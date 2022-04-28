@@ -1,0 +1,21 @@
+$modal-overlay-color: rgba(0, 0, 0, 0.5);
+
+:global(.Body--Modal-open-disable-scroll) {
+  overflow: hidden;
+}
+
+.root{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $modal-overlay-color;
+  overscroll-behavior: contain;
+}
+
+
+

@@ -1,0 +1,70 @@
+/**
+ * React Starter Kit (https://www.reactstarterkit.com/)
+ *
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+
+
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    @apply m-5;
+  }
+}
+
+.check {
+  width: 100px;
+  height: 100px;
+
+  &.red {
+    path {
+      fill: red;
+    }
+  }
+}
+
+.check-div {
+  width: 100px;
+  height: 100px;
+  background: url('./assets/check.svg') no-repeat center / contain;
+}
+
+.large-image {
+  width: 460px;
+  height: 300px;
+  margin: 10px;
+
+  &.background-image {
+    background: url('./assets/artificial-intelligence-machine.jpg') no-repeat center / cover;
+    flex-shrink: 0;
+  }
+}
+
+.small-image {
+  width: 64px;
+  height: 64px;
+  margin: 4px;
+
+  &.background-image {
+    background: url('./assets/positive-vote.png') no-repeat center / cover;
+  }
+}
+
+.hoverable {
+  &:hover {
+    color: #0093FC;
+  }
+}

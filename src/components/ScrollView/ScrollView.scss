@@ -1,0 +1,27 @@
+
+[data-layout='mobile'] {
+  .root {
+    -webkit-scrollbar-color: dark;
+
+    .hide-on-mobile {
+      // fix react-custom-scrollbars calculate bug on Safari
+      display: none !important;
+    }
+  }
+}
+
+.thumb-vertical,
+.thumb-horizontal {
+  border-radius: 32px;
+  background-color: red;
+}
+
+.scrollbar-x-hide {
+  overflow-x: hidden !important;
+  margin-bottom: 0 !important;
+}
+
+.scrollbar-y-hide {
+  overflow-y: hidden !important;
+  margin-right: 0 !important;
+}
