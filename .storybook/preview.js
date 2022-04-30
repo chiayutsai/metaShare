@@ -1,7 +1,7 @@
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 import insertCss from 'utils/insertCss'
 // eslint-disable-next-line
-import '!style-loader!css-loader!postcss-loader?{"postcssOptions":{"config":"./tools/postcss.config.js"}}!components/Layout/tailwind.css'
+import '!style-loader!css-loader!postcss-loader?{"postcssOptions":{"config":"./tools/postcss.config.js"}}!components/tailwind.css'
 
 export const globalTypes = {
   theme: {

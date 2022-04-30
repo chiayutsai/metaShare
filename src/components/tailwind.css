@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;900&display=swap');
+
+html,body,*,*::after,*::before {
+  @apply text-gray-1200 text-base font-sans leading-tight box-border;
+}
+img {
+  @apply object-cover;
+}
+
+[role='button'],
+[role='presentation'] {
+  @apply cursor-pointer outline-none;
+} 
+
+@layer components {
+  .button-3d {
+    @apply inline-flex shrink-0	items-center rounded px-4	pt-1.5 pb-2.5  duration-500  text-sm bg-gradient-to-center from-transparent;
+  }
+
+  .button-3d-primary {
+    @apply bg-primary-700  to-button3dGradient text-white shadow-button-3d hover:shadow-button-3d-hover
+    hover:bg-primary-600 hover:bg-gradient-to-center-hover hover:to-button3dGradientHover;
+  }
+  
+  .button-3d-disabled {
+    @apply text-gray-200 shadow-button-3d-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+  }
+
+
+  .button-3d-rounded {
+    @apply rounded-full pt-0.5 pb-1 px-3 shadow-button-3d-rounded hover:shadow-button-3d-rounded-hover;
+  }
+
+  .button-3d-rounded-disabled {
+    @apply text-gray-200 shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+  }
+}

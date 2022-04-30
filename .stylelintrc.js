@@ -53,6 +53,8 @@ module.exports = {
           'else',
           'for',
           'tailwind',
+          'layer',
+          'apply',
         ],
       },
     ],

@@ -11,7 +11,7 @@ import StyleContext from 'isomorphic-style-loader/StyleContext'
 import PropTypes from 'prop-types'
 import { Children } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
-
+import './tailwind.css'
 /**
  * The top-level React component setting context (global) variables
  * that can be accessed from all the child components.
