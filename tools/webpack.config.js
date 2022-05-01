@@ -160,7 +160,7 @@ const config = {
       // [1] Rules for Style Sheets
       {
         test: reStyle,
-        exclude: /tailwind/,
+        exclude: [/tailwind/, /swiper/],
         rules: [
           // Convert CSS into JS module
           {
@@ -216,7 +216,7 @@ const config = {
       // [2] Rules for tailwind
       {
         test: reStyle,
-        include: /tailwind/,
+        include: [/tailwind/, /swiper/],
         rules: [
           // Convert CSS into JS module
           {

@@ -33,6 +33,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "store": "^2.0.12",
+    "swiper": "6.0.2",
     "universal-router": "^9.0.1",
     "uuid": "^8.3.2",
     "whatwg-fetch": "^3.6.2"

@@ -1,0 +1,9 @@
+.button {
+  &:hover {
+    .icon {
+      path {
+        @apply stroke-primary-800;
+      }
+    }
+  }
+}

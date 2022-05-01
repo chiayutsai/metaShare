@@ -3,6 +3,13 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./src/**/*.js'],
   theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+    },
     colors: {
       transparent: 'transparent',
       white: '#ffffff',
@@ -40,7 +47,13 @@ module.exports = {
         1300: '#1C1C1C',
       },
     },
+    container: {
+      center: true,
+    },
     extend: {
+      transitionProperty: {
+        height: 'height',
+      },
       backgroundImage: {
         'gradient-to-center':
           'radial-gradient(100% 100% at 32% 100%, var(--tw-gradient-stops))',
@@ -59,8 +72,13 @@ module.exports = {
         'button-3d-disable': `0px 2px 2px rgba(0, 0, 0, 0.2), inset 0px -4px 0px #838383`,
         'button-3d-rounded-disable': `inset 0px -2px 0px #838383`,
         navbar: '0px 2px 10px rgba(0, 0, 0, 0.04)',
+        card: '2px 2px 6px rgba(0, 0, 0, 0.15)',
+        filter: '1px 1px 2px rgba(65,49,126,0.2)',
       },
     },
+  },
+  variants: {
+    stroke: ['responsive', 'hover', 'group-hover', 'focus'],
   },
   plugins: [],
 }

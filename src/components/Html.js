@@ -36,6 +36,7 @@ const Html = ({ title, description, styles, scripts }) => (
         <link key={script} rel="preload" href={script} as="script" />
       ))}
       <link rel="apple-touch-icon" href="/icon.png" />
+      <link rel="stylesheet" href="/swiper-bundle.min.css" />
       {styles.map(style => (
         <style
           key={style.id}

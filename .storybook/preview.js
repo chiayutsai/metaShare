@@ -1,6 +1,8 @@
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 import insertCss from 'utils/insertCss'
 // eslint-disable-next-line
+import '!style-loader!css-loader!swiper/swiper-bundle.min.css'
+// eslint-disable-next-line
 import '!style-loader!css-loader!postcss-loader?{"postcssOptions":{"config":"./tools/postcss.config.js"}}!components/tailwind.css'
 
 export const globalTypes = {

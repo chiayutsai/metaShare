@@ -15,6 +15,7 @@ import { appReadySelector } from 'selectors'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ModalList from '../ModalList/ModalList'
 import Navbar from '../Navbar/Navbar'
+import PersonCard from '../PersonCard/PersonCard'
 import styles from './Layout.scss'
 
 const Layout = ({ children }) => {
@@ -24,14 +25,22 @@ const Layout = ({ children }) => {
     <ErrorBoundary>
       {/* {!appReady && <LoadingLayout />} 全版 */}
       {appReady && (
-        <div>
+        <>
           <div className={styles.bg} />
           <Navbar />
-          <div className="container" />
-          {children}
+          <div className="container mt-[56px] pt-7 px-9">
+            <div className="flex">
+              <div className="w-60 shrink-0">
+                <PersonCard />
+              </div>
+              <div className="w-full mx-[30px]"> {children}</div>
+              <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
+            </div>
+          </div>
+
           <ModalList />
           {/* {loading && <LoadingModal />} 遮罩版 */}
-        </div>
+        </>
       )}
     </ErrorBoundary>
   )

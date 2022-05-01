@@ -1,3 +1,6 @@
+import { Provider as ReduxProvider } from 'react-redux'
+import Layout from 'components/Layout/Layout'
+import storyState from 'mocks/storybookState'
 import Home from 'routes/home/Home'
 
 export default {
@@ -5,6 +8,42 @@ export default {
   component: Home,
 }
 
-const Template = () => <Home />
+const Template = () => {
+  const store = {
+    dispatch: () => {},
+    getState: () => ({
+      ...storyState,
+    }),
+    subscribe: () => {},
+  }
+  return (
+    <ReduxProvider store={store}>
+      <Layout>
+        <Home />
+      </Layout>
+    </ReduxProvider>
+  )
+}
 
-export const Primary = Template.bind({})
+export const HomeTemplate = Template.bind({})
+
+export const HomeNoPostTemplate = () => {
+  const store = {
+    dispatch: () => {},
+    getState: () => ({
+      ...storyState,
+      postsWall: {
+        ...storyState.postsWall,
+        posts: [],
+      },
+    }),
+    subscribe: () => {},
+  }
+  return (
+    <ReduxProvider store={store}>
+      <Layout>
+        <Home />
+      </Layout>
+    </ReduxProvider>
+  )
+}

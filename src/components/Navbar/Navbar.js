@@ -7,7 +7,7 @@ import styles from './Navbar.scss'
 const Navbar = () => {
   useStyles(styles)
   return (
-    <div className="fixed flex items-center justify-between top-0 z-10 w-full py-1 px-6 bg-white shadow-navbar">
+    <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full py-1 px-6 bg-white shadow-navbar">
       <h1>
         <a href="/" className={styles.logo}>
           MetaShare

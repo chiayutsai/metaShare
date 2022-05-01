@@ -5,8 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;900&display=swap');
 
 html,body,*,*::after,*::before {
-  @apply text-gray-1200 text-base font-sans leading-tight box-border;
+  @apply text-gray-1200 text-base font-sans leading-tight box-border duration-300;
 }
+
+
 img {
   @apply object-cover;
 }
@@ -38,4 +40,25 @@ img {
   .button-3d-rounded-disabled {
     @apply text-gray-200 shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
   }
+}
+.swiper-wrapper {
+  @apply flex items-center;
+}
+.swiper-slide {
+  max-height: 740px;
+}
+.swiper-pagination-bullet {
+  @apply opacity-50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-primary-600 opacity-100;
+}
+
+.swiper-button-next, .swiper-button-prev {
+box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+ @apply opacity-0  group-hover:opacity-100 flex items-center justify-center w-6 h-6 rounded-full bg-white/60 hover:bg-white/80 after:bg-[url('./Post/PostSwiper/assets/arrow.svg')] after:w-full after:h-full after:bg-no-repeat after:bg-center;
+}
+.swiper-button-prev {
+  @apply after:rotate-180;
 }
