@@ -1,0 +1,44 @@
+.unlike {
+  @apply mr-2.5;
+
+  path {
+    @apply fill-alert/80;
+  }
+}
+
+.eye,
+.photo {
+  @apply mr-2.5;
+
+  path {
+    @apply fill-primary-700 group-hover:fill-primary-800;
+  }
+}
+
+.button:not(.disable) {
+  &:hover {
+    .eye,
+    .photo {
+      path {
+        @apply fill-primary-800;
+      }
+    }
+    .unlike {
+      path {
+        @apply fill-alert;
+      }
+    }
+  }
+}
+
+.button {
+  &.disable {
+    .eye,
+    .photo,
+    .unlike {
+      path {
+        @apply fill-gray-700;
+      }
+    }
+  }
+}

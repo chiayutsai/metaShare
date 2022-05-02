@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 import { ReactComponent as IconSearchSvg } from './assets/Icon.svg'
 
 const Button3D = ({ onClick, isRounded, icon, isDisabled, content }) => (
-  <div
+  <button
+    type="button"
     className={classNames('button-3d button-3d-primary', {
       'button-3d-rounded': isRounded,
       'button-3d-disabled': !isRounded && isDisabled,
       'button-3d-rounded-disabled': isRounded && isDisabled,
     })}
-    role="presentation"
     onClick={onClick}>
     {content}
     {icon && <IconSearchSvg className="ml-1" />}
-  </div>
+  </button>
 )
 
 Button3D.propTypes = {

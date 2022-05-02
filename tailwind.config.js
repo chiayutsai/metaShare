@@ -13,8 +13,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       white: '#ffffff',
-      black: '121212',
-      alert: 'EB4F4F',
+      black: '#121212',
+      alert: '#EB4F4F',
       button3dGradient: 'rgba(161, 202, 255, 0.35)',
       button3dGradientHover: 'rgba(208, 229, 255, 0.35)',
       button3dGradientDisable: 'rgba(244, 244, 244, 0.6)',
@@ -79,6 +79,7 @@ module.exports = {
   },
   variants: {
     stroke: ['responsive', 'hover', 'group-hover', 'focus'],
+    fill: ['responsive', 'hover', 'group-hover', 'focus'],
   },
   plugins: [],
 }

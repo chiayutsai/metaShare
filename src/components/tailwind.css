@@ -20,7 +20,7 @@ img {
 
 @layer components {
   .button-3d {
-    @apply inline-flex shrink-0	items-center rounded px-4	pt-1.5 pb-2.5  duration-500  text-sm bg-gradient-to-center from-transparent;
+    @apply inline-flex shrink-0	items-center rounded px-4	pt-1.5 pb-2.5  duration-500 bg-gradient-to-center from-transparent;
   }
 
   .button-3d-primary {
@@ -34,11 +34,11 @@ img {
 
 
   .button-3d-rounded {
-    @apply rounded-full pt-0.5 pb-1 px-3 shadow-button-3d-rounded hover:shadow-button-3d-rounded-hover;
+    @apply rounded-full pt-0.5 pb-1 px-3 shadow-button-3d-rounded text-sm hover:shadow-button-3d-rounded-hover;
   }
 
   .button-3d-rounded-disabled {
-    @apply text-gray-200 shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+    @apply text-gray-200 text-sm shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
   }
 }
 .swiper-wrapper {
