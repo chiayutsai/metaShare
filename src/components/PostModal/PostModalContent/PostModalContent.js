@@ -1,20 +1,29 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
 import ScrollView from 'components/ScrollView'
 import { ReactComponent as IconDeleteSvg } from './assets/delete.svg'
 import { ReactComponent as IconLoadingSvg } from './assets/loading.svg'
 // Todo: 瀑布流修正
-const PostModalContent = ({ isLoading, isError, errorContent, imageUrls }) => {
+const PostModalContent = ({
+  isLoading,
+  isError,
+  errorContent,
+  imageUrls,
+  setTextAreaContent,
+}) => {
   const singleImage = imageUrls.length === 1
   const mostImages = imageUrls.length > 1
 
   return (
     <>
-      <textArea
+      <textarea
         rows="5"
         className="w-full bg-gray-100 rounded p-3 outline-none placeholder:text-gray-700"
         placeholder="貼文內容"
+        onChange={e => {
+          const { value } = e.target
+          setTextAreaContent(value)
+        }}
       />
 
       {isError && (
@@ -76,6 +85,7 @@ PostModalContent.propTypes = {
   isError: PropTypes.bool,
   imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   errorContent: PropTypes.string,
+  setTextAreaContent: PropTypes.func,
 }
 
 PostModalContent.defaultProps = {
@@ -83,5 +93,6 @@ PostModalContent.defaultProps = {
   isError: false,
   imageUrls: [],
   errorContent: '',
+  setTextAreaContent: () => {},
 }
 export default PostModalContent

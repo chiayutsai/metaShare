@@ -1,6 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
 import axios from 'axios'
-import { setLoadingDone, setLoadingProgress } from 'actions/loading'
 
 const APP_REQUEST_TIMEOUT = 60 * 1000
 
@@ -25,13 +24,8 @@ class BaseApi {
       ...options,
     })
     // https://github.com/axios/axios#axiosconfig
-    return input => async dispatch => {
-      const { loadingTarget } = input || {}
+    return input => async () => {
       try {
-        if (loadingTarget) {
-          dispatch(setLoadingProgress({ target: loadingTarget }))
-        }
-
         const result = await instance(input)
         const data = this.checkResponse(result)
         return data
@@ -52,21 +46,15 @@ class BaseApi {
           throw new ApiError(status, 'Service not avaiable')
         }
         // non standard error or unexpected error
-        const {
-          Result: { ErrorCode, ErrorDescription },
-        } = data
+        const { Result: { ErrorCode, ErrorDescription } = {} } = data || {}
         // Logger.error('API Error', error)
         throw new ApiError(ErrorCode, ErrorDescription)
-      } finally {
-        if (loadingTarget) {
-          dispatch(setLoadingDone({ target: loadingTarget }))
-        }
       }
     }
   }
 
   checkResponse = response => {
-    if (response?.data?.Result?.ErrorCode !== '0') {
+    if (response?.data?.status !== 'success') {
       const error = new Error(response?.data)
       error.response = response
       throw error

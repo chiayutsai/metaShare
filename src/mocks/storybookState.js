@@ -8,6 +8,7 @@ const storyState = {
   loading: false,
   modals: [],
   postsWall: {
+    isLoading: false,
     filterType: 'news',
     posts: [
       {
@@ -89,6 +90,9 @@ const storyState = {
       },
     ],
   },
+  // personPage:{
+
+  // }
 }
 
 export default storyState

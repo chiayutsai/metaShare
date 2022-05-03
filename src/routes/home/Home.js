@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllPosts } from 'actions/api/webApi'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
@@ -6,6 +8,12 @@ import PostInput from 'components/PostInput/PostInput'
 import { postsSelector } from 'selectors/post'
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllPosts())
+  }, [dispatch])
+
   const posts = useSelector(postsSelector)
   const isNopost = posts.length === 0
   console.log(posts)
