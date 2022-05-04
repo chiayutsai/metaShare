@@ -14,7 +14,6 @@ const PostModalContent = ({
 }) => {
   const singleImage = imageUrls.length === 1
   const mostImages = imageUrls.length > 1
-  console.log(isError)
   return (
     <>
       <textarea

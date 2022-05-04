@@ -34,14 +34,15 @@ const postApi = new BaseApi().create({
 export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 
 // request
-const getAllPosts = () => async dispatch => {
+const getAllPosts = query => async dispatch => {
   const data = {}
-
+  console.log(query)
+  const url = query ? `/posts/${query}` : '/posts'
   try {
     dispatch(getAllPostsAction.request(data))
     const result = await dispatch(
       getApi({
-        url: '/posts',
+        url,
       }),
     )
     dispatch(getAllPostsAction.success(result))

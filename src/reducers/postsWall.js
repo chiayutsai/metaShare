@@ -1,10 +1,16 @@
 import { handleActions } from 'redux-actions'
 import { getAllPostsAction } from 'actions/api/webApi'
+import { SET_FILTER_TYPE } from 'actions/post'
+import { LASTEST_POST } from 'constants/filterType'
 
-const initialState = { isLoading: false, filterType: 'news', posts: [] }
+const initialState = { isLoading: false, filterType: LASTEST_POST, posts: [] }
 
 export default handleActions(
   {
+    [SET_FILTER_TYPE]: (state, { payload }) => ({
+      ...state,
+      filterType: payload,
+    }),
     [getAllPostsAction.request]: state => ({
       ...state,
       isLoading: true,

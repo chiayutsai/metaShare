@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { addPost } from 'actions/api/webApi'
+import { handleAllPost } from 'actions/postModal'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper'
 import PostModalContent from 'components/PostModal/PostModalContent/PostModalContent'
@@ -11,14 +11,27 @@ import PostModalHeader from 'components/PostModal/PostModalHeader/PostModalHeade
 const PostModal = ({ content, imageUrls, onClose }) => {
   const dispatch = useDispatch()
   const [textAreaContent, setTextAreaContent] = useState(content)
-  const handleAddPost = useCallback(() => {
+  const [isError, setError] = useState(false)
+  const [errorContent, setErrorContent] = useState('')
+  useEffect(() => {
+    if (textAreaContent || imageUrls.length) {
+      setError(false)
+    }
+  }, [textAreaContent, imageUrls])
+  const handleAllPostClick = useCallback(() => {
     if (!textAreaContent && !imageUrls.length) {
+      setError(true)
+      setErrorContent('請輸入貼文內容或上傳一張圖片')
       return
     }
     const data = {
       content: textAreaContent,
     }
-    dispatch(addPost(data))
+    try {
+      dispatch(handleAllPost(data))
+    } catch (error) {
+      console.log(error)
+    }
   }, [dispatch, textAreaContent, imageUrls])
 
   return (
@@ -34,9 +47,11 @@ const PostModal = ({ content, imageUrls, onClose }) => {
               textAreaContent={textAreaContent}
               imageUrls={imageUrls}
               setTextAreaContent={setTextAreaContent}
+              isError={isError}
+              errorContent={errorContent}
             />
           </div>
-          <PostModalFooter onClick={handleAddPost} />
+          <PostModalFooter isError={isError} onClick={handleAllPostClick} />
         </div>
       </div>
     </ModalWrapper>

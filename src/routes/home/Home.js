@@ -6,21 +6,30 @@ import ModalList from 'components/ModalList/ModalList'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
 import PostInput from 'components/PostInput/PostInput'
-import { postsSelector, postsWallLoadingSelector } from 'selectors/post'
+import {
+  postsSelector,
+  filterTypeSelector,
+  postsWallLoadingSelector,
+} from 'selectors/post'
 
 const Home = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllPosts())
+    try {
+      dispatch(getAllPosts())
+    } catch (error) {
+      console.log(error)
+    }
   }, [dispatch])
   const isPostWallLoading = useSelector(postsWallLoadingSelector)
+  const filterType = useSelector(filterTypeSelector)
   const posts = useSelector(postsSelector)
-  const isNopost = posts.length === 0 && !isPostWallLoading
+  const isNopost = posts?.length === 0 && !isPostWallLoading
   return (
     <>
       <div className="flex justify-end mb-4">
-        <FilterDropdown filterType="最新貼文" />
+        <FilterDropdown filterType={filterType} />
       </div>
       <div className="w-full mb-6">
         <PostInput />

@@ -1,3 +1,5 @@
+import { LASTEST_POST } from 'constants/filterType'
+
 const storyState = {
   user: {
     id: 123456789,
@@ -9,7 +11,7 @@ const storyState = {
   modals: [],
   postsWall: {
     isLoading: false,
-    filterType: 'news',
+    filterType: LASTEST_POST,
     posts: [
       {
         id: '12421414',

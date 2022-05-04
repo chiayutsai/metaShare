@@ -35,18 +35,21 @@ const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
         </div>
         <PostInfo type={COMMENT} commentAmount={commentAmount} />
       </div>
-      <div className="border-b border-gray-600/50 pb-3 mb-3">
-        {comments.map(comment => (
-          <div key={comment.id} className="mb-3 last:mb-0 ">
-            <PostComment
-              avatorUrl={comment.commenter.avator}
-              userName={comment.commenter.name}
-              date={comment.createdAt}
-              content={comment.content}
-            />
-          </div>
-        ))}
-      </div>
+      {!!commentAmount && (
+        <div className="border-b border-gray-600/50 pb-3 mb-3">
+          {comments.map(comment => (
+            <div key={comment.id} className="mb-3 last:mb-0 ">
+              <PostComment
+                avatorUrl={comment.commenter.avator}
+                userName={comment.commenter.name}
+                date={comment.createdAt}
+                content={comment.content}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
       <PostCommentInput />
     </div>
   )

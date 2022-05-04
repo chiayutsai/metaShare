@@ -2,11 +2,14 @@ import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useCallback, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { changeFilterType } from 'actions/post'
 import { LASTEST_POST, MOST_LIKE, MOST_COMMENT } from 'constants/filterType'
 import styles from './FilterDropdown.scss'
 
 const FilterDropdown = ({ filterType }) => {
   useStyles(styles)
+  const dispatch = useDispatch()
   const [isToggleDropdown, setToggleDropdown] = useState(false)
   const [isFirstTimeToggle, setFirstTimeToggle] = useState(true)
   const handleToggleDropdown = useCallback(() => {
@@ -14,9 +17,13 @@ const FilterDropdown = ({ filterType }) => {
     setToggleDropdown(!isToggleDropdown)
   }, [isToggleDropdown])
 
-  const handleCloseDropdown = useCallback(() => {
-    setToggleDropdown(false)
-  }, [])
+  const handleCloseDropdown = useCallback(
+    e => {
+      dispatch(changeFilterType(e.target.id))
+      setToggleDropdown(false)
+    },
+    [dispatch],
+  )
 
   return (
     <div className="relative w-[216px]">
@@ -41,6 +48,7 @@ const FilterDropdown = ({ filterType }) => {
           [styles.close]: !isToggleDropdown,
         })}>
         <li
+          id={LASTEST_POST}
           className={classNames({
             [styles.active]: filterType === LASTEST_POST,
           })}
@@ -49,6 +57,7 @@ const FilterDropdown = ({ filterType }) => {
           最新貼文
         </li>
         <li
+          id={MOST_LIKE}
           className={classNames({
             [styles.active]: filterType === MOST_LIKE,
           })}
@@ -57,6 +66,7 @@ const FilterDropdown = ({ filterType }) => {
           最多人喜歡
         </li>
         <li
+          id={MOST_COMMENT}
           className={classNames({
             [styles.active]: filterType === MOST_COMMENT,
           })}
