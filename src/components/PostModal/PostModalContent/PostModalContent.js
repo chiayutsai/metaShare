@@ -5,6 +5,7 @@ import { ReactComponent as IconDeleteSvg } from './assets/delete.svg'
 import { ReactComponent as IconLoadingSvg } from './assets/loading.svg'
 // Todo: 瀑布流修正
 const PostModalContent = ({
+  textAreaContent,
   isLoading,
   isError,
   errorContent,
@@ -13,13 +14,14 @@ const PostModalContent = ({
 }) => {
   const singleImage = imageUrls.length === 1
   const mostImages = imageUrls.length > 1
-
+  console.log(isError)
   return (
     <>
       <textarea
         rows="5"
         className="w-full bg-gray-100 rounded p-3 outline-none placeholder:text-gray-700"
         placeholder="貼文內容"
+        value={textAreaContent}
         onChange={e => {
           const { value } = e.target
           setTextAreaContent(value)
@@ -84,6 +86,7 @@ PostModalContent.propTypes = {
   isLoading: PropTypes.bool,
   isError: PropTypes.bool,
   imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  textAreaContent: PropTypes.string,
   errorContent: PropTypes.string,
   setTextAreaContent: PropTypes.func,
 }
@@ -93,6 +96,7 @@ PostModalContent.defaultProps = {
   isError: false,
   imageUrls: [],
   errorContent: '',
+  textAreaContent: '',
   setTextAreaContent: () => {},
 }
 export default PostModalContent

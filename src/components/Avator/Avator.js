@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import perosn from './assets/person.png'
 
-const Avator = ({ isBorder, isRounded }) => (
+const Avator = ({ avatorUrl, isBorder, isRounded }) => (
   <div
     className={classNames('w-full h-full', {
       'rounded-lg': !isRounded,
@@ -10,7 +9,7 @@ const Avator = ({ isBorder, isRounded }) => (
       'p-[1px] bg-gradient-to-br from-[#B9D7FF] to-primary-700': isBorder,
     })}>
     <img
-      src={perosn}
+      src={avatorUrl}
       alt="person"
       className={classNames({
         'rounded-lg': !isRounded,
@@ -21,11 +20,13 @@ const Avator = ({ isBorder, isRounded }) => (
 )
 
 Avator.propTypes = {
+  avatorUrl: PropTypes.string,
   isBorder: PropTypes.bool,
   isRounded: PropTypes.bool,
 }
 
 Avator.defaultProps = {
+  avatorUrl: 'https://imgur.com/LwPqBcI.png',
   isBorder: false,
   isRounded: false,
 }

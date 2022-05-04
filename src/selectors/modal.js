@@ -1,3 +1,8 @@
-const modalsSelector = state => state.modals
+import { createSelector } from 'reselect'
+import POST_MODAL from 'constants/modal'
 
-export default modalsSelector
+export const modalsSelector = state => state.modals
+
+export const postModalSelector = createSelector(modalsSelector, modals =>
+  modals.find(m => [POST_MODAL].includes(m.name)),
+)

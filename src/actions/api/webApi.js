@@ -1,14 +1,15 @@
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
-const baseURL = 'https://mata-share-backend.herokuapp.com/'
+// const baseURL = 'https://mata-share-backend.herokuapp.com'
+const baseURL = 'http://127.0.0.1:3000'
 // base api
 const getApi = new BaseApi().create({
-  baseURL,
+  baseURL: `${baseURL}/api`,
 })
 
 const postApi = new BaseApi().create({
-  baseURL,
+  baseURL: `${baseURL}/api`,
   method: 'POST',
 })
 
@@ -59,7 +60,10 @@ const addPost = ({ content }) => async dispatch => {
   try {
     // author、imageUrls 從 selector 來
 
-    const data = { content }
+    const data = {
+      author: '627100547ef69b72689e67f6',
+      content,
+    }
 
     dispatch(addPostAction.request(data))
     const result = await dispatch(

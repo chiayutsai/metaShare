@@ -26,14 +26,18 @@ const ModalWrapper = ({
   }, [disableBodyScroll])
 
   return (
-    <div
-      className={classnames(styles.root, className, overlayClassName)}
-      role="presentation"
-      onClick={() => {
-        // TODO: 如果有更複雜的背景點擊關閉功能, 需改變作法
-        if (shouldCloseOnOverlayClick) onClose()
-      }}>
-      {children}
+    <div className={classnames(styles.root, className)}>
+      <div
+        className={classnames(styles.overlay, overlayClassName, {
+          [styles['can-click']]: shouldCloseOnOverlayClick,
+        })}
+        role="presentation"
+        onClick={() => {
+          // TODO: 如果有更複雜的背景點擊關閉功能, 需改變作法
+          if (shouldCloseOnOverlayClick) onClose()
+        }}
+      />
+      <div className={styles.container}>{children}</div>
     </div>
   )
 }

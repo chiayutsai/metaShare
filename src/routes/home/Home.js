@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from 'actions/api/webApi'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
+import ModalList from 'components/ModalList/ModalList'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
 import PostInput from 'components/PostInput/PostInput'
-import { postsSelector } from 'selectors/post'
+import { postsSelector, postsWallLoadingSelector } from 'selectors/post'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -13,10 +14,9 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllPosts())
   }, [dispatch])
-
+  const isPostWallLoading = useSelector(postsWallLoadingSelector)
   const posts = useSelector(postsSelector)
-  const isNopost = posts.length === 0
-  console.log(posts)
+  const isNopost = posts.length === 0 && !isPostWallLoading
   return (
     <>
       <div className="flex justify-end mb-4">
@@ -32,6 +32,7 @@ const Home = () => {
           <Post {...props} />
         </div>
       ))}
+      <ModalList />
     </>
   )
 }

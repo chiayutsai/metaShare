@@ -2,18 +2,23 @@ import PropTypes from 'prop-types'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { dismissModal } from 'actions/modal'
+import PostModal from 'components/PostModal/PostModal'
+import POST_MODAL from 'constants/modal'
 
-const ModalMapper = ({ name }) => {
+const ModalMapper = ({ name, ...props }) => {
   switch (name) {
-    // case PRIVACY:
-    //   return <PrivacyModal {...props} />
+    case POST_MODAL:
+      return <PostModal {...props} />
     // case HOTLINE:
     //   return <HotlineModalContainer {...props} />
     // case SETTING:
     //   return <SettingMenuContainer {...props} />
     default:
-      return ''
+      return null
   }
+}
+ModalMapper.propTypes = {
+  name: PropTypes.string.isRequired,
 }
 
 const Modal = props => {

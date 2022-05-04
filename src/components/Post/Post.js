@@ -8,14 +8,18 @@ import PostInfo from 'components/Post/PostInfo/PostInfo'
 import { LIKE, COMMENT } from 'constants/post'
 // Todo userID useSelctor
 const userID = '1234567'
-const Post = ({ userName, date, content, imageUrls, likes, comments }) => {
+const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
   const likeAmount = likes.length
   const commentAmount = comments.length
   const isLike = Boolean(likes.filter(user => user.id === userID).length)
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">
-        <PostHeader userName={userName} date={date} />
+        <PostHeader
+          avatorUrl={author.avator}
+          userName={author.name}
+          date={createdAt}
+        />
       </div>
       <div className="border-b border-gray-600/50 pb-3 mb-2">
         <PostContent content={content} imageUrls={imageUrls} />
@@ -35,8 +39,9 @@ const Post = ({ userName, date, content, imageUrls, likes, comments }) => {
         {comments.map(comment => (
           <div key={comment.id} className="mb-3 last:mb-0 ">
             <PostComment
+              avatorUrl={comment.commenter.avator}
               userName={comment.commenter.name}
-              date={comment.commentTime}
+              date={comment.createdAt}
               content={comment.content}
             />
           </div>
@@ -47,8 +52,8 @@ const Post = ({ userName, date, content, imageUrls, likes, comments }) => {
   )
 }
 Post.propTypes = {
-  userName: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  author: PropTypes.string.isRequired,
+  createdAt: PropTypes.number.isRequired,
   content: PropTypes.string,
   imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   likes: PropTypes.arrayOf(PropTypes.object),
