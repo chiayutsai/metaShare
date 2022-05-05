@@ -22,7 +22,8 @@ else
 fi
 
 # 打包編譯
-yarn build
+yarn build-prod
+
 
 echo '移動目錄到編譯出來的 dist 資料夾'
 #移動到打包資料夾下，若你有調整的話打包後的資料夾請務必調整
