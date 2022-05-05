@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types'
 import { useState, useCallback, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { handleAllPost } from 'actions/postModal'
+import { handleUploadImage } from 'actions/uploadImage'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper'
 import PostModalContent from 'components/PostModal/PostModalContent/PostModalContent'
 import PostModalFooter from 'components/PostModal/PostModalFooter/PostModalFooter'
 import PostModalHeader from 'components/PostModal/PostModalHeader/PostModalHeader'
+import { uploadImageSelector } from 'selectors/uploadImage'
 
-const PostModal = ({ content, imageUrls, onClose }) => {
+const PostModal = ({ content, onClose }) => {
   const dispatch = useDispatch()
+  const imageUrls = useSelector(uploadImageSelector)
   const [textAreaContent, setTextAreaContent] = useState(content)
   const [isError, setError] = useState(false)
   const [errorContent, setErrorContent] = useState('')
@@ -33,7 +36,19 @@ const PostModal = ({ content, imageUrls, onClose }) => {
       console.log(error)
     }
   }, [dispatch, textAreaContent, imageUrls])
+  const handleUploadChange = async e => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    formData.append('type', 'file')
 
+    try {
+      await dispatch(handleUploadImage(formData))
+    } catch (error) {
+      setError(true)
+      setErrorContent(error.message)
+    }
+  }
   return (
     <ModalWrapper shouldCloseOnOverlayClick disableBodyScroll onClose={onClose}>
       <div className="w-[600px] bg-white rounded-lg pb-4">
@@ -51,7 +66,11 @@ const PostModal = ({ content, imageUrls, onClose }) => {
               errorContent={errorContent}
             />
           </div>
-          <PostModalFooter isError={isError} onClick={handleAllPostClick} />
+          <PostModalFooter
+            isError={isError}
+            onClick={handleAllPostClick}
+            onChange={handleUploadChange}
+          />
         </div>
       </div>
     </ModalWrapper>
@@ -60,11 +79,9 @@ const PostModal = ({ content, imageUrls, onClose }) => {
 
 PostModal.propTypes = {
   content: PropTypes.string,
-  imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClose: PropTypes.func.isRequired,
 }
 PostModal.defaultProps = {
   content: '',
-  imageUrls: [],
 }
 export default PostModal

@@ -47,7 +47,7 @@ const PostModalContent = ({
                     className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100">
                     <IconDeleteSvg />
                   </button>
-                  <img key={`img ${index + 1}`} src={img} alt="post" />
+                  <img key={`img ${index + 1}`} src={img.imageUrl} alt="post" />
                 </div>
               ))}
             </div>
@@ -67,7 +67,7 @@ const PostModalContent = ({
                 className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100">
                 <IconDeleteSvg />
               </button>
-              <img src={imageUrls[0]} alt="post" />
+              <img src={imageUrls[0].imageUrl} alt="post" />
             </div>
           </ScrollView>
         </div>

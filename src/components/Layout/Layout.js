@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
               <div className="w-60 shrink-0">
                 <PersonCard />
               </div>
-              <div className="w-full mx-[30px]"> {children}</div>
+              <div className="w-full max-w-[788px] mx-[30px]"> {children}</div>
               <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
             </div>
           </div>

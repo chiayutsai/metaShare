@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
-import { upload } from 'actions/api/webApi'
+
 import {
   NORMAL,
   ALERT,
@@ -15,17 +14,9 @@ import { ReactComponent as IconPhotoSvg } from './assets/photo.svg'
 import { ReactComponent as IconUnLikeSvg } from './assets/unLike.svg'
 import styles from './Button.scss'
 
-const UpLoadButton = ({ isDisabled }) => {
-  const dispatch = useDispatch()
+const UpLoadButton = ({ isDisabled, onChange }) => {
   useStyles(styles)
-  const handleUpload = e => {
-    const file = e.target.files[0]
-    const formData = new FormData()
-    formData.append('image', file)
-    formData.append('type', 'file')
-    console.log(file, formData)
-    dispatch(upload(formData))
-  }
+
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
@@ -36,7 +27,7 @@ const UpLoadButton = ({ isDisabled }) => {
           [styles.disable]: isDisabled,
         },
       )}>
-      <input type="file" className="hidden" onChange={handleUpload} />
+      <input type="file" className="hidden" onChange={onChange} />
       <IconPhotoSvg className={styles.photo} />
       <p
         className={classNames('text-primary-700 group-hover:text-primary-800', {
@@ -50,10 +41,12 @@ const UpLoadButton = ({ isDisabled }) => {
 
 UpLoadButton.propTypes = {
   isDisabled: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 UpLoadButton.defaultProps = {
   isDisabled: false,
+  onChange: () => {},
 }
 
 const Button = ({ type, onClick, iconType, isDisabled, content }) => {

@@ -12,11 +12,11 @@ export const setFilterType = createAction(SET_FILTER_TYPE)
 export const setSearchWord = createAction(SET_SEARCH_WROD)
 
 export const changeFilterType = (filterType, searchWord) => async dispatch => {
-  console.log(filterType, searchWord)
   try {
     await dispatch(getAllPosts(filterType, searchWord))
   } catch (error) {
     console.log(error)
+    throw error
   }
   dispatch(setFilterType(filterType))
   dispatch(setSearchWord(searchWord))

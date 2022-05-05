@@ -14,10 +14,6 @@ const postApi = new BaseApi().create({
   method: 'POST',
 })
 
-const uploadApi = new BaseApi().create({
-  baseURL: `https://api.imgur.com/3/image`,
-  method: 'POST',
-})
 // const deleteApi = new BaseApi().create({
 //   baseURL: '/api',
 //   method: 'DELETE',
@@ -71,13 +67,14 @@ const getAllPosts = (filterType, searchWord) => async dispatch => {
 // define
 export const addPostAction = createApiActions('ADD_POST')
 // request
-const addPost = ({ content }) => async dispatch => {
+const addPost = ({ content, imageUrls }) => async dispatch => {
   try {
     // author、imageUrls 從 selector 來
-
+    console.log(content, imageUrls)
     const data = {
       author: '627100547ef69b72689e67f6',
       content,
+      imageUrls,
     }
 
     dispatch(addPostAction.request(data))
@@ -97,26 +94,23 @@ const addPost = ({ content }) => async dispatch => {
 }
 
 // define
-export const uploadAction = createApiActions('UPLOAD')
+export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
-const upload = formData => async dispatch => {
+const uploadImage = formData => async dispatch => {
   try {
-    dispatch(uploadAction.request(formData))
+    dispatch(uploadImageAction.request(formData))
     const result = await dispatch(
-      uploadApi({
-        url: '',
+      postApi({
+        url: '/uploadImage',
         data: formData,
-        headers: {
-          Authorization: 'Client-ID 8da3280e9f02bd8',
-        },
       }),
     )
-    dispatch(uploadAction.success(result))
+    dispatch(uploadImageAction.success(result))
     return result
   } catch (error) {
     console.error(error)
-    dispatch(uploadAction.failure(error))
+    dispatch(uploadImageAction.failure(error))
     throw error
   }
 }
-export { getAllPosts, addPost, upload }
+export { getAllPosts, addPost, uploadImage }

@@ -18,11 +18,13 @@ const Home = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    try {
-      dispatch(getAllPosts())
-    } catch (error) {
-      console.log(error)
-    }
+    ;(async () => {
+      try {
+        await dispatch(getAllPosts())
+      } catch (error) {
+        console.log(error)
+      }
+    })()
   }, [dispatch])
   const isPostWallLoading = useSelector(postsWallLoadingSelector)
   const searchWord = useSelector(searchWordSelector)
