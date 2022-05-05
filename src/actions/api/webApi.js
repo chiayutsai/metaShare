@@ -1,3 +1,4 @@
+import { FILTER_TYPE_MAP } from 'constants/filterType'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
@@ -13,6 +14,10 @@ const postApi = new BaseApi().create({
   method: 'POST',
 })
 
+const uploadApi = new BaseApi().create({
+  baseURL: `https://api.imgur.com/3/image`,
+  method: 'POST',
+})
 // const deleteApi = new BaseApi().create({
 //   baseURL: '/api',
 //   method: 'DELETE',
@@ -34,10 +39,19 @@ const postApi = new BaseApi().create({
 export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 
 // request
-const getAllPosts = query => async dispatch => {
+const getAllPosts = (filterType, searchWord) => async dispatch => {
   const data = {}
-  console.log(query)
-  const url = query ? `/posts/${query}` : '/posts'
+  const sort = filterType ? `sort=${FILTER_TYPE_MAP[filterType]}` : ''
+  const search = searchWord ? `search=${searchWord}` : ''
+  let url = '/posts'
+  if (sort && search) {
+    url += `?${sort}&${search}`
+  } else if (sort) {
+    url += `?${sort}`
+  } else if (search) {
+    url += `?${search}`
+  }
+
   try {
     dispatch(getAllPostsAction.request(data))
     const result = await dispatch(
@@ -82,4 +96,27 @@ const addPost = ({ content }) => async dispatch => {
   }
 }
 
-export { getAllPosts, addPost }
+// define
+export const uploadAction = createApiActions('UPLOAD')
+// request
+const upload = formData => async dispatch => {
+  try {
+    dispatch(uploadAction.request(formData))
+    const result = await dispatch(
+      uploadApi({
+        url: '',
+        data: formData,
+        headers: {
+          Authorization: 'Client-ID 8da3280e9f02bd8',
+        },
+      }),
+    )
+    dispatch(uploadAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(uploadAction.failure(error))
+    throw error
+  }
+}
+export { getAllPosts, addPost, upload }

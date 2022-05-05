@@ -1,15 +1,24 @@
 import { handleActions } from 'redux-actions'
 import { getAllPostsAction } from 'actions/api/webApi'
-import { SET_FILTER_TYPE } from 'actions/post'
+import { SET_FILTER_TYPE, SET_SEARCH_WROD } from 'actions/post'
 import { LASTEST_POST } from 'constants/filterType'
 
-const initialState = { isLoading: false, filterType: LASTEST_POST, posts: [] }
+const initialState = {
+  isLoading: false,
+  filterType: LASTEST_POST,
+  searchWord: '',
+  posts: [],
+}
 
 export default handleActions(
   {
     [SET_FILTER_TYPE]: (state, { payload }) => ({
       ...state,
       filterType: payload,
+    }),
+    [SET_SEARCH_WROD]: (state, { payload }) => ({
+      ...state,
+      searchWord: payload,
     }),
     [getAllPostsAction.request]: state => ({
       ...state,

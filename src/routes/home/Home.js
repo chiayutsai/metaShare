@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from 'actions/api/webApi'
@@ -9,6 +10,7 @@ import PostInput from 'components/PostInput/PostInput'
 import {
   postsSelector,
   filterTypeSelector,
+  searchWordSelector,
   postsWallLoadingSelector,
 } from 'selectors/post'
 
@@ -23,12 +25,20 @@ const Home = () => {
     }
   }, [dispatch])
   const isPostWallLoading = useSelector(postsWallLoadingSelector)
+  const searchWord = useSelector(searchWordSelector)
   const filterType = useSelector(filterTypeSelector)
   const posts = useSelector(postsSelector)
   const isNopost = posts?.length === 0 && !isPostWallLoading
   return (
     <>
-      <div className="flex justify-end mb-4">
+      <div
+        className={classNames('flex items-end mb-4', {
+          'justify-end': !searchWord,
+          'justify-between': searchWord,
+        })}>
+        {searchWord && (
+          <p className="text-sm text-primary-800">搜尋 : {searchWord}</p>
+        )}
         <FilterDropdown filterType={filterType} />
       </div>
       <div className="w-full mb-6">

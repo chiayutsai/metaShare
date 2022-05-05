@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import Button from 'components/Button/Button'
+import { UpLoadButton } from 'components/Button/Button'
 import Button3D from 'components/Button/Button3D/Button3D'
 import { NORMAL, ICON_PHOTO } from 'constants/buttonType'
 
 const PostModalFooter = ({ isError, isLoading, onClick }) => (
   <div className="flex justify-between items-center">
-    <Button
+    <UpLoadButton
       content="新增照片"
       type={NORMAL}
       iconType={ICON_PHOTO}

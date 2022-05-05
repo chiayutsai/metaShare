@@ -2,14 +2,16 @@ import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeFilterType } from 'actions/post'
 import { LASTEST_POST, MOST_LIKE, MOST_COMMENT } from 'constants/filterType'
+import { searchWordSelector } from 'selectors/post'
 import styles from './FilterDropdown.scss'
 
 const FilterDropdown = ({ filterType }) => {
   useStyles(styles)
   const dispatch = useDispatch()
+  const searchWord = useSelector(searchWordSelector)
   const [isToggleDropdown, setToggleDropdown] = useState(false)
   const [isFirstTimeToggle, setFirstTimeToggle] = useState(true)
   const handleToggleDropdown = useCallback(() => {
@@ -19,10 +21,10 @@ const FilterDropdown = ({ filterType }) => {
 
   const handleCloseDropdown = useCallback(
     e => {
-      dispatch(changeFilterType(e.target.id))
+      dispatch(changeFilterType(e.target.id, searchWord))
       setToggleDropdown(false)
     },
-    [dispatch],
+    [dispatch, searchWord],
   )
 
   return (

@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { upload } from 'actions/api/webApi'
 import {
   NORMAL,
   ALERT,
@@ -13,7 +15,48 @@ import { ReactComponent as IconPhotoSvg } from './assets/photo.svg'
 import { ReactComponent as IconUnLikeSvg } from './assets/unLike.svg'
 import styles from './Button.scss'
 
-const Button3D = ({ type, onClick, iconType, isDisabled, content }) => {
+const UpLoadButton = ({ isDisabled }) => {
+  const dispatch = useDispatch()
+  useStyles(styles)
+  const handleUpload = e => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    formData.append('type', 'file')
+    console.log(file, formData)
+    dispatch(upload(formData))
+  }
+  return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label
+      className={classNames(
+        `${styles.button} flex rounded items-center py-1.5 px-4 group bg-primary-50  hover:bg-primary-200 cursor-pointer`,
+        {
+          'bg-gray-400 pointer-events-none': isDisabled,
+          [styles.disable]: isDisabled,
+        },
+      )}>
+      <input type="file" className="hidden" onChange={handleUpload} />
+      <IconPhotoSvg className={styles.photo} />
+      <p
+        className={classNames('text-primary-700 group-hover:text-primary-800', {
+          'text-gray-700': isDisabled,
+        })}>
+        上傳圖片
+      </p>
+    </label>
+  )
+}
+
+UpLoadButton.propTypes = {
+  isDisabled: PropTypes.bool,
+}
+
+UpLoadButton.defaultProps = {
+  isDisabled: false,
+}
+
+const Button = ({ type, onClick, iconType, isDisabled, content }) => {
   useStyles(styles)
   return (
     <button
@@ -43,7 +86,7 @@ const Button3D = ({ type, onClick, iconType, isDisabled, content }) => {
   )
 }
 
-Button3D.propTypes = {
+Button.propTypes = {
   onClick: PropTypes.func,
   iconType: PropTypes.string,
   isDisabled: PropTypes.bool,
@@ -51,11 +94,13 @@ Button3D.propTypes = {
   type: PropTypes.string,
 }
 
-Button3D.defaultProps = {
+Button.defaultProps = {
   type: '',
   onClick: () => {},
   iconType: '',
   isDisabled: false,
   content: '',
 }
-export default Button3D
+
+export { UpLoadButton }
+export default Button
