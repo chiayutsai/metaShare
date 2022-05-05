@@ -2,20 +2,29 @@ import PropTypes from 'prop-types'
 import { useState, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { handleAllPost } from 'actions/postModal'
-import { handleUploadImage } from 'actions/uploadImage'
+import { handleUploadImage, cleanAllImageUrl } from 'actions/uploadImage'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper'
 import PostModalContent from 'components/PostModal/PostModalContent/PostModalContent'
 import PostModalFooter from 'components/PostModal/PostModalFooter/PostModalFooter'
 import PostModalHeader from 'components/PostModal/PostModalHeader/PostModalHeader'
-import { uploadImageSelector } from 'selectors/uploadImage'
+import {
+  uploadImageSelector,
+  uploadImageLoadingSelector,
+} from 'selectors/uploadImage'
 
 const PostModal = ({ content, onClose }) => {
   const dispatch = useDispatch()
   const imageUrls = useSelector(uploadImageSelector)
+  const isLoading = useSelector(uploadImageLoadingSelector)
   const [textAreaContent, setTextAreaContent] = useState(content)
   const [isError, setError] = useState(false)
   const [errorContent, setErrorContent] = useState('')
+  const handleClose = useCallback(() => {
+    onClose()
+    dispatch(cleanAllImageUrl())
+  }, [dispatch, onClose])
+
   useEffect(() => {
     if (textAreaContent || imageUrls.length) {
       setError(false)
@@ -50,9 +59,9 @@ const PostModal = ({ content, onClose }) => {
     }
   }
   return (
-    <ModalWrapper shouldCloseOnOverlayClick disableBodyScroll onClose={onClose}>
+    <ModalWrapper disableBodyScroll onClose={handleClose}>
       <div className="w-[600px] bg-white rounded-lg pb-4">
-        <PostModalHeader onClose={onClose} />
+        <PostModalHeader onClose={handleClose} />
         <div className="px-7">
           <div className="mb-4">
             <DecorationLine />
@@ -64,9 +73,11 @@ const PostModal = ({ content, onClose }) => {
               setTextAreaContent={setTextAreaContent}
               isError={isError}
               errorContent={errorContent}
+              isLoading={isLoading}
             />
           </div>
           <PostModalFooter
+            isLoading={isLoading}
             isError={isError}
             onClick={handleAllPostClick}
             onChange={handleUploadChange}

@@ -31,8 +31,9 @@ export const handleAllPost = data => async (dispatch, getState) => {
   const state = getState()
   const imageArray = uploadImageSelector(state)
   const imageUrls = imageArray.map(img => img.imageUrl)
+  const { content } = data
   const postData = {
-    constent: data,
+    content,
     imageUrls,
   }
   try {

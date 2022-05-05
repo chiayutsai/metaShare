@@ -1,6 +1,10 @@
 import { handleActions } from 'redux-actions'
 import { uploadImageAction } from 'actions/api/webApi'
-import { ADD_IMAGE_URL, CLEAN_ALL_IMAGE_URL } from 'actions/uploadImage'
+import {
+  ADD_IMAGE_URL,
+  CLEAN_ALL_IMAGE_URL,
+  TOGGLE_LOADING,
+} from 'actions/uploadImage'
 
 const initialState = {
   isLoading: false,
@@ -19,6 +23,10 @@ export default handleActions(
     }),
     [CLEAN_ALL_IMAGE_URL]: () => ({
       imageUrls: [],
+    }),
+    [TOGGLE_LOADING]: state => ({
+      ...state,
+      isLoading: !state.isLoading,
     }),
     [uploadImageAction.failure]: state => ({
       ...state,
