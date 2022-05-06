@@ -407,6 +407,7 @@ const config = {
       minify: {
         collapseWhitespace: true,
       },
+      favicon: './public/favicon.ico',
     }),
 
     // 4
