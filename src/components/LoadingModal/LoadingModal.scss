@@ -1,0 +1,56 @@
+:global(.Body--Loading-disable-scroll) {
+  overflow: hidden;
+}
+
+.root {
+  @apply fixed top-0 left-0 z-20 flex items-center justify-center w-full h-full bg-black/70;
+}
+
+.loading {
+  @apply w-[300px] h-[300px] flex items-center justify-center;
+}
+
+.circle {
+  @apply absolute flex items-center justify-center rounded-full;
+}
+
+.blue {
+  animation: spin3D 3s linear .2s infinite;
+  @apply w-[165px] h-[165px] border border-[#91daff];
+}
+
+.green {
+  animation: spin3D 2s linear 0s infinite;
+  @apply w-[120px] h-[120px] border border-[#91ffbf];
+}
+
+.red {
+  animation: spin3D 1s linear 0s infinite;
+  @apply w-[90px] h-[90px] border border-[#ffca91];
+}
+
+.white {
+  animation: spin3D 10s linear 0s infinite;
+  @apply w-[60px] h-[60px] border-2 border-white;
+}
+
+.w1 {
+  transform: rotate3d(1, 1, 1, 90deg);
+}
+
+.w2 {
+  transform: rotate3d(1, 2, .5, 90deg);
+}
+
+.w3 {
+  transform: rotate3d(.5, 1, 2, 90deg);
+}
+
+@keyframes spin3D {
+  from {
+    transform: rotate3d(.5,.5,.5, 360deg);
+  }
+  to{
+    transform: rotate3d(0deg);
+  }
+}

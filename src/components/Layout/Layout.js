@@ -11,7 +11,9 @@
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
+import LoadingModal from 'components/LoadingModal/LoadingModal'
 import { appReadySelector } from 'selectors'
+import { postsWallLoadingSelector } from 'selectors/post'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ModalList from '../ModalList/ModalList'
 import Navbar from '../Navbar/Navbar'
@@ -20,6 +22,7 @@ import styles from './Layout.scss'
 
 const Layout = ({ children }) => {
   const appReady = useSelector(appReadySelector)
+  const loading = useSelector(postsWallLoadingSelector)
   useStyles(styles)
   return (
     <ErrorBoundary>
@@ -37,9 +40,9 @@ const Layout = ({ children }) => {
               <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
             </div>
           </div>
-
           <ModalList />
-          {/* {loading && <LoadingModal />} 遮罩版 */}
+
+          {loading && <LoadingModal />}
         </>
       )}
     </ErrorBoundary>
