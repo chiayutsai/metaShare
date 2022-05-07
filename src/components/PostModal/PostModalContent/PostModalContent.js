@@ -41,7 +41,9 @@ const PostModalContent = ({
             thumbSizeChangeOnHover>
             <div className="gap-2 columns-2 ">
               {imageUrls.map((img, index) => (
-                <div className="relative mb-2 rounded overflow-hidden ">
+                <div
+                  key={`img${index + 1}`}
+                  className="relative mb-2 rounded overflow-hidden ">
                   <button
                     type="button"
                     className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100">

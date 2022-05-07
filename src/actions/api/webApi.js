@@ -70,7 +70,7 @@ export const addPostAction = createApiActions('ADD_POST')
 const addPost = ({ content, imageUrls }) => async dispatch => {
   try {
     // author、imageUrls 從 selector 來
-    console.log(content, imageUrls)
+
     const data = {
       author: '627100547ef69b72689e67f6',
       content,

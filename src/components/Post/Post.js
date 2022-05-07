@@ -12,13 +12,14 @@ const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
   const likeAmount = likes.length
   const commentAmount = comments.length
   const isLike = Boolean(likes.filter(user => user.id === userID).length)
+
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">
         <PostHeader
           avatorUrl={author.avator}
           userName={author.name}
-          date={createdAt}
+          createdAt={createdAt}
         />
       </div>
       <div className="border-b border-gray-600/50 pb-3 mb-2">
@@ -37,8 +38,8 @@ const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
       </div>
       {!!commentAmount && (
         <div className="border-b border-gray-600/50 pb-3 mb-3">
-          {comments.map(comment => (
-            <div key={comment.id} className="mb-3 last:mb-0 ">
+          {comments.map((comment, index) => (
+            <div key={`comment${index + 1}`} className="mb-3 last:mb-0 ">
               <PostComment
                 avatorUrl={comment.commenter.avator}
                 userName={comment.commenter.name}
@@ -55,11 +56,11 @@ const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
   )
 }
 Post.propTypes = {
-  author: PropTypes.string.isRequired,
-  createdAt: PropTypes.number.isRequired,
+  author: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  createdAt: PropTypes.string.isRequired,
   content: PropTypes.string,
   imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  likes: PropTypes.arrayOf(PropTypes.object),
+  likes: PropTypes.arrayOf(PropTypes.string),
   comments: PropTypes.arrayOf(PropTypes.object),
 }
 

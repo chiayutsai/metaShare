@@ -4,7 +4,7 @@ $modal-overlay-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
-.root{
+.root {
   position: fixed;
   top: 0;
   right: 0;
@@ -25,6 +25,7 @@ $modal-overlay-color: rgba(0, 0, 0, 0.5);
     left: 0;
     right: 0;
     cursor: default;
+    pointer-events: auto;
 
     &.can-click {
       pointer-events: auto;
@@ -36,6 +37,3 @@ $modal-overlay-color: rgba(0, 0, 0, 0.5);
     pointer-events: auto;
   }
 }
-
-
-

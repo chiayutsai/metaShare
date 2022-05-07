@@ -1,6 +1,7 @@
 import { getAllPosts, addPost } from 'actions/api/webApi'
 import { dismissModal, setModal } from 'actions/modal'
-import { cleanAllImageUrl } from 'actions/uploadImage'
+import { setSearchWord } from 'actions/post'
+import { toggleLoading, cleanAllImageUrl } from 'actions/uploadImage'
 import POST_MODAL from 'constants/modal'
 import { postModalSelector } from 'selectors/modal'
 import { uploadImageSelector } from 'selectors/uploadImage'
@@ -37,16 +38,18 @@ export const handleAllPost = data => async (dispatch, getState) => {
     imageUrls,
   }
   try {
+    dispatch(toggleLoading())
     await dispatch(addPost(postData))
     dispatch(cleanAllImageUrl())
   } catch (error) {
     console.log(error)
     throw error
   }
+  dispatch(toggleLoading())
   dispatch(dismissPostModal())
-
   try {
     dispatch(getAllPosts())
+    dispatch(setSearchWord(''))
   } catch (error) {
     console.log(error)
     throw error

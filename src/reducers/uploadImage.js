@@ -21,7 +21,8 @@ export default handleActions(
       ...state,
       imageUrls: [...state.imageUrls, payload],
     }),
-    [CLEAN_ALL_IMAGE_URL]: () => ({
+    [CLEAN_ALL_IMAGE_URL]: state => ({
+      ...state,
       imageUrls: [],
     }),
     [TOGGLE_LOADING]: state => ({
