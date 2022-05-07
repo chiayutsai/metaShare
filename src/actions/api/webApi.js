@@ -80,7 +80,7 @@ const addPost = ({ content, imageUrls }) => async dispatch => {
     dispatch(addPostAction.request(data))
     const result = await dispatch(
       postApi({
-        url: `/posts`,
+        url: `/post`,
         data,
       }),
     )
