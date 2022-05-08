@@ -20,6 +20,15 @@ const routes = {
       path: '',
       load: () => import(/* webpackChunkName: 'home' */ './home'),
     },
+    {
+      path: '/login',
+      load: () => import(/* webpackChunkName: 'login' */ './login'),
+    },
+    {
+      path: '/login/checkEmail',
+      load: () =>
+        import(/* webpackChunkName: 'loginCheckEmail' */ './loginCheckEmail'),
+    },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',

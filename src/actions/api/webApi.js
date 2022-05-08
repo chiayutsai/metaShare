@@ -82,6 +82,9 @@ const addPost = ({ content, imageUrls }) => async dispatch => {
       postApi({
         url: `/post`,
         data,
+        // header: {
+        //   auth: 'barer 25728357239857',
+        // },
       }),
     )
     dispatch(addPostAction.success(result))

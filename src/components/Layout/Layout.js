@@ -20,26 +20,35 @@ import Navbar from '../Navbar/Navbar'
 import PersonCard from '../PersonCard/PersonCard'
 import styles from './Layout.scss'
 
-const Layout = ({ children }) => {
+const Layout = ({ view, children }) => {
   const appReady = useSelector(appReadySelector)
   const loading = useSelector(postsWallLoadingSelector)
   useStyles(styles)
+  const isHome = view === 'home'
+  const isLogin = view === 'login'
   return (
     <ErrorBoundary>
       {/* {!appReady && <LoadingLayout />} 全版 */}
       {appReady && (
         <>
           <div className={styles.bg} />
-          <Navbar />
-          <div className="container mt-[56px] pt-7 px-9">
-            <div className="flex">
-              <div className="w-60 shrink-0">
-                <PersonCard />
+          {isHome && (
+            <>
+              <Navbar />
+              <div className="container mt-[56px] pt-7 px-9">
+                <div className="flex">
+                  <div className="w-60 shrink-0">
+                    <PersonCard />
+                  </div>
+                  <div className="w-full max-w-[788px] mx-[30px]">
+                    {children}
+                  </div>
+                  <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
+                </div>
               </div>
-              <div className="w-full max-w-[788px] mx-[30px]"> {children}</div>
-              <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
-            </div>
-          </div>
+            </>
+          )}
+          {isLogin && <div>{children}</div>}
           <ModalList />
 
           {loading && <LoadingModal />}
@@ -51,6 +60,10 @@ const Layout = ({ children }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  view: PropTypes.string,
 }
 
+Layout.defaultProps = {
+  view: '',
+}
 export default Layout
