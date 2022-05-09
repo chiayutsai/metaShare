@@ -30,19 +30,21 @@
 }
 
 .white {
-  animation: spin3D 10s linear 0s infinite;
   @apply w-[60px] h-[60px] border-2 border-white;
 }
 
 .w1 {
+  animation: spin3D-w1 10s linear 0s infinite;
   transform: rotate3d(1, 1, 1, 90deg);
 }
 
 .w2 {
+  animation: spin3D-w2 10s linear 0s infinite;
   transform: rotate3d(1, 2, 0.5, 90deg);
 }
 
 .w3 {
+  animation: spin3D-w3 10s linear 0s infinite;
   transform: rotate3d(0.5, 1, 2, 90deg);
 }
 
@@ -51,6 +53,33 @@
     transform: rotate3d(0.5, 0.5, 0.5, 360deg);
   }
   to {
-    transform: rotate3d(1, 1, 1, 0deg);
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+}
+
+@keyframes spin3D-w1 {
+  from {
+    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
+  }
+  to {
+    transform: rotate3d(1, 1, 1, 90deg);
+  }
+}
+
+@keyframes spin3D-w2 {
+  from {
+    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
+  }
+  to {
+    transform: rotate3d(1, 2, 0.5, 90deg);
+  }
+}
+
+@keyframes spin3D-w3 {
+  from {
+    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
+  }
+  to {
+    transform: rotate3d(0.5, 1, 2, 90deg);
   }
 }

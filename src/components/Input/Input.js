@@ -27,14 +27,13 @@ const Input = ({ type, isError, errorContent, showLabel }) => {
   const [isFocus, setFocus] = useState(false)
 
   const handleShowPasswordClick = useCallback(() => {
-    setFocus(true)
     setShowPasswrod(!showPasseord)
   }, [showPasseord])
   const inputTypePassword = isPassword && !showPasseord
   return (
     <div
       className={classNames(
-        'relative flex items-center max-h-12 rounded border-2 border-gray-600 px-5 py-3',
+        'relative flex items-center w-full max-h-12 rounded border-[1.5px] border-gray-600 px-5 py-3',
         {
           'border-primary-600': isFocus,
           '!border-alert': isError,
@@ -124,7 +123,9 @@ const Input = ({ type, isError, errorContent, showLabel }) => {
       {isError && (
         <div className="absolute -bottom-7 left-0 flex items-center">
           <IconErrorSvg />
-          <p className="text-alert ml-2 text-sm">{errorContent}</p>
+          <p className="relative -top-[1px] text-alert ml-2 text-sm">
+            {errorContent}
+          </p>
         </div>
       )}
     </div>

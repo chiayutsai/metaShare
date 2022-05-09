@@ -1,6 +1,7 @@
 import useStyles from 'isomorphic-style-loader/useStyles'
 import Avator from 'components/Avator/Avator'
 import HomeButton from 'components/Button/HomeButton/HomeButton'
+import Link from 'components/Link/Link'
 import SearchBar from 'components/SerachBar/SearchBar'
 import styles from './Navbar.scss'
 
@@ -9,9 +10,9 @@ const Navbar = () => {
   return (
     <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full py-1 px-6 bg-white shadow-navbar">
       <h1>
-        <a href="/" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           MetaShare
-        </a>
+        </Link>
       </h1>
 
       <SearchBar />

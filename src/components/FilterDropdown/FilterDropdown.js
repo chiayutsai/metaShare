@@ -74,7 +74,7 @@ const FilterDropdown = ({ filterType }) => {
           })}
           onClick={handleCloseDropdown}
           role="presentation">
-          最多則貼文
+          最多則留言
         </li>
       </ul>
     </div>

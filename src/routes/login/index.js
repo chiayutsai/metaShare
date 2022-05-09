@@ -8,11 +8,16 @@
  */
 
 import Layout from 'components/Layout/Layout'
+import Login from './Login'
 
 const action = async () => ({
   title: '',
-  chunks: ['home'],
-  component: <Layout view="login">login</Layout>,
+  chunks: ['login'],
+  component: (
+    <Layout view="login">
+      <Login />
+    </Layout>
+  ),
 })
 
 export default action

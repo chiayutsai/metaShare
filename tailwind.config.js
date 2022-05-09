@@ -74,6 +74,8 @@ module.exports = {
         navbar: '0px 2px 10px rgba(0, 0, 0, 0.04)',
         card: '2px 2px 6px rgba(0, 0, 0, 0.15)',
         filter: '1px 1px 2px rgba(65,49,126,0.2)',
+        login: '2px 2px 5px rgba(37,2,81,0.25)',
+        'login-card': '4px 5px 10px rgba(0,0,0,0.15)',
       },
     },
   },

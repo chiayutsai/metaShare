@@ -11,8 +11,8 @@ import Layout from 'components/Layout/Layout'
 
 const action = async () => ({
   title: '',
-  chunks: ['home'],
-  component: <Layout view="login">loginCheckEmail</Layout>,
+  chunks: ['checkEmail'],
+  component: <Layout view="login">checkEmail</Layout>,
 })
 
 export default action

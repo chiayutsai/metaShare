@@ -27,8 +27,11 @@ input:-webkit-autofill:active  {
 } 
 
 @layer components {
+  .login-line {
+    @apply relative top-1 w-5 h-0.5 bg-primary-500 mr-2 rotate-[70deg] before:w-2 before:h-2 before:rounded-full before:bg-primary-500 before:absolute before:-top-[3px] before:-left-[6px];
+  }
   .button-3d {
-    @apply inline-flex shrink-0	items-center rounded px-4	pt-1.5 pb-2.5  duration-500 bg-gradient-to-center from-transparent;
+    @apply inline-flex shrink-0	items-center justify-center rounded px-4	pt-1.5 pb-2.5  duration-500 bg-gradient-to-center from-transparent;
   }
 
   .button-3d-primary {
@@ -47,6 +50,88 @@ input:-webkit-autofill:active  {
 
   .button-3d-rounded-disabled {
     @apply text-gray-200 text-sm shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+  }
+
+  .login-circle {
+    
+    @apply absolute w-full h-full flex items-center justify-center;
+  }
+  .circle1 {
+    animation: spin1 20s infinite linear;
+  }
+
+  .circle2 {
+    animation: spin2 20s infinite linear;
+  }
+
+  .circle3 {
+    animation: spin3 20s infinite linear;
+  }
+
+  .small-circle1 {
+    animation: small-spin1 25s infinite linear;
+  }
+
+  .small-circle2 {
+    animation: small-spin2 25s infinite linear;
+  }
+
+  .rotate-login-circle{
+    animation: rotate-circle 60s infinite linear reverse;
+  }
+  .rotate-small-login-circle{
+    animation: rotate-circle 80s infinite linear;
+  }
+  .login-circle-img {
+    @apply border-4 border-gray-100 rounded-full shadow-login;
+  }
+}
+
+@keyframes spin1{ 
+  from { 
+    transform: rotate(45deg) translateY(-456px) translateY(50%) rotate(405deg); 
+  } to { 
+    transform: rotate(405deg) translateY(-456px) translateY(50%) rotate(45deg); 
+  }
+}
+
+@keyframes spin2{ 
+  from { 
+    transform: rotate(135deg) translateY(-456px) translateY(50%) rotate(495deg); 
+  } to { 
+    transform: rotate(495deg) translateY(-456px) translateY(50%) rotate(135deg); 
+  }
+}
+
+@keyframes spin3{ 
+  from { 
+    transform: rotate(-90deg) translateY(-456px) translateY(50%) rotate(270deg); 
+  } to { 
+    transform: rotate(270deg) translateY(-456px) translateY(50%) rotate(-90deg); 
+  }
+}
+
+@keyframes small-spin1{ 
+  from { 
+    transform: rotate(390deg) translateY(-260px) translateY(50%) rotate(30deg); 
+  } to { 
+    transform: rotate(30deg) translateY(-260px) translateY(50%) rotate(390deg); 
+  }
+}
+
+@keyframes small-spin2{ 
+  from { 
+    transform: rotate(210deg) translateY(-260px) translateY(50%) rotate(-150deg); 
+  } to { 
+    transform: rotate(-150deg) translateY(-260px) translateY(50%) rotate(210deg); 
+  }
+}
+
+@keyframes rotate-circle{ 
+  from { 
+    transform: rotate(0deg)
+  } to { 
+    transform: rotate(360deg)
   }
 }
 .swiper-wrapper {

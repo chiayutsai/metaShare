@@ -26,8 +26,7 @@ const routes = {
     },
     {
       path: '/login/checkEmail',
-      load: () =>
-        import(/* webpackChunkName: 'loginCheckEmail' */ './loginCheckEmail'),
+      load: () => import(/* webpackChunkName: 'checkEmail' */ './checkEmail'),
     },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {

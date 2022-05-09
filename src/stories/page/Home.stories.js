@@ -18,7 +18,7 @@ const Template = () => {
   }
   return (
     <ReduxProvider store={store}>
-      <Layout>
+      <Layout view="home">
         <Home />
       </Layout>
     </ReduxProvider>
@@ -41,7 +41,7 @@ export const HomeNoPostTemplate = () => {
   }
   return (
     <ReduxProvider store={store}>
-      <Layout>
+      <Layout view="home">
         <Home />
       </Layout>
     </ReduxProvider>

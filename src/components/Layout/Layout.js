@@ -12,6 +12,7 @@ import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import LoadingModal from 'components/LoadingModal/LoadingModal'
+import LoginCircle from 'components/LoginCircle/LoginCircle'
 import { appReadySelector } from 'selectors'
 import { postsWallLoadingSelector } from 'selectors/post'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
@@ -48,7 +49,23 @@ const Layout = ({ view, children }) => {
               </div>
             </>
           )}
-          {isLogin && <div>{children}</div>}
+          {isLogin && (
+            <div>
+              <div className="relative w-full h-screen grid grid-cols-12 py-9 px-12 items-center">
+                <h1 className="absolute top-6 left-9 ">
+                  <div className={styles.logo}>MetaShare</div>
+                </h1>
+                <div className="col-span-7 flex items-center justify-center">
+                  <div className="scale-110">
+                    <LoginCircle />
+                  </div>
+                </div>
+                <div className="col-span-4 px-24 py-14 ml bg-white/70 shadow-login-card rounded-lg">
+                  {children}
+                </div>
+              </div>
+            </div>
+          )}
           <ModalList />
 
           {loading && <LoadingModal />}

@@ -1,3 +1,7 @@
 .bg {
   @apply fixed top-0 left-0 w-full -z-10 bg-[url('./assets/bg.png')] bg-no-repeat bg-cover h-screen;
 }
+
+.logo {
+  @apply bg-[url('./assets/logo.png')] bg-no-repeat bg-contain h-[54px] w-[270px] overflow-hidden indent-[101%];
+}
