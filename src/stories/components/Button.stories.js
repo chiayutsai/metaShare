@@ -1,5 +1,6 @@
 import Button from 'components/Button/Button'
 import Button3D from 'components/Button/Button3D/Button3D'
+import CommunityButton from 'components/Button/CommunityButton/CommunityButton'
 import HomeButton from 'components/Button/HomeButton/HomeButton'
 import {
   NORMAL,
@@ -7,6 +8,8 @@ import {
   ICON_EYE,
   ICON_PHOTO,
   ICON_UNLIKE,
+  GOOGLE,
+  FACEBOOK,
 } from 'constants/buttonType'
 
 export default {
@@ -42,6 +45,31 @@ Button3DTemplate.argTypes = {
 }
 
 export const HomeButtonTemplate = () => <HomeButton />
+
+export const CommunityButtonTemplate = args => (
+  <div style={{ width: 212 }}>
+    <CommunityButton {...args} />
+  </div>
+)
+
+CommunityButtonTemplate.args = {
+  type: GOOGLE,
+  isDisabled: false,
+}
+
+CommunityButtonTemplate.argTypes = {
+  type: {
+    control: {
+      type: 'radio',
+      options: [GOOGLE, FACEBOOK],
+    },
+  },
+  isDisabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+}
 
 export const ButtonTemplate = args => <Button {...args} />
 

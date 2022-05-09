@@ -1,0 +1,14 @@
+.icon {
+  @apply mr-2;
+  &.focus {
+    path {
+      @apply fill-primary-600;
+    }
+  }
+
+  &.error {
+    path {
+      @apply fill-alert;
+    }
+  }
+}
