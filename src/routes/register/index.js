@@ -8,11 +8,16 @@
  */
 
 import Layout from 'components/Layout/Layout'
+import Register from './Register'
 
 const action = async () => ({
   title: '',
-  chunks: ['checkEmail'],
-  component: <Layout view="login">checkEmail</Layout>,
+  chunks: ['register'],
+  component: (
+    <Layout view="login">
+      <Register />
+    </Layout>
+  ),
 })
 
 export default action

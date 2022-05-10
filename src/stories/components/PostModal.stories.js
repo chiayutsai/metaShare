@@ -21,7 +21,6 @@ export const PostModalContentTemplate = args => (
 
 PostModalContentTemplate.args = {
   isLoading: false,
-  isError: false,
   imageUrls: [
     'https://images.unsplash.com/photo-1651173889796-5cd7ed0c1108?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
     'https://images.unsplash.com/photo-1651319721939-34e8864b7006?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2942&q=80',
@@ -32,11 +31,6 @@ PostModalContentTemplate.args = {
 
 PostModalContentTemplate.argTypes = {
   isLoading: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isError: {
     control: {
       type: 'boolean',
     },

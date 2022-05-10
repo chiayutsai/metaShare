@@ -8,3 +8,5 @@ export const appReadySelector = state => state.appReady
 export const loadingSelector = state => state.loading
 
 export const darkModeSelector = state => state.darkMode
+
+export const forgetPasswordStepSelector = state => state.forgetPassword

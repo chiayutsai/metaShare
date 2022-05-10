@@ -18,7 +18,6 @@ const PostModal = ({ content, onClose }) => {
   const imageUrls = useSelector(uploadImageSelector)
   const isLoading = useSelector(uploadImageLoadingSelector)
   const [textAreaContent, setTextAreaContent] = useState(content)
-  const [isError, setError] = useState(false)
   const [errorContent, setErrorContent] = useState('')
   const handleClose = useCallback(() => {
     onClose()
@@ -27,12 +26,11 @@ const PostModal = ({ content, onClose }) => {
 
   useEffect(() => {
     if (textAreaContent || imageUrls.length) {
-      setError(false)
+      setErrorContent('')
     }
   }, [textAreaContent, imageUrls])
   const handleAllPostClick = useCallback(() => {
     if (!textAreaContent && !imageUrls.length) {
-      setError(true)
       setErrorContent('請輸入貼文內容或上傳一張圖片')
       return
     }
@@ -53,8 +51,8 @@ const PostModal = ({ content, onClose }) => {
 
     try {
       await dispatch(handleUploadImage(formData))
+      setErrorContent('')
     } catch (error) {
-      setError(true)
       setErrorContent(error.message)
     }
   }
@@ -71,14 +69,13 @@ const PostModal = ({ content, onClose }) => {
               textAreaContent={textAreaContent}
               imageUrls={imageUrls}
               setTextAreaContent={setTextAreaContent}
-              isError={isError}
               errorContent={errorContent}
               isLoading={isLoading}
             />
           </div>
           <PostModalFooter
             isLoading={isLoading}
-            isError={isError}
+            isError={Boolean(errorContent)}
             onClick={handleAllPostClick}
             onChange={handleUploadChange}
           />

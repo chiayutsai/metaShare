@@ -4,7 +4,7 @@ import { GOOGLE, FACEBOOK } from 'constants/buttonType'
 import { ReactComponent as IconFacebookSvg } from './assets/facebook.svg'
 import { ReactComponent as IconGoogleSvg } from './assets/google.svg'
 
-const CommunityButton = ({ type, isDisabled, onClick }) => (
+const CommunityButton = ({ type, isDisabled, onClick, login }) => (
   <button
     type="button"
     className={classNames(
@@ -35,20 +35,21 @@ const CommunityButton = ({ type, isDisabled, onClick }) => (
           '!text-gray-700': isDisabled,
         },
       )}>
-      使用 {type} 登入
+      使用 {type} {login ? '登入' : '註冊'}
     </p>
   </button>
 )
-
 CommunityButton.propTypes = {
   type: PropTypes.string,
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func,
+  login: PropTypes.bool,
 }
 
 CommunityButton.defaultProps = {
   type: '',
   isDisabled: false,
   onClick: () => {},
+  login: false,
 }
 export default CommunityButton

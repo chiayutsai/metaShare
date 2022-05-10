@@ -19,11 +19,6 @@ const postApi = new BaseApi().create({
 //   method: 'DELETE',
 // })
 
-// const putApi = new BaseApi().create({
-//   baseURL: '/api',
-//   method: 'PUT',
-// })
-
 // const patchApi = new BaseApi().create({
 //   baseURL: '/api',
 //   method: 'PATCH',
@@ -97,6 +92,32 @@ const addPost = ({ content, imageUrls }) => async dispatch => {
 }
 
 // define
+export const loginAction = createApiActions('LOGIN')
+// request
+const login = ({ email, password }) => async dispatch => {
+  try {
+    const data = {
+      email,
+      password,
+    }
+
+    dispatch(loginAction.request(data))
+    const result = await dispatch(
+      postApi({
+        url: `/user/login`,
+        data,
+      }),
+    )
+    dispatch(loginAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(loginAction.failure(error))
+    throw error
+  }
+}
+
+// define
 export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
 const uploadImage = formData => async dispatch => {
@@ -116,4 +137,4 @@ const uploadImage = formData => async dispatch => {
     throw error
   }
 }
-export { getAllPosts, addPost, uploadImage }
+export { getAllPosts, addPost, login, uploadImage }

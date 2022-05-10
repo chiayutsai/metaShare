@@ -7,7 +7,6 @@ import { ReactComponent as IconLoadingSvg } from './assets/loading.svg'
 const PostModalContent = ({
   textAreaContent,
   isLoading,
-  isError,
   errorContent,
   imageUrls,
   setTextAreaContent,
@@ -27,7 +26,7 @@ const PostModalContent = ({
         }}
       />
 
-      {isError && (
+      {errorContent && (
         <div className="flex justify-center mt-4">
           <ErrorBadge content={errorContent} />
         </div>
@@ -85,7 +84,6 @@ const PostModalContent = ({
 
 PostModalContent.propTypes = {
   isLoading: PropTypes.bool,
-  isError: PropTypes.bool,
   imageUrls: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   textAreaContent: PropTypes.string,
   errorContent: PropTypes.string,
@@ -94,7 +92,6 @@ PostModalContent.propTypes = {
 
 PostModalContent.defaultProps = {
   isLoading: false,
-  isError: false,
   imageUrls: [],
   errorContent: '',
   textAreaContent: '',

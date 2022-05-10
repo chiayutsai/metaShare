@@ -9,22 +9,19 @@ const Button3D = ({
   icon,
   isDisabled,
   content,
-}) => {
-  console.log(className)
-  return (
-    <button
-      type="button"
-      className={classNames(`${className} button-3d button-3d-primary`, {
-        'button-3d-rounded': isRounded,
-        'button-3d-disabled': !isRounded && isDisabled,
-        'button-3d-rounded-disabled': isRounded && isDisabled,
-      })}
-      onClick={onClick}>
-      {content}
-      {icon && <IconSearchSvg className="ml-1" />}
-    </button>
-  )
-}
+}) => (
+  <button
+    type="button"
+    className={classNames(`${className} button-3d button-3d-primary`, {
+      'button-3d-rounded': isRounded,
+      'button-3d-disabled': !isRounded && isDisabled,
+      'button-3d-rounded-disabled': isRounded && isDisabled,
+    })}
+    onClick={onClick}>
+    {content}
+    {icon && <IconSearchSvg className="ml-1" />}
+  </button>
+)
 
 Button3D.propTypes = {
   className: PropTypes.string,

@@ -21,7 +21,6 @@ export const InputTemplate = args => (
 
 InputTemplate.args = {
   type: EMAIL,
-  isError: false,
   showLabel: true,
   errorContent: 'Error Message',
 }
@@ -40,11 +39,7 @@ InputTemplate.argTypes = {
       ],
     },
   },
-  isError: {
-    control: {
-      type: 'boolean',
-    },
-  },
+
   showLabel: {
     control: {
       type: 'boolean',

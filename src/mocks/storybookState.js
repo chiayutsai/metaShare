@@ -1,4 +1,5 @@
 import { LASTEST_POST } from 'constants/filterType'
+import { CHECK_EMAIL } from 'constants/forgetPassword'
 
 const storyState = {
   user: {
@@ -246,6 +247,7 @@ const storyState = {
       },
     ],
   },
+  forgetPassword: CHECK_EMAIL,
   // personPage:{
 
   // }
