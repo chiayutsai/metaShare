@@ -48,7 +48,7 @@ const Input = ({
       )}>
       {showLabel && (
         <label
-          htmlFor="input"
+          htmlFor={`input${type}`}
           className={classNames(
             'absolute -top-3 left-3 bg-white px-2 font-bold text-gray-900 ',
             {
@@ -86,7 +86,7 @@ const Input = ({
 
       <input
         type={inputTypePassword ? 'password' : 'text'}
-        id="input"
+        id={`input${type}`}
         className={classNames(
           'w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 focus:outline-none',
           {
@@ -144,7 +144,7 @@ Input.propTypes = {
   errorContent: PropTypes.string,
   showLabel: PropTypes.bool,
   handleChange: PropTypes.func,
-  setRef: PropTypes.func,
+  setRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 }
 
 Input.defaultProps = {

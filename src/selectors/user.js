@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
+export const tokenSelector = state => state.user.token
+
 export const loginLoadingSelector = state => state.user.isLoading

@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from 'actions/api/webApi'
+import { handleCheck } from 'actions/user'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import ModalList from 'components/ModalList/ModalList'
 import NoPost from 'components/Post/NoPost/NoPost'
@@ -19,6 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     ;(async () => {
+      await dispatch(handleCheck())
       try {
         await dispatch(getAllPosts())
       } catch (error) {

@@ -1,7 +1,8 @@
 import { FILTER_TYPE_MAP } from 'constants/filterType'
+import { tokenSelector } from 'selectors/user'
+import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
-
 // const baseURL = 'https://mata-share-backend.herokuapp.com'
 const baseURL = 'http://127.0.0.1:3000'
 // base api
@@ -62,12 +63,11 @@ const getAllPosts = (filterType, searchWord) => async dispatch => {
 // define
 export const addPostAction = createApiActions('ADD_POST')
 // request
-const addPost = ({ content, imageUrls }) => async dispatch => {
+const addPost = ({ content, imageUrls }) => async (dispatch, getState) => {
   try {
-    // author、imageUrls 從 selector 來
-
+    const state = getState()
+    const token = tokenSelector(state)
     const data = {
-      author: '627100547ef69b72689e67f6',
       content,
       imageUrls,
     }
@@ -77,9 +77,9 @@ const addPost = ({ content, imageUrls }) => async dispatch => {
       postApi({
         url: `/post`,
         data,
-        // header: {
-        //   auth: 'barer 25728357239857',
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     )
     dispatch(addPostAction.success(result))
@@ -118,6 +118,58 @@ const login = ({ email, password }) => async dispatch => {
 }
 
 // define
+export const registerAction = createApiActions('REGISTER')
+// request
+const register = ({ name, email, password }) => async dispatch => {
+  try {
+    const data = {
+      name,
+      email,
+      password,
+    }
+
+    dispatch(registerAction.request(data))
+    const result = await dispatch(
+      postApi({
+        url: `/user/register`,
+        data,
+      }),
+    )
+    dispatch(registerAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(registerAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const checkAction = createApiActions('CHECK')
+// request
+const check = () => async dispatch => {
+  try {
+    const data = {}
+    const token = BrowserStorage.get('token')
+    dispatch(checkAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/user/check`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(checkAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(checkAction.failure(error))
+    throw error
+  }
+}
+
+// define
 export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
 const uploadImage = formData => async dispatch => {
@@ -137,4 +189,4 @@ const uploadImage = formData => async dispatch => {
     throw error
   }
 }
-export { getAllPosts, addPost, login, uploadImage }
+export { getAllPosts, addPost, login, register, check, uploadImage }
