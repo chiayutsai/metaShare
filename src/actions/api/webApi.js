@@ -2,8 +2,8 @@ import { FILTER_TYPE_MAP } from 'constants/filterType'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
-const baseURL = 'https://mata-share-backend.herokuapp.com'
-// const baseURL = 'http://127.0.0.1:3000'
+// const baseURL = 'https://mata-share-backend.herokuapp.com'
+const baseURL = 'http://127.0.0.1:3000'
 // base api
 const getApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,

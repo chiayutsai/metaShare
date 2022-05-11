@@ -4,6 +4,7 @@ import forgetPassword from './forgetPassword'
 import modals from './modals'
 import postsWall from './postsWall'
 import uploadImage from './uploadImage'
+import user from './user'
 
 export default {
   appReady,
@@ -12,4 +13,5 @@ export default {
   modals,
   postsWall,
   uploadImage,
+  user,
 }

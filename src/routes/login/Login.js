@@ -1,9 +1,9 @@
 // import classNames from 'classnames'
 // import { useEffect } from 'react'
 import { useState, useCallback, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import validator from 'validator'
-import { handleLogin } from 'actions/admin'
+import { handleLogin } from 'actions/user'
 import Button3D from 'components/Button/Button3D/Button3D'
 import CommunityButton from 'components/Button/CommunityButton/CommunityButton'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
@@ -11,6 +11,7 @@ import Input from 'components/Input/Input'
 import Link from 'components/Link/Link'
 import { GOOGLE, FACEBOOK } from 'constants/buttonType'
 import { EMAIL, PASSWORD } from 'constants/inputType'
+import { loginLoadingSelector } from 'selectors/user'
 
 const Login = () => {
   const firstInputRef = useRef()
@@ -22,6 +23,7 @@ const Login = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState('')
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
   const [passwordContent, setPasswordContent] = useState('')
+  const isLoginLoading = useSelector(loginLoadingSelector)
 
   const validateEmail = useCallback(value => {
     let message = ''
@@ -149,7 +151,9 @@ const Login = () => {
           className="w-full min-h-[48px] text-xl font-bold"
           content="登入"
           onClick={handleLoginClick}
-          isDisabled={Boolean(emailErrorMessage || passwordErrorMessage)}
+          isDisabled={Boolean(
+            emailErrorMessage || passwordErrorMessage || isLoginLoading,
+          )}
         />
       </div>
       <div className="flex items-center justify-center">
