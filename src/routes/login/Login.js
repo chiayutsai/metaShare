@@ -79,6 +79,8 @@ const Login = () => {
     const isEmailFailed = validateEmail(emailContent)
     const isPasswordFailed = validatePassword(passwordContent)
     if (isEmailFailed || isPasswordFailed) {
+      firstInputRef.current.focus()
+      firstInputRef.current.select(0, -1)
       return
     }
     try {

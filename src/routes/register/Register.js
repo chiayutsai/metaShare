@@ -105,6 +105,8 @@ const Register = () => {
     const isEmailFailed = validateEmail(emailContent)
     const isPasswordFailed = validatePassword(passwordContent)
     if (isNameFailed || isEmailFailed || isPasswordFailed) {
+      firstInputRef.current.focus()
+      firstInputRef.current.select(0, -1)
       return
     }
     try {

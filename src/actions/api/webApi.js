@@ -1,10 +1,12 @@
 import { FILTER_TYPE_MAP } from 'constants/filterType'
+import { forgetPasswordTokenSelector } from 'selectors'
 import { tokenSelector } from 'selectors/user'
 import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
-// const baseURL = 'https://mata-share-backend.herokuapp.com'
-const baseURL = 'http://127.0.0.1:3000'
+
+const baseURL = 'https://mata-share-backend.herokuapp.com'
+// const baseURL = 'http://127.0.0.1:3000'
 // base api
 const getApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,
@@ -20,10 +22,10 @@ const postApi = new BaseApi().create({
 //   method: 'DELETE',
 // })
 
-// const patchApi = new BaseApi().create({
-//   baseURL: '/api',
-//   method: 'PATCH',
-// })
+const patchApi = new BaseApi().create({
+  baseURL: `${baseURL}/api`,
+  method: 'PATCH',
+})
 
 // api actions
 
@@ -170,6 +172,89 @@ const check = () => async dispatch => {
 }
 
 // define
+export const checkEmailAction = createApiActions('CHECK_EMAIL')
+// request
+const checkEmail = ({ email }) => async dispatch => {
+  try {
+    const data = {
+      email,
+    }
+
+    dispatch(checkEmailAction.request(data))
+    const result = await dispatch(
+      postApi({
+        url: `/user/checkEmail`,
+        data,
+      }),
+    )
+    dispatch(checkEmailAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(checkEmailAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const checkVerificationAction = createApiActions('CHECK_VERIFICATION')
+// request
+const checkVerification = ({ email, verification }) => async dispatch => {
+  try {
+    const data = {
+      email,
+      verification,
+    }
+    console.log(data)
+    dispatch(checkVerificationAction.request(data))
+    const result = await dispatch(
+      postApi({
+        url: `/user/verification`,
+        data,
+      }),
+    )
+    dispatch(checkVerificationAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(checkVerificationAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const resetPasswordAction = createApiActions('RESET_PASSWORD')
+// request
+const resetPassword = ({ password, confirmPassword }) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    const state = getState()
+    const token = forgetPasswordTokenSelector(state)
+    const data = {
+      password,
+      confirmPassword,
+    }
+    dispatch(resetPasswordAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/user/resetPassword`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(resetPasswordAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(resetPasswordAction.failure(error))
+    throw error
+  }
+}
+// define
 export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
 const uploadImage = formData => async dispatch => {
@@ -189,4 +274,14 @@ const uploadImage = formData => async dispatch => {
     throw error
   }
 }
-export { getAllPosts, addPost, login, register, check, uploadImage }
+export {
+  getAllPosts,
+  addPost,
+  login,
+  register,
+  check,
+  checkEmail,
+  checkVerification,
+  resetPassword,
+  uploadImage,
+}

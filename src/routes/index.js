@@ -31,7 +31,7 @@ const routes = {
     {
       path: '/forgetPassword',
       load: () =>
-        import(/* webpackChunkName: 'forgetPassword' */ './ForgetPassword'),
+        import(/* webpackChunkName: 'forgetPassword' */ './forgetPassword'),
     },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {

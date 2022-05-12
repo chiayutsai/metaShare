@@ -60,7 +60,7 @@ const Layout = ({ view, children }) => {
                     <LoginCircle />
                   </div>
                 </div>
-                <div className="col-span-4 px-24 py-14 ml bg-white shadow-login-card rounded-lg">
+                <div className="relative col-span-4 px-24 py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden">
                   {children}
                 </div>
               </div>
