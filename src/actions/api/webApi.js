@@ -1,3 +1,4 @@
+import baseURL from 'config/baseURL'
 import { FILTER_TYPE_MAP } from 'constants/filterType'
 import { forgetPasswordTokenSelector } from 'selectors'
 import { tokenSelector } from 'selectors/user'
@@ -5,8 +6,6 @@ import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
-const baseURL = 'https://mata-share-backend.herokuapp.com'
-// const baseURL = 'http://127.0.0.1:3000'
 // base api
 const getApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,
@@ -33,7 +32,9 @@ const patchApi = new BaseApi().create({
 export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 
 // request
-const getAllPosts = (filterType, searchWord) => async dispatch => {
+const getAllPosts = (filterType, searchWord) => async (dispatch, getState) => {
+  const state = getState()
+  const token = tokenSelector(state)
   const data = {}
   const sort = filterType ? `sort=${FILTER_TYPE_MAP[filterType]}` : ''
   const search = searchWord ? `search=${searchWord}` : ''
@@ -51,6 +52,9 @@ const getAllPosts = (filterType, searchWord) => async dispatch => {
     const result = await dispatch(
       getApi({
         url,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     )
     dispatch(getAllPostsAction.success(result))

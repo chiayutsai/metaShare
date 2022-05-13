@@ -39,6 +39,7 @@ export default handleActions(
       id: payload.data.id,
       name: payload.data.name,
       avator: payload.data.avator,
+      token: payload.data.token,
     }),
   },
   initialState,

@@ -38,11 +38,9 @@ export const handleCheck = () => async (dispatch, getState) => {
     return
   }
   try {
-    await dispatch(check())
-    const storagetoken = BrowserStorage.get('token')
-    dispatch(setToken(storagetoken))
+    const { data } = await dispatch(check())
+    BrowserStorage.set('token', data.token)
   } catch (error) {
-    history.push('/metaShare/login')
     console.log(error)
     throw error
   }

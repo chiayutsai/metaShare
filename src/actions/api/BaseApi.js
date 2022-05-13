@@ -36,6 +36,15 @@ class BaseApi {
           throw new ApiError(408, 'Request Timeout')
         }
 
+        console.log(data)
+
+        if (
+          data?.message === '尚未登入！' ||
+          data?.message === '認證失敗，請重新登入'
+        ) {
+          window.location = '/metaShare/login'
+        }
+
         if (status !== 200) {
           const contentType = headers?.['content-type'] || ''
 
