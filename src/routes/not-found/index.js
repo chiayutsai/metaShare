@@ -16,7 +16,7 @@ const action = () => ({
   title,
   chunks: ['not-found'],
   component: (
-    <Layout>
+    <Layout view="notFound">
       <NotFound title={title} />
     </Layout>
   ),

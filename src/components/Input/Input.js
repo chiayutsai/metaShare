@@ -25,6 +25,7 @@ const Input = ({
   setRef,
   errorContent,
   showLabel,
+  showIcon,
   handleChange,
 }) => {
   useStyles(styles)
@@ -59,29 +60,33 @@ const Input = ({
           {INPUT_TYPE_LABEL_MAP[type]}
         </label>
       )}
-      {type === EMAIL && (
-        <IconEmailSvg
-          className={classNames(styles.icon, {
-            [styles.focus]: isFocus,
-            [styles.error]: errorContent,
-          })}
-        />
-      )}
-      {isPassword && (
-        <IconPasswordSvg
-          className={classNames(styles.icon, {
-            [styles.focus]: isFocus,
-            [styles.error]: errorContent,
-          })}
-        />
-      )}
-      {type === NAME && (
-        <IconPersonSvg
-          className={classNames(styles.icon, {
-            [styles.focus]: isFocus,
-            [styles.error]: errorContent,
-          })}
-        />
+      {showIcon && (
+        <>
+          {type === EMAIL && (
+            <IconEmailSvg
+              className={classNames(styles.icon, {
+                [styles.focus]: isFocus,
+                [styles.error]: errorContent,
+              })}
+            />
+          )}
+          {isPassword && (
+            <IconPasswordSvg
+              className={classNames(styles.icon, {
+                [styles.focus]: isFocus,
+                [styles.error]: errorContent,
+              })}
+            />
+          )}
+          {type === NAME && (
+            <IconPersonSvg
+              className={classNames(styles.icon, {
+                [styles.focus]: isFocus,
+                [styles.error]: errorContent,
+              })}
+            />
+          )}
+        </>
       )}
 
       <input
@@ -143,6 +148,7 @@ Input.propTypes = {
   value: PropTypes.string,
   errorContent: PropTypes.string,
   showLabel: PropTypes.bool,
+  showIcon: PropTypes.bool,
   handleChange: PropTypes.func,
   setRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 }
@@ -152,6 +158,7 @@ Input.defaultProps = {
   value: '',
   errorContent: '',
   showLabel: false,
+  showIcon: true,
   handleChange: () => {},
   setRef: () => {},
 }

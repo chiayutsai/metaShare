@@ -1,0 +1,22 @@
+:root {
+  --rti-bg: transparent; //
+  --rti-border: #c7c7c7; // border - normal
+  --rti-main: transparent; // border - focus
+  --rti-radius: 0.25rem; //border radius
+  --rti-s: 8px; // 間距
+  --rti-tag: #e5e0f8; // tag 底色
+  --rti-tag-remove: #7464b3; // tag 叉叉 hover
+}
+
+:global(.rti--tag) {
+  @apply rounded-full bg-primary-100 border border-primary-300 py-1 pl-3 pr-1;
+  span {
+    @apply text-primary-700 mr-1;
+  }
+  button {
+    @apply w-5 h-5 leading-none rounded-full bg-white/70 p-0 flex items-center justify-center text-primary-700 hover:bg-white text-sm;
+  }
+}
+:global(.rti--container) {
+  @apply border-[1.5px] border-gray-600 outline-none focus-within:outline-none focus-within:border-primary-600;
+}

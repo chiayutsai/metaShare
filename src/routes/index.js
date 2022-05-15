@@ -10,6 +10,7 @@
 /* eslint-disable global-require */
 
 // The top-level (parent) route
+import { handleCheck } from 'actions/user'
 
 const routes = {
   path: '/metaShare',
@@ -32,6 +33,10 @@ const routes = {
       path: '/forgetPassword',
       load: () =>
         import(/* webpackChunkName: 'forgetPassword' */ './forgetPassword'),
+    },
+    {
+      path: '/profile/:id',
+      load: () => import(/* webpackChunkName: 'profile' */ './profile'),
     },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
@@ -57,6 +62,10 @@ const routes = {
 
     // Execute each child route until one of them return the result
     const route = await next()
+
+    if (route.needCheckUser) {
+      await store.dispatch(handleCheck())
+    }
 
     ;(async () => {
       if (contextRoute.request) {

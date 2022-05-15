@@ -21,11 +21,14 @@ export default handleActions(
       searchWord: payload,
     }),
     [getAllPostsAction.request]: state => ({
-      ...state,
+      filterType: state.filterType,
+      searchWord: state.searchWord,
       isLoading: true,
+      posts: [],
     }),
     [getAllPostsAction.success]: (state, { payload }) => ({
-      ...state,
+      filterType: state.filterType,
+      searchWord: state.searchWord,
       isLoading: false,
       posts: payload.data,
     }),

@@ -26,11 +26,13 @@ import BrowserStorage from 'utils/BrowserStorage'
 // ------------------------------------
 export const SET_LOGIN_LOADING = 'SET_LOGIN_LOADING'
 export const SET_TOKEN = 'SET_TOKEN'
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 // ------------------------------------
 // Actions
 // ------------------------------------
 export const setLoginLoading = createAction(SET_LOGIN_LOADING)
 export const setToken = createAction(SET_TOKEN)
+export const updateUserInfo = createAction(UPDATE_USER_INFO)
 export const handleCheck = () => async (dispatch, getState) => {
   const state = getState()
   const token = tokenSelector(state)
@@ -111,7 +113,6 @@ export const handleResetPassword = ({
   password,
   confirmPassword,
 }) => async dispatch => {
-  console.log(password, confirmPassword)
   try {
     dispatch(setLoginLoading())
     await dispatch(resetPassword({ password, confirmPassword }))

@@ -10,8 +10,11 @@ import {
   ICON_UNLIKE,
 } from 'constants/buttonType'
 import { ReactComponent as IconEyeSvg } from './assets/eye.svg'
+import { ReactComponent as IconLoadingSvg } from './assets/loading.svg'
 import { ReactComponent as IconPhotoSvg } from './assets/photo.svg'
 import { ReactComponent as IconUnLikeSvg } from './assets/unLike.svg'
+import { ReactComponent as IconUploadSvg } from './assets/upload.svg'
+
 import styles from './Button.scss'
 
 const UpLoadButton = ({ isDisabled, onChange }) => {
@@ -47,6 +50,43 @@ UpLoadButton.propTypes = {
 UpLoadButton.defaultProps = {
   isDisabled: false,
   onChange: () => {},
+}
+
+export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
+  useStyles(styles)
+  const labelText = isLoading ? '上傳中' : content
+  return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label
+      className={classNames(
+        `${styles['upload-button']} inline-flex rounded items-center py-2 px-4 group bg-primary-100  hover:bg-primary-200 cursor-pointer`,
+        {
+          '!bg-gray-400 pointer-events-none': isLoading,
+        },
+      )}>
+      <input type="file" className="hidden" onChange={onChange} />
+      {isLoading && <IconLoadingSvg className={styles.loadingIcon} />}
+      {!isLoading && <IconUploadSvg className={styles.upload} />}
+      <p
+        className={classNames('text-primary-700 group-hover:text-primary-800', {
+          'text-gray-800': isLoading,
+        })}>
+        {labelText}
+      </p>
+    </label>
+  )
+}
+
+UpLoadLoadingButton.propTypes = {
+  isLoading: PropTypes.bool,
+  onChange: PropTypes.func,
+  content: PropTypes.string,
+}
+
+UpLoadLoadingButton.defaultProps = {
+  isLoading: false,
+  onChange: () => {},
+  content: '',
 }
 
 const Button = ({ type, onClick, iconType, isDisabled, content }) => {
@@ -96,4 +136,5 @@ Button.defaultProps = {
 }
 
 export { UpLoadButton }
+
 export default Button

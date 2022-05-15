@@ -1,0 +1,44 @@
+.edit,
+.trash,
+.follow,
+.unfollow {
+  @apply mr-2.5;
+}
+
+.button {
+  &.normal {
+    box-shadow: inset -1px -1px 1px rgba(24, 0, 75, 0.25),
+      inset 1px 1px 1px rgba(239, 205, 251, 0.35);
+
+    @apply bg-primary-200 hover:bg-primary-300;
+
+    path {
+      @apply fill-primary-900;
+    }
+  }
+
+  &.cancel {
+    box-shadow: inset -1px -1px 1px rgba(105, 105, 105, 0.25),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+
+    @apply bg-gray-400 hover:bg-gray-500;
+  }
+
+  &.darken {
+    box-shadow: inset -1px -1px 1px rgba(24, 0, 75, 0.25),
+      inset 1px 1px 1px rgba(239, 205, 251, 0.35);
+
+    @apply bg-primary-700 bg-gradient-to-center from-transparent to-button3dGradient hover:bg-primary-600 hover:bg-gradient-to-center-hover hover:to-button3dGradientHover;
+  }
+  &.disable {
+    @apply bg-gray-400 pointer-events-none shadow-none to-transparent;
+    .edit,
+    .trash,
+    .follow,
+    .unfollow {
+      path {
+        @apply fill-gray-700;
+      }
+    }
+  }
+}

@@ -44,7 +44,9 @@ class BaseApi {
         ) {
           window.location = '/metaShare/login'
         }
-
+        if (data?.message === '查無此用戶') {
+          window.location = '/metaShare/notFound'
+        }
         if (status !== 200) {
           const contentType = headers?.['content-type'] || ''
 

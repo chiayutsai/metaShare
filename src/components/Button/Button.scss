@@ -42,3 +42,20 @@
     }
   }
 }
+
+.upload-button {
+  &:hover {
+    .upload {
+      path {
+        @apply fill-primary-800;
+      }
+    }
+  }
+}
+
+.upload {
+  @apply mr-2.5;
+}
+.loadingIcon {
+  @apply mr-2.5 animate-spin;
+}

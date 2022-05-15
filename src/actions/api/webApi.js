@@ -1,7 +1,9 @@
 import baseURL from 'config/baseURL'
 import { FILTER_TYPE_MAP } from 'constants/filterType'
 import { forgetPasswordTokenSelector } from 'selectors'
+import { profileUserIdSelector } from 'selectors/profile'
 import { tokenSelector } from 'selectors/user'
+
 import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
@@ -35,10 +37,11 @@ export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 const getAllPosts = (filterType, searchWord) => async (dispatch, getState) => {
   const state = getState()
   const token = tokenSelector(state)
+  const profileUserId = profileUserIdSelector(state)
   const data = {}
   const sort = filterType ? `sort=${FILTER_TYPE_MAP[filterType]}` : ''
   const search = searchWord ? `search=${searchWord}` : ''
-  let url = '/posts'
+  let url = profileUserId ? `/posts/user/${profileUserId}` : '/posts'
   if (sort && search) {
     url += `?${sort}&${search}`
   } else if (sort) {
@@ -258,6 +261,108 @@ const resetPassword = ({ password, confirmPassword }) => async (
     throw error
   }
 }
+
+// define
+export const getProfileAction = createApiActions('GET_PROFILE')
+// request
+const getProfile = () => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    const profileUserId = profileUserIdSelector(state)
+    dispatch(getProfileAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/user/profile/${profileUserId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getProfileAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getProfileAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const updateProfileAction = createApiActions('UPDATE_PROFILE')
+// request
+const updateProfile = ({
+  avator,
+  name,
+  description,
+  tags,
+  coverImage,
+  coverImageBlur,
+}) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {
+      avator,
+      name,
+      description,
+      tags,
+      coverImage,
+      coverImageBlur,
+    }
+    dispatch(updateProfileAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/user/profile`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updateProfileAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updateProfileAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
+// request
+const updatePassword = ({ password, confirmPassword }) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {
+      password,
+      confirmPassword,
+    }
+
+    dispatch(updatePasswordAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/user/updatePassword`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updatePasswordAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updatePasswordAction.failure(error))
+    throw error
+  }
+}
 // define
 export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
@@ -278,6 +383,7 @@ const uploadImage = formData => async dispatch => {
     throw error
   }
 }
+
 export {
   getAllPosts,
   addPost,
@@ -287,5 +393,8 @@ export {
   checkEmail,
   checkVerification,
   resetPassword,
+  getProfile,
+  updateProfile,
+  updatePassword,
   uploadImage,
 }

@@ -15,6 +15,7 @@ import LoadingModal from 'components/LoadingModal/LoadingModal'
 import LoginCircle from 'components/LoginCircle/LoginCircle'
 import { appReadySelector } from 'selectors'
 import { postsWallLoadingSelector } from 'selectors/post'
+import { userAvatorSelector, userNameSelector } from 'selectors/user'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ModalList from '../ModalList/ModalList'
 import Navbar from '../Navbar/Navbar'
@@ -25,8 +26,12 @@ const Layout = ({ view, children }) => {
   const appReady = useSelector(appReadySelector)
   const loading = useSelector(postsWallLoadingSelector)
   useStyles(styles)
+  const userAvator = useSelector(userAvatorSelector)
+  const userName = useSelector(userNameSelector)
   const isHome = view === 'home'
   const isLogin = view === 'login'
+  const isProfile = view === 'profile'
+  const isNotFound = view === 'notFound'
   return (
     <ErrorBoundary>
       {/* {!appReady && <LoadingLayout />} 全版 */}
@@ -35,15 +40,13 @@ const Layout = ({ view, children }) => {
           <div className={styles.bg} />
           {isHome && (
             <>
-              <Navbar />
-              <div className="container mt-[56px] pt-7 px-9">
+              <Navbar avatorUrl={userAvator} name={userName} />
+              <div className="container mt-[56px] mb-16 pt-7 px-9">
                 <div className="flex">
                   <div className="w-60 shrink-0">
-                    <PersonCard />
+                    <PersonCard avatorUrl={userAvator} name={userName} />
                   </div>
-                  <div className="w-full max-w-[788px] mx-[30px]">
-                    {children}
-                  </div>
+                  <div className="w-full min-w-0 mx-[30px]">{children}</div>
                   <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
                 </div>
               </div>
@@ -66,6 +69,13 @@ const Layout = ({ view, children }) => {
               </div>
             </div>
           )}
+          {isProfile && (
+            <>
+              <Navbar avatorUrl={userAvator} name={userName} />
+              {children}
+            </>
+          )}
+          {isNotFound && <>{children}</>}
           <ModalList />
 
           {loading && <LoadingModal />}

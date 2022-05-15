@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import { loginAction, registerAction, checkAction } from 'actions/api/webApi'
-import { SET_LOGIN_LOADING, SET_TOKEN } from 'actions/user'
+import { SET_LOGIN_LOADING, SET_TOKEN, UPDATE_USER_INFO } from 'actions/user'
 
 const initialState = {
   isLoading: false,
@@ -19,6 +19,11 @@ export default handleActions(
     [SET_TOKEN]: (state, { payload }) => ({
       ...state,
       token: payload,
+    }),
+    [UPDATE_USER_INFO]: (state, { payload }) => ({
+      ...state,
+      name: payload.user.name,
+      avator: payload.user.avator,
     }),
     [loginAction.success]: (state, { payload }) => ({
       ...state,

@@ -13,7 +13,7 @@ import {
   uploadImageLoadingSelector,
 } from 'selectors/uploadImage'
 
-const PostModal = ({ content, onClose }) => {
+const PostModal = ({ avatorUrl, content, onClose }) => {
   const dispatch = useDispatch()
   const imageUrls = useSelector(uploadImageSelector)
   const isLoading = useSelector(uploadImageLoadingSelector)
@@ -59,7 +59,7 @@ const PostModal = ({ content, onClose }) => {
   return (
     <ModalWrapper disableBodyScroll onClose={handleClose}>
       <div className="w-[600px] bg-white rounded-lg pb-4">
-        <PostModalHeader onClose={handleClose} />
+        <PostModalHeader avatorUrl={avatorUrl} onClose={handleClose} />
         <div className="px-7">
           <div className="mb-4">
             <DecorationLine />
@@ -86,10 +86,12 @@ const PostModal = ({ content, onClose }) => {
 }
 
 PostModal.propTypes = {
+  avatorUrl: PropTypes.string,
   content: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 }
 PostModal.defaultProps = {
+  avatorUrl: '',
   content: '',
 }
 export default PostModal

@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPostModal } from 'actions/postModal'
 import Avator from 'components/Avator/Avator'
 
-const PostInput = () => {
+const PostInput = ({ avatorUrl }) => {
   const dispatch = useDispatch()
   const handleClick = useCallback(() => {
     dispatch(setPostModal({}))
@@ -11,7 +12,7 @@ const PostInput = () => {
   return (
     <div className="flex items-center px-6 py-3 rounded shadow-card bg-white">
       <div className="w-12 h-12 mr-3 shrink-0">
-        <Avator isRounded />
+        <Avator isRounded avatorUrl={avatorUrl} />
       </div>
       <button
         type="button"
@@ -21,5 +22,12 @@ const PostInput = () => {
       </button>
     </div>
   )
+}
+PostInput.propTypes = {
+  avatorUrl: PropTypes.string,
+}
+
+PostInput.defaultProps = {
+  avatorUrl: '',
 }
 export default PostInput

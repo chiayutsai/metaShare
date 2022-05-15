@@ -5,6 +5,7 @@ import { toggleLoading, cleanAllImageUrl } from 'actions/uploadImage'
 import POST_MODAL from 'constants/modal'
 import { postModalSelector } from 'selectors/modal'
 import { uploadImageSelector } from 'selectors/uploadImage'
+import { userAvatorSelector } from 'selectors/user'
 
 export const dismissPostModal = () => (dispatch, getState) => {
   const state = getState()
@@ -16,19 +17,19 @@ export const dismissPostModal = () => (dispatch, getState) => {
   }
 }
 
-export const setPostModal = ({ content = '' }) => dispatch => {
-  // 取得 avator url
-  // const state = getState()
+export const setPostModal = ({ content = '' }) => (dispatch, getState) => {
+  const state = getState()
+  const avatorUrl = userAvatorSelector(state)
   dispatch(
     setModal({
       name: POST_MODAL,
       content,
+      avatorUrl,
     }),
   )
 }
 
 export const handleAllPost = data => async (dispatch, getState) => {
-  // 取得 avator url
   const state = getState()
   const imageArray = uploadImageSelector(state)
   const imageUrls = imageArray.map(img => img.imageUrl)

@@ -1,0 +1,20 @@
+.icon {
+  @apply mr-3;
+}
+
+.item {
+  @apply relative flex p-4 before:absolute before:top-0 before:left-0 before:w-[3px] before:h-full hover:bg-primary-50 hover:before:bg-primary-300;
+
+  &.active {
+    @apply bg-primary-100  before:bg-primary-900;
+
+    p {
+      @apply text-primary-900;
+    }
+    .icon {
+      path {
+        @apply fill-primary-900;
+      }
+    }
+  }
+}

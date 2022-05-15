@@ -13,6 +13,7 @@ import Home from './Home'
 const action = async () => ({
   title: '',
   chunks: ['home'],
+  needCheckUser: true,
   component: (
     <Layout view="home">
       <Home />

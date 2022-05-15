@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import Avator from 'components/Avator/Avator'
 
-const PostModalHeader = ({ onClose }) => (
+const PostModalHeader = ({ avatorUrl, onClose }) => (
   <div className="relative flex  items-center justify-between p-3 rounded-t-lg bg-white">
     <div className="absolute w-[106px] h-[106px] bottom-0 left-0 p-4 bg-white rounded-full">
       <div className="w-full h-full p-2 bg-gradient-to-br from-[#b9d7ff83] to-primary-700/50 rounded-full">
-        <Avator isRounded />
+        <Avator avatorUrl={avatorUrl} isRounded />
       </div>
     </div>
     <p className=" ml-24 text-lg text-gray-1100">說點什麼呢?</p>
@@ -20,6 +20,10 @@ const PostModalHeader = ({ onClose }) => (
 )
 
 PostModalHeader.propTypes = {
+  avatorUrl: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+}
+PostModalHeader.defaultProps = {
+  avatorUrl: '',
 }
 export default PostModalHeader
