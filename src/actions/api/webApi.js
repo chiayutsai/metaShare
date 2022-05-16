@@ -366,13 +366,18 @@ const updatePassword = ({ password, confirmPassword }) => async (
 // define
 export const uploadImageAction = createApiActions('UPLOAD_IMAGE')
 // request
-const uploadImage = formData => async dispatch => {
+const uploadImage = formData => async (dispatch, getState) => {
   try {
+    const state = getState()
+    const token = tokenSelector(state)
     dispatch(uploadImageAction.request(formData))
     const result = await dispatch(
       postApi({
         url: '/uploadImage',
         data: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     )
     dispatch(uploadImageAction.success(result))
