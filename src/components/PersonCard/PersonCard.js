@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types'
 import Avator from 'components/Avator/Avator'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
+import Link from 'components/Link/Link'
 
-const PersonCard = ({ avatorUrl, name }) => (
+const PersonCard = ({ userId, avatorUrl, name }) => (
   <div className="flex flex-col justify-center items-center px-[30px] py-9 bg-white rounded-lg shadow-card">
     <div className=" w-[120px] h-[120px] mb-2">
       <Avator avatorUrl={avatorUrl} />
     </div>
-    <p className="font-bold text-xl mb-3">{name}</p>
+    <Link
+      to={`/metaShare/profile/${userId}`}
+      className="font-bold text-xl mb-3 hover:text-primary-800">
+      {name}
+    </Link>
     <DecorationLine />
     <div
       className="flex mt-3
@@ -28,11 +33,13 @@ const PersonCard = ({ avatorUrl, name }) => (
   </div>
 )
 PersonCard.propTypes = {
+  userId: PropTypes.string,
   name: PropTypes.string,
   avatorUrl: PropTypes.string,
 }
 
 PersonCard.defaultProps = {
+  userId: '',
   name: '',
   avatorUrl: '',
 }

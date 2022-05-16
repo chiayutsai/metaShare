@@ -11,7 +11,6 @@ const Post = ({ author, createdAt, content, imageUrls, likes, comments }) => {
   const likeAmount = likes.length
   const commentAmount = comments.length
   const isLike = Boolean(likes.filter(user => user.id === '123').length)
-  console.log(author)
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">

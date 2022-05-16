@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  setProdileEditInit,
+  setProfileEditInit,
   handleUploadProfileImage,
   handleSaveCoverImage,
 } from 'actions/profile'
@@ -35,7 +35,7 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
   }, [coverImage, isOpen])
 
   const handleCancleEditClick = useCallback(() => {
-    dispatch(setProdileEditInit())
+    dispatch(setProfileEditInit())
   }, [dispatch])
 
   const handleCoverImageBlur = useCallback(() => {

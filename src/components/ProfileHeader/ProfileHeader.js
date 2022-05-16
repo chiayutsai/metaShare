@@ -3,7 +3,7 @@ import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { setProfileEdit, setProdileEditInit } from 'actions/profile'
+import { setProfileEdit, setProfileEditInit } from 'actions/profile'
 import Avator from 'components/Avator/Avator'
 import ProfileButton from 'components/Button/ProfileButton/ProfileButton'
 import { NORMAL, DARKEN, ICON_EDIT, ICON_FOLLOW } from 'constants/buttonType'
@@ -25,7 +25,7 @@ const ProfileHeader = ({
     dispatch(setProfileEdit())
   }, [dispatch])
   const handleCancleEditClick = useCallback(() => {
-    dispatch(setProdileEditInit())
+    dispatch(setProfileEditInit())
   }, [dispatch])
   return (
     <>

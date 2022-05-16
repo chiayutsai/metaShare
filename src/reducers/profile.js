@@ -6,6 +6,7 @@ import {
   SET_PROFILE_EDIT_LOADING,
   SET_PROFILE_EDIT_PAGE,
   SET_PROFILE_UPLOAD_LOADING,
+  OPEN_PROFILE_EDIT,
   CLOSE_PROFILE_EDIT,
   UPDATE_PROFILE_INFO,
 } from 'actions/profile'
@@ -38,6 +39,10 @@ export default handleActions(
     [SET_PROFILE_EDIT]: state => ({
       ...state,
       isEdit: !state.isEdit,
+    }),
+    [OPEN_PROFILE_EDIT]: state => ({
+      ...state,
+      isEdit: true,
     }),
     [CLOSE_PROFILE_EDIT]: state => ({
       ...state,

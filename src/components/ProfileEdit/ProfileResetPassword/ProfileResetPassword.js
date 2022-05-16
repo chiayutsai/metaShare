@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useCallback, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import validator from 'validator'
-import { setProdileEditInit, handleUpdatePassword } from 'actions/profile'
+import { setProfileEditInit, handleUpdatePassword } from 'actions/profile'
 import ProfileButton from 'components/Button/ProfileButton/ProfileButton'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
 import Input from 'components/Input/Input'
@@ -14,7 +14,7 @@ const ProfileResetPassword = ({ isEditLoading }) => {
   const firstInputRef = useRef()
   const dispatch = useDispatch()
   const handleCancleEditClick = useCallback(() => {
-    dispatch(setProdileEditInit())
+    dispatch(setProfileEditInit())
   }, [dispatch])
   const [firstTimeClick, setFirstTimeClick] = useState(true)
   const [errorContent, setErrorContent] = useState('')

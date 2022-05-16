@@ -73,6 +73,7 @@ module.exports = {
         'button-3d-disable': `0px 2px 2px rgba(0, 0, 0, 0.2), inset 0px -4px 0px #838383`,
         'button-3d-rounded-disable': `inset 0px -2px 0px #838383`,
         navbar: '0px 2px 10px rgba(0, 0, 0, 0.04)',
+        'navbar-dropdown': '0px 1px 4px rgba(116, 100, 179, 0.4)',
         card: '2px 2px 6px rgba(0, 0, 0, 0.15)',
         filter: '1px 1px 2px rgba(65,49,126,0.2)',
         login: '2px 2px 5px rgba(37,2,81,0.25)',

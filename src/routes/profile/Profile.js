@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProfile } from 'actions/api/webApi'
+import { setProfileUserId } from 'actions/profile'
 import PostsWall from 'components/PostsWall/PostsWall'
 import ProfileCard from 'components/ProfileCard/ProfileCard'
 import ProfileEdit from 'components/ProfileEdit/ProfileEdit'
@@ -26,6 +27,10 @@ const Profile = () => {
         console.log(error)
       }
     })()
+
+    return () => {
+      dispatch(setProfileUserId(''))
+    }
   }, [dispatch])
   const profileInfo = useSelector(profileInfoSelector)
   const profileCoverImage = useSelector(profileCoverImageSelector)

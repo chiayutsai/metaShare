@@ -8,11 +8,16 @@
  */
 import { setProfileUserId } from 'actions/profile'
 import Layout from 'components/Layout/Layout'
+import { profileUserIdSelector } from 'selectors/profile'
 import Profile from './Profile'
 
 const action = async ({ store, params }) => {
   const { id } = params
-  store.dispatch(setProfileUserId(id))
+  const profileUserId = profileUserIdSelector(store.getState())
+  if (profileUserId !== id) {
+    store.dispatch(setProfileUserId(id))
+  }
+
   return {
     title: '',
     chunks: ['prilfile'],

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { TagsInput } from 'react-tag-input-component'
 import validator from 'validator'
 import {
-  setProdileEditInit,
+  setProfileEditInit,
   handleUploadProfileImage,
   handleSavePersonInfo,
 } from 'actions/profile'
@@ -66,7 +66,7 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
   )
 
   const handleCancleEditClick = useCallback(() => {
-    dispatch(setProdileEditInit())
+    dispatch(setProfileEditInit())
   }, [dispatch])
 
   const handleUploadAvatorChange = async e => {

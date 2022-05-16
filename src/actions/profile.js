@@ -13,6 +13,7 @@ export const SET_PROFILE_EDIT_LOADING = 'SET_PROFILE_EDIT_LOADING'
 export const SET_PROFILE_EDIT_PAGE = 'SET_PROFILE_EDIT_PAGE'
 export const SET_PROFILE_UPLOAD_LOADING = 'SET_PROFILE_UPLOAD_LOADING'
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT'
+export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT'
 export const UPDATE_PROFILE_INFO = 'UPDATE_PROFILE_INFO'
 // ------------------------------------
 // Action Creators
@@ -20,6 +21,7 @@ export const UPDATE_PROFILE_INFO = 'UPDATE_PROFILE_INFO'
 export const setProfileUserId = createAction(SET_PROFILE_USER_ID)
 export const setProfileEdit = createAction(SET_PROFILE_EDIT)
 export const setProfileEditLoading = createAction(SET_PROFILE_EDIT_LOADING)
+export const openProfileEdit = createAction(OPEN_PROFILE_EDIT)
 export const closeProfileEdit = createAction(CLOSE_PROFILE_EDIT)
 export const setProfileEditPage = createAction(SET_PROFILE_EDIT_PAGE)
 
@@ -27,8 +29,8 @@ export const setProfileUploadLoading = createAction(SET_PROFILE_UPLOAD_LOADING)
 
 export const updateProfileInfo = createAction(UPDATE_PROFILE_INFO)
 
-export const setProdileEditInit = () => dispatch => {
-  dispatch(setProfileEdit())
+export const setProfileEditInit = () => dispatch => {
+  dispatch(closeProfileEdit())
   dispatch(setProfileEditPage(COVER_IMAGE))
 }
 
