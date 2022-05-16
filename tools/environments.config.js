@@ -36,7 +36,7 @@ const config = {
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
-  publicPath: __DEV__ ? '/assets/' : './assets/',
+  publicPath: __DEV__ ? '/assets/' : '/metaShare/assets/',
 
   cdnUrlPathVariable: 'window.__CDN_URL_PATH__',
 }

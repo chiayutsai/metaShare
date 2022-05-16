@@ -52,11 +52,7 @@ const config = {
   mode: isDebug ? 'development' : 'production',
 
   output: {
-    path: resolvePath(
-      BUILD_DIR,
-      'public',
-      environments.publicPath.replace(/^\//, ''),
-    ),
+    path: resolvePath(BUILD_DIR, 'public', 'assets'),
     publicPath: environments.publicPath,
     pathinfo: isVerbose,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
