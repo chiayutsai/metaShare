@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import { createAction } from 'redux-actions'
-import { getAllPosts } from 'actions/api/webApi'
+import { getAllPosts, updateLikes } from 'actions/api/webApi'
+
 // ------------------------------------
 // Action Types
 // ------------------------------------
@@ -20,4 +22,18 @@ export const changeFilterType = (filterType, searchWord) => async dispatch => {
   }
   dispatch(setFilterType(filterType))
   dispatch(setSearchWord(searchWord))
+}
+
+export const handleLikes = ({ postId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const { posts } = state.postsWall
+
+    const { data } = await dispatch(updateLikes({ postId }))
+    const [updatePost] = posts.filter(post => post._id === data._id)
+    console.log(updatePost)
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
 }

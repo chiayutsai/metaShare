@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from 'actions/api/webApi'
+import { setSearchWord } from 'actions/post'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
@@ -13,8 +14,9 @@ import {
   searchWordSelector,
   postsWallLoadingSelector,
 } from 'selectors/post'
+import { userIdSelector } from 'selectors/user'
 
-const PostsWall = ({ avatorUrl }) => {
+const PostsWall = ({ isAdmin, avatorUrl }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     ;(async () => {
@@ -25,6 +27,13 @@ const PostsWall = ({ avatorUrl }) => {
       }
     })()
   }, [dispatch])
+  useEffect(
+    () => () => {
+      dispatch(setSearchWord(''))
+    },
+    [dispatch],
+  )
+  const userId = useSelector(userIdSelector)
   const isPostWallLoading = useSelector(postsWallLoadingSelector)
   const searchWord = useSelector(searchWordSelector)
   const filterType = useSelector(filterTypeSelector)
@@ -42,24 +51,29 @@ const PostsWall = ({ avatorUrl }) => {
         )}
         <FilterDropdown filterType={filterType} />
       </div>
-      <div className="w-full mb-6">
-        <PostInput avatorUrl={avatorUrl} />
-      </div>
-      {isNopost && <NoPost />}
+      {isAdmin && (
+        <div className="w-full mb-6">
+          <PostInput avatorUrl={avatorUrl} />
+        </div>
+      )}
+
+      {isNopost && <NoPost isAdmin={isAdmin} />}
 
       {posts.map((props, index) => (
         <div key={`post${index + 1}`} className="w-full mb-6 last:mb-0 ">
-          <Post {...props} />
+          <Post {...props} userId={userId} />
         </div>
       ))}
     </>
   )
 }
 PostsWall.propTypes = {
+  isAdmin: PropTypes.bool,
   avatorUrl: PropTypes.string,
 }
 
 PostsWall.defaultProps = {
+  isAdmin: false,
   avatorUrl: '',
 }
 export default PostsWall

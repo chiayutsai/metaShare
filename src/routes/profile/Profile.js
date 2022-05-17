@@ -53,12 +53,12 @@ const Profile = () => {
               />
             </div>
             <div className=" flex-1 min-w-0">
-              <PostsWall avatorUrl={profileInfo.avator} />
+              <PostsWall isAdmin={isAdmin} avatorUrl={profileInfo.avator} />
             </div>
           </div>
         </div>
       )}
-      {isEdit && (
+      {isAdmin && isEdit && (
         <div className="container pt-12 px-9">
           <ProfileEdit
             editPage={editPage}

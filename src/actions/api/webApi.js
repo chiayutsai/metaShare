@@ -331,6 +331,33 @@ const updateProfile = ({
 }
 
 // define
+export const updateLikesAction = createApiActions('UPDATE_LIKES')
+// request
+const updateLikes = ({ postId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(updateLikesAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/post/${postId}/likes`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updateLikesAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updateLikesAction.failure(error))
+    throw error
+  }
+}
+
+// define
 export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
 // request
 const updatePassword = ({ password, confirmPassword }) => async (
@@ -400,6 +427,7 @@ export {
   resetPassword,
   getProfile,
   updateProfile,
+  updateLikes,
   updatePassword,
   uploadImage,
 }
