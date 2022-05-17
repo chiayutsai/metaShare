@@ -1,6 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import { handleActions } from 'redux-actions'
-import { getAllPostsAction } from 'actions/api/webApi'
-import { SET_FILTER_TYPE, SET_SEARCH_WROD } from 'actions/post'
+import { getAllPostsAction, updateLikesAction } from 'actions/api/webApi'
+import { SET_FILTER_TYPE, SET_SEARCH_WROD, SET_COMMENTS } from 'actions/post'
 import { LASTEST_POST } from 'constants/filterType'
 
 const initialState = {
@@ -37,6 +38,50 @@ export default handleActions(
       isLoading: false,
       posts: payload.data,
     }),
+    [updateLikesAction.success]: (state, { payload: { data } }) => {
+      const { _id } = data
+      const { posts } = state
+      const newPosts = posts.reduce((acc, cur) => {
+        if (cur._id === _id) {
+          return [
+            ...acc,
+            {
+              ...cur,
+              likes: data.likes,
+            },
+          ]
+        }
+
+        return [...acc, cur]
+      }, [])
+      const newList = {
+        ...state,
+        posts: newPosts,
+      }
+      return newList
+    },
+    [SET_COMMENTS]: (state, { payload }) => {
+      const { _id } = payload
+      const { posts } = state
+      const newPosts = posts.reduce((acc, cur) => {
+        if (cur._id === _id) {
+          return [
+            ...acc,
+            {
+              ...cur,
+              comments: payload.comments,
+            },
+          ]
+        }
+
+        return [...acc, cur]
+      }, [])
+      const newList = {
+        ...state,
+        posts: newPosts,
+      }
+      return newList
+    },
   },
   initialState,
 )

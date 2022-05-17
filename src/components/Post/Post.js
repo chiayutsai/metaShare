@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import PropTypes from 'prop-types'
-import { useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { handleLikes } from 'actions/post'
+import { updateLikes } from 'actions/api/webApi'
 import PostButton from 'components/Post/PostButton/PostButton'
 import PostComment from 'components/Post/PostComment/PostComment'
 import PostCommentInput from 'components/Post/PostCommentInput/PostCommentInput'
@@ -20,22 +21,34 @@ const Post = ({
   likes,
   comments,
 }) => {
+  const commentInputRef = useRef()
   const dispatch = useDispatch()
-
+  const [isShowComments, setShowComments] = useState(false)
   const likeAmount = likes.length
   const commentAmount = comments.length
   const isLike = Boolean(likes.filter(user => user === userId).length)
-  const handleLikesClick = useCallback(() => {
+  const handleLikesClick = useCallback(async () => {
     try {
-      dispatch(handleLikes({ postId: _id }))
+      await dispatch(updateLikes({ postId: _id }))
     } catch (error) {
       console.log(error)
     }
   }, [dispatch, _id])
+  const handleCommentsClick = useCallback(async () => {
+    setShowComments(true)
+    setTimeout(() => {
+      commentInputRef.current.focus()
+    }, 0)
+  }, [])
+  const handleShowCommentsClick = useCallback(() => {
+    setShowComments(!isShowComments)
+  }, [isShowComments])
+  const showComments = isShowComments && commentAmount >= 1
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">
         <PostHeader
+          authorId={author._id}
           avatorUrl={author.avator}
           userName={author.name}
           createdAt={createdAt}
@@ -47,15 +60,19 @@ const Post = ({
       <div className="flex items-center border-b border-gray-600/50 pb-2 mb-3">
         <PostButton type={LIKE} isLike={isLike} onClick={handleLikesClick} />
         <div className="w-[1px] h-6 mx-1 bg-gray-500 shrink-0" />
-        <PostButton type={COMMENT} />
+        <PostButton type={COMMENT} onClick={handleCommentsClick} />
       </div>
       <div className="flex border-b border-gray-600/50 pb-3 mb-3">
         <div className="mr-3">
           <PostInfo type={LIKE} likeAmount={likeAmount} />
         </div>
-        <PostInfo type={COMMENT} commentAmount={commentAmount} />
+        <PostInfo
+          type={COMMENT}
+          commentAmount={commentAmount}
+          onClick={handleShowCommentsClick}
+        />
       </div>
-      {!!commentAmount && (
+      {showComments && (
         <div className="border-b border-gray-600/50 pb-3 mb-3">
           {comments.map((comment, index) => (
             <div key={`comment${index + 1}`} className="mb-3 last:mb-0 ">
@@ -70,7 +87,7 @@ const Post = ({
         </div>
       )}
 
-      <PostCommentInput />
+      <PostCommentInput postId={_id} setRef={commentInputRef} />
     </div>
   )
 }

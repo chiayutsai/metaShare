@@ -5,7 +5,7 @@ import { ReactComponent as IconlikehSvg } from './assets/like.svg'
 import { ReactComponent as IconNoCommenthSvg } from './assets/noComment.svg'
 import { ReactComponent as IconNoLikehSvg } from './assets/noLike.svg'
 
-const PostInfo = ({ type, likeAmount, commentAmount }) => (
+const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
   <div className="flex items-center">
     {type === LIKE && (
       <>
@@ -35,7 +35,10 @@ const PostInfo = ({ type, likeAmount, commentAmount }) => (
           </>
         )}
         {!!commentAmount && (
-          <button type="button" className="flex items-center group">
+          <button
+            type="button"
+            className="flex items-center group"
+            onClick={onClick}>
             <IconCommenthSvg className="mr-2" />
             <p className="text-gray-1000 group-hover:text-primary-800">
               {commentAmount}則{POST_BUTTON_TEXY_MAP[type]}
@@ -51,11 +54,13 @@ PostInfo.propTypes = {
   type: PropTypes.string.isRequired,
   likeAmount: PropTypes.number,
   commentAmount: PropTypes.number,
+  onClick: PropTypes.func,
 }
 
 PostInfo.defaultProps = {
   likeAmount: 0,
   commentAmount: 0,
+  onClick: () => {},
 }
 
 export default PostInfo

@@ -1,17 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 import { createAction } from 'redux-actions'
-import { getAllPosts, updateLikes } from 'actions/api/webApi'
+import { getAllPosts, updateComments } from 'actions/api/webApi'
 
 // ------------------------------------
 // Action Types
 // ------------------------------------
 export const SET_FILTER_TYPE = 'SET_FILTER_TYPE'
 export const SET_SEARCH_WROD = 'SET_SEARCH_WROD'
+export const SET_COMMENTS = 'SET_COMMENTS'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 export const setFilterType = createAction(SET_FILTER_TYPE)
 export const setSearchWord = createAction(SET_SEARCH_WROD)
+export const setComments = createAction(SET_COMMENTS)
 
 export const changeFilterType = (filterType, searchWord) => async dispatch => {
   try {
@@ -24,14 +26,10 @@ export const changeFilterType = (filterType, searchWord) => async dispatch => {
   dispatch(setSearchWord(searchWord))
 }
 
-export const handleLikes = ({ postId }) => async (dispatch, getState) => {
+export const handleComments = ({ postId, content }) => async dispatch => {
   try {
-    const state = getState()
-    const { posts } = state.postsWall
-
-    const { data } = await dispatch(updateLikes({ postId }))
-    const [updatePost] = posts.filter(post => post._id === data._id)
-    console.log(updatePost)
+    const { data } = await dispatch(updateComments({ postId, content }))
+    dispatch(setComments(data))
   } catch (error) {
     console.log(error)
     throw error

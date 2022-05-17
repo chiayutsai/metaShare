@@ -358,6 +358,35 @@ const updateLikes = ({ postId }) => async (dispatch, getState) => {
 }
 
 // define
+export const updateCommentsAction = createApiActions('UPDATE_COMMENTS')
+// request
+const updateComments = ({ postId, content }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {
+      content,
+    }
+    dispatch(updateCommentsAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/post/${postId}/comments`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updateCommentsAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updateCommentsAction.failure(error))
+    throw error
+  }
+}
+
+// define
 export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
 // request
 const updatePassword = ({ password, confirmPassword }) => async (
@@ -428,6 +457,7 @@ export {
   getProfile,
   updateProfile,
   updateLikes,
+  updateComments,
   updatePassword,
   uploadImage,
 }
