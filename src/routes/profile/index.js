@@ -19,7 +19,7 @@ const action = async ({ store, params }) => {
   }
 
   return {
-    title: '',
+    title: 'metaShare',
     chunks: ['prilfile'],
     needCheckUser: true,
     component: (

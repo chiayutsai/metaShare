@@ -8,14 +8,15 @@
  */
 
 import Layout from 'components/Layout/Layout'
-import Register from './Register'
+import LikesPost from './LikesPost'
 
 const action = async () => ({
   title: 'metaShare',
-  chunks: ['register'],
+  chunks: ['likesPost'],
+  needCheckUser: true,
   component: (
-    <Layout view="login">
-      <Register />
+    <Layout view="home">
+      <LikesPost />
     </Layout>
   ),
 })

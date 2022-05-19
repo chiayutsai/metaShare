@@ -11,7 +11,7 @@ import Layout from 'components/Layout/Layout'
 import Login from './Login'
 
 const action = async () => ({
-  title: '',
+  title: 'metaShare',
   chunks: ['login'],
   component: (
     <Layout view="login">

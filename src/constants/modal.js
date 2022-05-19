@@ -1,3 +1,2 @@
-const POST_MODAL = 'POST_MODAL'
-
-export default POST_MODAL
+export const POST_MODAL = 'POST_MODAL'
+export const SINGLE_POST_MODAL = 'SINGLE_POST_MODAL'

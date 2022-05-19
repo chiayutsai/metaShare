@@ -38,6 +38,14 @@ const routes = {
       path: '/profile/:id',
       load: () => import(/* webpackChunkName: 'profile' */ './profile'),
     },
+    {
+      path: '/likesPost',
+      load: () => import(/* webpackChunkName: 'likesPost' */ './likesPost'),
+    },
+    {
+      path: '/follow',
+      load: () => import(/* webpackChunkName: 'follow' */ './follow'),
+    },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',
@@ -76,7 +84,7 @@ const routes = {
     })()
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || ''}`
+    route.title = `${route.title || 'metaShare'}`
     route.description = route.description || ''
 
     return route

@@ -9,7 +9,7 @@ SwiperCore.use([Navigation, Pagination])
 
 const PostSwiper = ({ imageUrls }) => (
   <Swiper
-    className="mt-3 group max-h-[740px] rounded-lg bg-gray-600/50"
+    className="h-full"
     slidesPerView={1}
     loop
     navigation

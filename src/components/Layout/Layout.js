@@ -13,13 +13,14 @@ import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import LoadingModal from 'components/LoadingModal/LoadingModal'
 import LoginCircle from 'components/LoginCircle/LoginCircle'
-import { appReadySelector } from 'selectors'
+import { appReadySelector, loadingSelector } from 'selectors'
 import { postsWallLoadingSelector } from 'selectors/post'
 import {
   userAvatorSelector,
   userNameSelector,
   userIdSelector,
 } from 'selectors/user'
+import ButtonGroup from '../ButtonGroup/ButtonGroup'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ModalList from '../ModalList/ModalList'
 import Navbar from '../Navbar/Navbar'
@@ -28,7 +29,8 @@ import styles from './Layout.scss'
 
 const Layout = ({ view, children }) => {
   const appReady = useSelector(appReadySelector)
-  const loading = useSelector(postsWallLoadingSelector)
+  const postsWallLoading = useSelector(postsWallLoadingSelector)
+  const loading = useSelector(loadingSelector)
   useStyles(styles)
   const userId = useSelector(userIdSelector)
   const userAvator = useSelector(userAvatorSelector)
@@ -37,6 +39,7 @@ const Layout = ({ view, children }) => {
   const isLogin = view === 'login'
   const isProfile = view === 'profile'
   const isNotFound = view === 'notFound'
+  const isLoading = loading || postsWallLoading
   return (
     <ErrorBoundary>
       {/* {!appReady && <LoadingLayout />} 全版 */}
@@ -49,11 +52,14 @@ const Layout = ({ view, children }) => {
               <div className="container mt-[56px] mb-16 pt-7 px-9">
                 <div className="flex">
                   <div className="w-60 shrink-0">
-                    <PersonCard
-                      userId={userId}
-                      avatorUrl={userAvator}
-                      name={userName}
-                    />
+                    <div className="mb-3">
+                      <PersonCard
+                        userId={userId}
+                        avatorUrl={userAvator}
+                        name={userName}
+                      />
+                    </div>
+                    <ButtonGroup userId={userId} />
                   </div>
                   <div className="w-full min-w-0 mx-[30px]">{children}</div>
                   <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
@@ -87,7 +93,7 @@ const Layout = ({ view, children }) => {
           {isNotFound && <>{children}</>}
           <ModalList />
 
-          {loading && <LoadingModal />}
+          {isLoading && <LoadingModal />}
         </>
       )}
     </ErrorBoundary>

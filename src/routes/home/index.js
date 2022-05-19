@@ -11,7 +11,7 @@ import Layout from 'components/Layout/Layout'
 import Home from './Home'
 
 const action = async () => ({
-  title: '',
+  title: 'metaShare',
   chunks: ['home'],
   needCheckUser: true,
   component: (

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useState, useCallback, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateLikes } from 'actions/api/webApi'
+import { handleComments } from 'actions/post'
 import PostButton from 'components/Post/PostButton/PostButton'
 import PostComment from 'components/Post/PostComment/PostComment'
 import PostCommentInput from 'components/Post/PostCommentInput/PostCommentInput'
@@ -23,6 +24,7 @@ const Post = ({
 }) => {
   const commentInputRef = useRef()
   const dispatch = useDispatch()
+  const [commentContent, setCommentContent] = useState('')
   const [isShowComments, setShowComments] = useState(false)
   const likeAmount = likes.length
   const commentAmount = comments.length
@@ -44,6 +46,18 @@ const Post = ({
     setShowComments(!isShowComments)
   }, [isShowComments])
   const showComments = isShowComments && commentAmount >= 1
+
+  const handleCommentClick = useCallback(async () => {
+    if (!commentContent) {
+      return
+    }
+    try {
+      await dispatch(handleComments({ postId: _id, content: commentContent }))
+      setCommentContent('')
+    } catch (error) {
+      console.log(error)
+    }
+  }, [dispatch, _id, commentContent])
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">
@@ -87,7 +101,13 @@ const Post = ({
         </div>
       )}
 
-      <PostCommentInput postId={_id} setRef={commentInputRef} />
+      <PostCommentInput
+        postId={_id}
+        setRef={commentInputRef}
+        onClick={handleCommentClick}
+        commentContent={commentContent}
+        setCommentContent={setCommentContent}
+      />
     </div>
   )
 }

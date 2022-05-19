@@ -97,8 +97,8 @@ const Button = ({ type, onClick, iconType, isDisabled, content }) => {
       className={classNames(
         `${styles.button} flex rounded items-center py-1.5 px-4 group`,
         {
-          'bg-primary-50  hover:bg-primary-200': type === NORMAL,
-          'bg-[#FAE9F6]': type === ALERT,
+          'bg-primary-100  hover:bg-primary-200': type === NORMAL,
+          'bg-[#f9d8e4]': type === ALERT,
           'bg-gray-400 pointer-events-none': isDisabled,
           [styles.disable]: isDisabled,
         },

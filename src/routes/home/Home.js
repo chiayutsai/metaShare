@@ -6,7 +6,7 @@ const Home = () => {
   const userAvator = useSelector(userAvatorSelector)
   return (
     <>
-      <PostsWall avatorUrl={userAvator} />
+      <PostsWall isAdmin avatorUrl={userAvator} />
     </>
   )
 }

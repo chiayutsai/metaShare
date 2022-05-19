@@ -11,7 +11,7 @@ import Layout from 'components/Layout/Layout'
 import ForgetPassword from './ForgetPassword'
 
 const action = async () => ({
-  title: '',
+  title: 'metaShare',
   chunks: ['forgetPassword'],
   component: (
     <Layout view="login">

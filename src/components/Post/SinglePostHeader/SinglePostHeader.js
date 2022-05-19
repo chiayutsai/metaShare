@@ -6,7 +6,7 @@ import Avator from 'components/Avator/Avator'
 import { userIdSelector } from 'selectors/user'
 import formatDate from 'utils/formatDate'
 
-const PostHeader = ({ authorId, avatorUrl, userName, createdAt }) => {
+const SinglePostHeader = ({ authorId, avatorUrl, userName, createdAt }) => {
   const userId = useSelector(userIdSelector)
   const isAdmin = userId === authorId
   const [isToggleDropdown, setToggleDropdown] = useState(false)
@@ -14,13 +14,13 @@ const PostHeader = ({ authorId, avatorUrl, userName, createdAt }) => {
     setToggleDropdown(!isToggleDropdown)
   }, [isToggleDropdown])
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between p-3 bg-white shadow-card">
       <div className="flex items-center">
-        <div className=" w-14 h-14 mr-3">
+        <div className=" w-10 h-10 mr-2.5">
           <Avator isRounded avatorUrl={avatorUrl} />
         </div>
         <div>
-          <p className="text-lg font-bold -mb-0.5">{userName}</p>
+          <p className="font-bold mb-0.5">{userName}</p>
           <p className="text-sm  text-gray-800"> {formatDate(createdAt)}</p>
         </div>
       </div>
@@ -84,11 +84,11 @@ const PostHeader = ({ authorId, avatorUrl, userName, createdAt }) => {
   )
 }
 
-PostHeader.propTypes = {
+SinglePostHeader.propTypes = {
   authorId: PropTypes.string.isRequired,
   avatorUrl: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
 }
 
-export default PostHeader
+export default SinglePostHeader

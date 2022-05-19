@@ -16,7 +16,11 @@ const PostContent = ({ content, imageUrls }) => {
           />
         </div>
       )}
-      {swiperImage && <PostSwiper imageUrls={imageUrls} />}
+      {swiperImage && (
+        <div className="mt-3 group max-h-[740px] rounded-lg bg-gray-600/50">
+          <PostSwiper imageUrls={imageUrls} />
+        </div>
+      )}
     </>
   )
 }

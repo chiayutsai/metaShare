@@ -1,26 +1,19 @@
 import PropTypes from 'prop-types'
-import { useCallback, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { handleComments } from 'actions/post'
+
+import { useSelector } from 'react-redux'
+
 import Avator from 'components/Avator/Avator'
 import Button3D from 'components/Button/Button3D/Button3D'
 import { userAvatorSelector } from 'selectors/user'
 
-const PostCommentInput = ({ postId, setRef }) => {
-  const dispatch = useDispatch()
-  const [commentContent, setCommentContent] = useState('')
+const PostCommentInput = ({
+  setRef,
+  onClick,
+  commentContent,
+  setCommentContent,
+}) => {
   const userAvator = useSelector(userAvatorSelector)
-  const handleCommentClick = useCallback(async () => {
-    if (!commentContent) {
-      return
-    }
-    try {
-      await dispatch(handleComments({ postId, content: commentContent }))
-      setCommentContent('')
-    } catch (error) {
-      console.log(error)
-    }
-  }, [dispatch, postId, commentContent])
+
   return (
     <div className="flex items-center w-full">
       <div className=" w-9 h-9 mr-2.5">
@@ -40,19 +33,23 @@ const PostCommentInput = ({ postId, setRef }) => {
             setCommentContent(value)
           }}
         />
-        <Button3D isRounded content="留言" onClick={handleCommentClick} />
+        <Button3D isRounded content="留言" onClick={onClick} />
       </div>
     </div>
   )
 }
 
 PostCommentInput.propTypes = {
-  postId: PropTypes.string,
+  onClick: PropTypes.func,
+  commentContent: PropTypes.string,
+  setCommentContent: PropTypes.func,
   setRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 }
 
 PostCommentInput.defaultProps = {
-  postId: '',
+  commentContent: '',
   setRef: () => {},
+  setCommentContent: () => {},
+  onClick: () => {},
 }
 export default PostCommentInput

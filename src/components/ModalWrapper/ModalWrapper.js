@@ -9,6 +9,7 @@ const ModalWrapper = ({
   className,
   overlayClassName,
   onClose,
+  showCloseButton,
   shouldCloseOnOverlayClick,
   disableBodyScroll,
 }) => {
@@ -37,6 +38,16 @@ const ModalWrapper = ({
           if (shouldCloseOnOverlayClick) onClose()
         }}
       />
+      {showCloseButton && (
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute flex items-center justify-center w-7 h-7 right-10 top-10 pointer-events-auto">
+          <span className="absolute w-9 h-1 bg-white rotate-45 rounded-full" />
+          <span className="absolute w-9 h-1 bg-white rotate-[-45deg] rounded-full" />
+        </button>
+      )}
+
       <div className={styles.container}>{children}</div>
     </div>
   )
@@ -47,6 +58,7 @@ ModalWrapper.propTypes = {
   className: PropTypes.string,
   overlayClassName: PropTypes.string,
   onClose: PropTypes.func,
+  showCloseButton: PropTypes.bool,
   shouldCloseOnOverlayClick: PropTypes.bool,
   disableBodyScroll: PropTypes.bool,
 }
@@ -55,6 +67,7 @@ ModalWrapper.defaultProps = {
   className: '',
   overlayClassName: '',
   onClose: null,
+  showCloseButton: false,
   shouldCloseOnOverlayClick: false,
   disableBodyScroll: false,
 }

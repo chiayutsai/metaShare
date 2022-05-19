@@ -70,6 +70,33 @@ const getAllPosts = (filterType, searchWord) => async (dispatch, getState) => {
 }
 
 // define
+export const getSinglePostAction = createApiActions('GET_SINGLE_POST')
+// request
+const getSinglePost = ({ postId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(getSinglePostAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/post/${postId}`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getSinglePostAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getSinglePostAction.failure(error))
+    throw error
+  }
+}
+
+// define
 export const addPostAction = createApiActions('ADD_POST')
 // request
 const addPost = ({ content, imageUrls }) => async (dispatch, getState) => {
@@ -387,6 +414,32 @@ const updateComments = ({ postId, content }) => async (dispatch, getState) => {
 }
 
 // define
+export const getUserLikesPostsAction = createApiActions('GET_USER_LIKES_POST')
+// request
+const getUserLikesPosts = () => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(getUserLikesPostsAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/likesPost`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getUserLikesPostsAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getUserLikesPostsAction.failure(error))
+    throw error
+  }
+}
+// define
 export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
 // request
 const updatePassword = ({ password, confirmPassword }) => async (
@@ -447,6 +500,7 @@ const uploadImage = formData => async (dispatch, getState) => {
 
 export {
   getAllPosts,
+  getSinglePost,
   addPost,
   login,
   register,
@@ -458,6 +512,7 @@ export {
   updateProfile,
   updateLikes,
   updateComments,
+  getUserLikesPosts,
   updatePassword,
   uploadImage,
 }

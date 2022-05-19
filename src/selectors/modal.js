@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import POST_MODAL from 'constants/modal'
+import { POST_MODAL } from 'constants/modal'
 
 export const modalsSelector = state => state.modals
 

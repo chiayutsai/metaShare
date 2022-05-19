@@ -106,9 +106,12 @@ const ScrollView = ({
   onScrollFrame,
   scrollViewClass,
   renderCustomContainer,
+  setRef,
 }) => {
   const rootRef = useRef()
   useStyles(styles)
+
+  setRef(rootRef)
 
   const [isHoveredVTrack, setIsHoveredVTrack] = useState(false)
   const [isDraggingVTrack, setIsDraggingVTrack] = useState(false)
