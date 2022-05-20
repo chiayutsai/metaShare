@@ -439,6 +439,33 @@ const getUserLikesPosts = () => async (dispatch, getState) => {
     throw error
   }
 }
+
+// define
+export const getUserFollowAction = createApiActions('GET_USER_FOLLOW')
+// request
+const getUserFollow = ({ userId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(getUserFollowAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/follow/${userId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getUserFollowAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getUserFollowAction.failure(error))
+    throw error
+  }
+}
+
 // define
 export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
 // request
@@ -513,6 +540,7 @@ export {
   updateLikes,
   updateComments,
   getUserLikesPosts,
+  getUserFollow,
   updatePassword,
   uploadImage,
 }
