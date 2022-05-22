@@ -12,6 +12,7 @@ import {
   setForgetPasswordEmail,
   setForgetPasswordToken,
 } from 'actions/forgetPassword'
+import baseURL from 'config/baseURL'
 import {
   CHECK_VERIFICATION,
   RESET_PASSWORD,
@@ -74,6 +75,10 @@ export const handleLogin = ({ email, password }) => async dispatch => {
     console.log(error)
     throw error
   }
+}
+
+export const handleFacebookLogin = () => () => {
+  window.location = `${baseURL}/api/auth/facebook`
 }
 
 export const handleCheckEmail = ({ email }) => async dispatch => {

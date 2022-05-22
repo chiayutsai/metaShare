@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import validator from 'validator'
-import { handleLogin } from 'actions/user'
+import { handleLogin, handleFacebookLogin } from 'actions/user'
 import Button3D from 'components/Button/Button3D/Button3D'
 import CommunityButton from 'components/Button/CommunityButton/CommunityButton'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
@@ -95,6 +95,10 @@ const Login = () => {
     }
   }, [dispatch, validateEmail, validatePassword, emailContent, passwordContent])
 
+  const handleFacebookLoginClick = useCallback(async () => {
+    dispatch(handleFacebookLogin())
+  }, [dispatch])
+
   return (
     <>
       <div className="flex items-center mb-6 xl:mb-9 ">
@@ -111,7 +115,11 @@ const Login = () => {
           <CommunityButton type={GOOGLE} login />
         </div>
         <div className="w-full">
-          <CommunityButton type={FACEBOOK} login />
+          <CommunityButton
+            type={FACEBOOK}
+            login
+            onClick={handleFacebookLoginClick}
+          />
         </div>
       </div>
       <div className="flex items-center mb-6 xl:mb-8">

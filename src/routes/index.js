@@ -47,6 +47,10 @@ const routes = {
       path: '/follow',
       load: () => import(/* webpackChunkName: 'follow' */ './follow'),
     },
+    {
+      path: '/thirdPartyAuthSuccess',
+      load: () => import('./thirdPartyAuthSuccess'),
+    },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',
