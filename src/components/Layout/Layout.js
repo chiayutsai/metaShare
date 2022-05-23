@@ -83,6 +83,7 @@ const Layout = ({ view, children }) => {
                   </div>
                 </div>
               </div>
+              <ChannelList />
             </>
           )}
           {isLogin && (
@@ -111,7 +112,7 @@ const Layout = ({ view, children }) => {
           {isNotFound && <>{children}</>}
 
           <ModalList />
-          <ChannelList />
+
           {isLoading && <LoadingModal />}
         </>
       )}
