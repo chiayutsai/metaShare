@@ -18,10 +18,10 @@ const postApi = new BaseApi().create({
   method: 'POST',
 })
 
-// const deleteApi = new BaseApi().create({
-//   baseURL: '/api',
-//   method: 'DELETE',
-// })
+const deleteApi = new BaseApi().create({
+  baseURL: `${baseURL}/api`,
+  method: 'DELETE',
+})
 
 const patchApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,
@@ -29,6 +29,33 @@ const patchApi = new BaseApi().create({
 })
 
 // api actions
+// define
+export const getAllUsersAction = createApiActions('GET_ALL_USERS')
+
+// request
+const getAllUsers = () => async (dispatch, getState) => {
+  const state = getState()
+  const token = tokenSelector(state)
+  const data = {}
+
+  try {
+    dispatch(getAllUsersAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/user`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getAllUsersAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getAllUsersAction.failure(error))
+    throw error
+  }
+}
 
 // define
 export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
@@ -97,6 +124,32 @@ const getSinglePost = ({ postId }) => async (dispatch, getState) => {
 }
 
 // define
+export const getPostLikesAction = createApiActions('GET_POST_LIKSE')
+// request
+const getPostLikes = ({ postId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(getPostLikesAction.request(data))
+    const result = await dispatch(
+      getApi({
+        url: `/post/${postId}/likes`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(getPostLikesAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(getPostLikesAction.failure(error))
+    throw error
+  }
+}
+// define
 export const addPostAction = createApiActions('ADD_POST')
 // request
 const addPost = ({ content, imageUrls }) => async (dispatch, getState) => {
@@ -127,6 +180,67 @@ const addPost = ({ content, imageUrls }) => async (dispatch, getState) => {
   }
 }
 
+// define
+export const updatePostAction = createApiActions('UPDATE_POST')
+// request
+const updatePost = ({ postId, content, imageUrls }) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {
+      content,
+      imageUrls,
+    }
+
+    dispatch(updatePostAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/post/${postId}`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updatePostAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updatePostAction.failure(error))
+    throw error
+  }
+}
+
+// define
+export const deletePostAction = createApiActions('DELETE_POST')
+// request
+const deletePost = ({ postId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+
+    dispatch(deletePostAction.request(data))
+    const result = await dispatch(
+      deleteApi({
+        url: `/post/${postId}`,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(deletePostAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(deletePostAction.failure(error))
+    throw error
+  }
+}
 // define
 export const loginAction = createApiActions('LOGIN')
 // request
@@ -292,16 +406,15 @@ const resetPassword = ({ password, confirmPassword }) => async (
 // define
 export const getProfileAction = createApiActions('GET_PROFILE')
 // request
-const getProfile = () => async (dispatch, getState) => {
+const getProfile = ({ userId }) => async (dispatch, getState) => {
   try {
     const state = getState()
     const token = tokenSelector(state)
     const data = {}
-    const profileUserId = profileUserIdSelector(state)
     dispatch(getProfileAction.request(data))
     const result = await dispatch(
       getApi({
-        url: `/user/profile/${profileUserId}`,
+        url: `/user/profile/${userId}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -467,6 +580,31 @@ const getUserFollow = ({ userId }) => async (dispatch, getState) => {
 }
 
 // define
+export const updateUserFollowAction = createApiActions('UPDATE_USER_FOLLOW')
+// request
+const updateUserFollow = ({ userId }) => async (dispatch, getState) => {
+  try {
+    const state = getState()
+    const token = tokenSelector(state)
+    const data = {}
+    dispatch(updateUserFollowAction.request(data))
+    const result = await dispatch(
+      patchApi({
+        url: `/follow/${userId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    )
+    dispatch(updateUserFollowAction.success(result))
+    return result
+  } catch (error) {
+    console.error(error)
+    dispatch(updateUserFollowAction.failure(error))
+    throw error
+  }
+}
+// define
 export const updatePasswordAction = createApiActions('UPDATE_PASSWORD')
 // request
 const updatePassword = ({ password, confirmPassword }) => async (
@@ -526,9 +664,13 @@ const uploadImage = formData => async (dispatch, getState) => {
 }
 
 export {
+  getAllUsers,
   getAllPosts,
   getSinglePost,
+  getPostLikes,
   addPost,
+  updatePost,
+  deletePost,
   login,
   register,
   check,
@@ -541,6 +683,7 @@ export {
   updateComments,
   getUserLikesPosts,
   getUserFollow,
+  updateUserFollow,
   updatePassword,
   uploadImage,
 }

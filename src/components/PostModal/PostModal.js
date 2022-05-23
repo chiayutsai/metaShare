@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { handleAllPost } from 'actions/postModal'
+import { handleAllPost, handleUpdatePost } from 'actions/postModal'
 import { handleUploadImage, cleanAllImageUrl } from 'actions/uploadImage'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper'
@@ -13,7 +13,7 @@ import {
   uploadImageLoadingSelector,
 } from 'selectors/uploadImage'
 
-const PostModal = ({ avatorUrl, content, onClose }) => {
+const PostModal = ({ type, postId, avatorUrl, content, onClose }) => {
   const dispatch = useDispatch()
   const imageUrls = useSelector(uploadImageSelector)
   const isLoading = useSelector(uploadImageLoadingSelector)
@@ -29,6 +29,7 @@ const PostModal = ({ avatorUrl, content, onClose }) => {
       setErrorContent('')
     }
   }, [textAreaContent, imageUrls])
+
   const handleAllPostClick = useCallback(() => {
     if (!textAreaContent && !imageUrls.length) {
       setErrorContent('請輸入貼文內容或上傳一張圖片')
@@ -43,6 +44,22 @@ const PostModal = ({ avatorUrl, content, onClose }) => {
       console.log(error)
     }
   }, [dispatch, textAreaContent, imageUrls])
+
+  const handleUpdatePostClick = useCallback(() => {
+    if (!textAreaContent && !imageUrls.length) {
+      setErrorContent('請輸入要更新的貼文內容或上傳一張圖片')
+      return
+    }
+    const data = {
+      content: textAreaContent,
+    }
+    try {
+      dispatch(handleUpdatePost({ postId, ...data }))
+    } catch (error) {
+      console.log(error)
+    }
+  }, [dispatch, postId, textAreaContent, imageUrls])
+
   const handleUploadChange = async e => {
     const file = e.target.files[0]
     const formData = new FormData()
@@ -55,6 +72,8 @@ const PostModal = ({ avatorUrl, content, onClose }) => {
     } catch (error) {
       setErrorContent(error.message)
     }
+
+    e.target.value = ''
   }
   return (
     <ModalWrapper disableBodyScroll onClose={handleClose}>
@@ -74,9 +93,12 @@ const PostModal = ({ avatorUrl, content, onClose }) => {
             />
           </div>
           <PostModalFooter
+            type={type}
             isLoading={isLoading}
             isError={Boolean(errorContent)}
-            onClick={handleAllPostClick}
+            onClick={
+              type === 'update' ? handleUpdatePostClick : handleAllPostClick
+            }
             onChange={handleUploadChange}
           />
         </div>
@@ -86,11 +108,15 @@ const PostModal = ({ avatorUrl, content, onClose }) => {
 }
 
 PostModal.propTypes = {
+  type: PropTypes.string,
+  postId: PropTypes.string,
   avatorUrl: PropTypes.string,
   content: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 }
 PostModal.defaultProps = {
+  type: '',
+  postId: '',
   avatorUrl: '',
   content: '',
 }

@@ -26,7 +26,13 @@ input:-webkit-autofill:active  {
 [role='presentation'] {
   @apply cursor-pointer outline-none;
 } 
-
+@layer utilities {
+  .nth-last-child-two{
+    &:nth-last-child(2){
+      border:none
+    }
+  }
+}
 @layer components {
   .text-overflow {
     display: -webkit-box;

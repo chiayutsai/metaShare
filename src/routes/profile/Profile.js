@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getProfile } from 'actions/api/webApi'
-import { setProfileUserId } from 'actions/profile'
+import { handleGetProfile, setProfileUserId } from 'actions/profile'
 import PostsWall from 'components/PostsWall/PostsWall'
 import ProfileCard from 'components/ProfileCard/ProfileCard'
 import ProfileEdit from 'components/ProfileEdit/ProfileEdit'
 import ProfileHeader from 'components/ProfileHeader/ProfileHeader'
 import {
+  profileUserIdSelector,
   profileInfoSelector,
   profileIsAdmin,
   profileEditSelector,
   profileEditPageSelector,
   profileCoverImageSelector,
+  profileFollowSelector,
 } from 'selectors/profile'
 
 const Profile = () => {
@@ -19,29 +20,38 @@ const Profile = () => {
   const isAdmin = useSelector(profileIsAdmin)
   const isEdit = useSelector(profileEditSelector)
   const editPage = useSelector(profileEditPageSelector)
+  const profileUserId = useSelector(profileUserIdSelector)
   useEffect(() => {
     ;(async () => {
       try {
-        await dispatch(getProfile())
+        await dispatch(handleGetProfile({ userId: profileUserId }))
       } catch (error) {
         console.log(error)
       }
     })()
+  }, [dispatch, profileUserId])
 
-    return () => {
+  useEffect(
+    () => () => {
       dispatch(setProfileUserId(''))
-    }
-  }, [dispatch])
+    },
+    [dispatch],
+  )
+
   const profileInfo = useSelector(profileInfoSelector)
   const profileCoverImage = useSelector(profileCoverImageSelector)
+  const { following, follower } = useSelector(profileFollowSelector)
   return (
     <div className="mt-[56px] mb-16">
       <ProfileHeader
         isAdmin={isAdmin}
         isEdit={isEdit}
+        profileUserId={profileUserId}
         profileCoverImage={profileCoverImage}
         avatorUrl={profileInfo.avator}
         name={profileInfo.name}
+        following={following}
+        follower={follower}
       />
       {!isEdit && (
         <div className="container  pt-6 px-9">
@@ -53,7 +63,11 @@ const Profile = () => {
               />
             </div>
             <div className=" flex-1 min-w-0">
-              <PostsWall isAdmin={isAdmin} avatorUrl={profileInfo.avator} />
+              <PostsWall
+                key={profileUserId}
+                isAdmin={isAdmin}
+                avatorUrl={profileInfo.avator}
+              />
             </div>
           </div>
         </div>

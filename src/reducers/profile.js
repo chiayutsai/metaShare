@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions'
-import { getProfileAction } from 'actions/api/webApi'
 import {
   SET_PROFILE_USER_ID,
   SET_PROFILE_EDIT,
@@ -9,6 +8,7 @@ import {
   OPEN_PROFILE_EDIT,
   CLOSE_PROFILE_EDIT,
   UPDATE_PROFILE_INFO,
+  UPDATE_PROFILE_FOLLOW,
 } from 'actions/profile'
 import { COVER_IMAGE } from 'constants/editType'
 
@@ -23,6 +23,10 @@ const initialState = {
   coverImage: {
     coverImage: '',
     isOpen: true,
+  },
+  follow: {
+    following: [],
+    follower: [],
   },
   isEdit: false,
   isEditLoading: false,
@@ -72,18 +76,16 @@ export default handleActions(
         coverImage: payload.coverImage,
         isOpen: payload.coverImageBlur,
       },
-    }),
-    [getProfileAction.success]: (state, { payload }) => ({
-      ...state,
-      info: {
-        name: payload.data.user.name,
-        avator: payload.data.user.avator,
-        description: payload.data.description,
-        tags: payload.data.tags,
+      follow: {
+        following: payload.following,
+        follower: payload.follower,
       },
-      coverImage: {
-        coverImage: payload.data.coverImage,
-        isOpen: payload.data.coverImageBlur,
+    }),
+    [UPDATE_PROFILE_FOLLOW]: (state, { payload }) => ({
+      ...state,
+      follow: {
+        following: payload.following,
+        follower: payload.follower,
       },
     }),
   },

@@ -79,6 +79,10 @@ module.exports = {
         login: '2px 2px 5px rgba(37,2,81,0.25)',
         'login-card': '4px 5px 10px rgba(0,0,0,0.15)',
         profile: '0px 4px 4px rgba(0, 0, 0, 0.1)',
+        channel: '0px 0px 15px rgba(0, 0, 0, 0.2)',
+        'channel-header': '0px 1px 4px rgba(0, 0, 0, 0.16)',
+        '3d':
+          'inset -1px -1px 1px rgba(24, 0, 75, 0.25), inset 1px 1px 1px rgba(239, 205, 251, 0.35);',
       },
     },
   },

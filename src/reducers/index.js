@@ -1,5 +1,8 @@
 import appReady from './appReady'
+import channel from './channel'
+import chat from './chat'
 import darkMode from './darkMode'
+import follow from './follow'
 import forgetPassword from './forgetPassword'
 import likesPost from './likesPost'
 import loading from './loading'
@@ -13,7 +16,10 @@ import user from './user'
 export default {
   appReady,
   darkMode,
+  chat,
+  channel,
   forgetPassword,
+  follow,
   modals,
   postsWall,
   uploadImage,

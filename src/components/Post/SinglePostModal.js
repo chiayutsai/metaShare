@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { useState, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { openLikesModal } from 'actions/post'
 import {
   handleSinglePostLike,
   handleSinglePostComment,
@@ -87,6 +88,10 @@ const SinglePostModal = ({ onClose }) => {
       console.log(error)
     }
   }, [dispatch, _id, commentContent, scrollToEnd])
+
+  const handleLikesModal = useCallback(() => {
+    dispatch(openLikesModal({ postId: _id }))
+  }, [dispatch, _id])
   return (
     <ModalWrapper
       disableBodyScroll
@@ -122,10 +127,14 @@ const SinglePostModal = ({ onClose }) => {
           )}>
           <div className="sticky top-0 left-0 w-full z-10">
             <SinglePostHeader
+              postId={_id}
               authorId={author._id}
               avatorUrl={author.avator}
               userName={author.name}
               createdAt={createdAt}
+              content={content}
+              imageUrls={imageUrls}
+              onClose={onClose}
             />
           </div>
           <ScrollView
@@ -148,7 +157,11 @@ const SinglePostModal = ({ onClose }) => {
                 <PostButton type={COMMENT} onClick={handleFocusComments} />
               </div>
               <div className="flex justify-between border-b border-gray-600/50 py-3 mx-3">
-                <PostInfo type={LIKE} likeAmount={likeAmount} />
+                <PostInfo
+                  type={LIKE}
+                  likeAmount={likeAmount}
+                  onClick={handleLikesModal}
+                />
                 <p className="text-gray-800">{commentAmount}則留言</p>
               </div>
             </div>

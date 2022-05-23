@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useState, useCallback, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateLikes } from 'actions/api/webApi'
-import { handleComments } from 'actions/post'
+import { handleComments, openLikesModal } from 'actions/post'
 import PostButton from 'components/Post/PostButton/PostButton'
 import PostComment from 'components/Post/PostComment/PostComment'
 import PostCommentInput from 'components/Post/PostCommentInput/PostCommentInput'
@@ -58,14 +58,21 @@ const Post = ({
       console.log(error)
     }
   }, [dispatch, _id, commentContent])
+
+  const handleLikesModal = useCallback(() => {
+    dispatch(openLikesModal({ postId: _id }))
+  }, [dispatch, _id])
   return (
     <div className="w-full py-3 px-6 rounded shadow-card bg-white">
       <div className="border-b border-gray-600/50 pb-3 mb-3">
         <PostHeader
+          _id={_id}
           authorId={author._id}
           avatorUrl={author.avator}
           userName={author.name}
           createdAt={createdAt}
+          content={content}
+          imageUrls={imageUrls}
         />
       </div>
       <div className="border-b border-gray-600/50 pb-3 mb-2">
@@ -78,7 +85,11 @@ const Post = ({
       </div>
       <div className="flex border-b border-gray-600/50 pb-3 mb-3">
         <div className="mr-3">
-          <PostInfo type={LIKE} likeAmount={likeAmount} />
+          <PostInfo
+            type={LIKE}
+            likeAmount={likeAmount}
+            onClick={handleLikesModal}
+          />
         </div>
         <PostInfo
           type={COMMENT}

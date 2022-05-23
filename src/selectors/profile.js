@@ -4,6 +4,7 @@ import { userIdSelector } from 'selectors/user'
 export const profileUserIdSelector = state => state.profile.userId
 export const profileInfoSelector = state => state.profile.info
 export const profileCoverImageSelector = state => state.profile.coverImage
+export const profileFollowSelector = state => state.profile.follow
 
 export const profileIsAdmin = createSelector(
   userIdSelector,

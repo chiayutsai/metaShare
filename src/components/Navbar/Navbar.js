@@ -75,9 +75,9 @@ const Navbar = ({ userId, avatorUrl, name }) => {
           </button>
           <ul
             className={classNames(
-              'absolute w-[150px] h-[108px] top-[52px] right-0 bg-white  rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
+              'absolute w-[150px] h-0 top-[52px] right-0 bg-white  rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
               {
-                'h-0': !isToggleDropdown,
+                'h-[108px]': isToggleDropdown,
               },
             )}>
             <li

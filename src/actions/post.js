@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { createAction } from 'redux-actions'
-import { getAllPosts, updateComments } from 'actions/api/webApi'
-
+import { getAllPosts, getPostLikes, updateComments } from 'actions/api/webApi'
+import { openLoading, closeLoading } from 'actions/loading'
+import { setModal } from 'actions/modal'
+import { LIKES_LIST_MODAL } from 'constants/modal'
 // ------------------------------------
 // Action Types
 // ------------------------------------
@@ -34,4 +36,22 @@ export const handleComments = ({ postId, content }) => async dispatch => {
     console.log(error)
     throw error
   }
+}
+
+export const openLikesModal = ({ postId }) => async dispatch => {
+  try {
+    dispatch(openLoading())
+    const { data } = await dispatch(getPostLikes({ postId }))
+
+    dispatch(
+      setModal({
+        name: LIKES_LIST_MODAL,
+        likes: data,
+      }),
+    )
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+  dispatch(closeLoading())
 }

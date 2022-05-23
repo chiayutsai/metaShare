@@ -7,6 +7,7 @@ import { handleShowPost } from 'actions/singlePost'
 
 import Avator from 'components/Avator/Avator'
 import Button from 'components/Button/Button'
+import Link from 'components/Link/Link'
 import { NORMAL, ALERT, ICON_EYE, ICON_UNLIKE } from 'constants/buttonType'
 import formatDate from 'utils/formatDate'
 
@@ -37,7 +38,11 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
               <Avator avatorUrl={author.avator} isRounded />
             </div>
             <div>
-              <p className="font-bold text-lg">{author.name}</p>
+              <Link
+                to={`/metaShare/profile/${author._id}`}
+                className="font-bold text-lg hover:text-primary-800">
+                {author.name}
+              </Link>
               <p className="text-sm text-gray-800">{formatDate(createdAt)}</p>
             </div>
           </div>
@@ -60,7 +65,7 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
         </div>
       </div>
       <div className="flex ">
-        <p className="w-full overflow-hidden text-ellipsis text-overflow">
+        <p className="w-full h-10 overflow-hidden text-ellipsis text-overflow">
           {content}
         </p>
         {hasImage && (

@@ -1,9 +1,21 @@
+/* eslint-disable no-underscore-dangle */
 import { createAction } from 'redux-actions'
-import { updatePassword, updateProfile, uploadImage } from 'actions/api/webApi'
+import {
+  getProfile,
+  updatePassword,
+  updateProfile,
+  uploadImage,
+  getUserFollow,
+  updateUserFollow,
+} from 'actions/api/webApi'
+import { setFollow } from 'actions/follow'
+import { openLoading, closeLoading } from 'actions/loading'
 import { setToken, updateUserInfo } from 'actions/user'
 import { COVER_IMAGE } from 'constants/editType'
-
+import { profileUserIdSelector } from 'selectors/profile'
+import { userIdSelector } from 'selectors/user'
 import BrowserStorage from 'utils/BrowserStorage'
+
 // ------------------------------------
 // Action Types
 // ------------------------------------
@@ -15,6 +27,7 @@ export const SET_PROFILE_UPLOAD_LOADING = 'SET_PROFILE_UPLOAD_LOADING'
 export const CLOSE_PROFILE_EDIT = 'CLOSE_PROFILE_EDIT'
 export const OPEN_PROFILE_EDIT = 'OPEN_PROFILE_EDIT'
 export const UPDATE_PROFILE_INFO = 'UPDATE_PROFILE_INFO'
+export const UPDATE_PROFILE_FOLLOW = 'UPDATE_PROFILE_FOLLOW'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
@@ -28,6 +41,7 @@ export const setProfileEditPage = createAction(SET_PROFILE_EDIT_PAGE)
 export const setProfileUploadLoading = createAction(SET_PROFILE_UPLOAD_LOADING)
 
 export const updateProfileInfo = createAction(UPDATE_PROFILE_INFO)
+export const updateProfileFollow = createAction(UPDATE_PROFILE_FOLLOW)
 
 export const setProfileEditInit = () => dispatch => {
   dispatch(closeProfileEdit())
@@ -100,4 +114,78 @@ export const handleUpdatePassword = ({
     throw error
   }
   dispatch(setProfileEditLoading())
+}
+
+export const handleGetProfile = ({ userId }) => async dispatch => {
+  try {
+    dispatch(openLoading())
+
+    const { data } = await dispatch(getProfile({ userId }))
+    const {
+      data: { following, follower },
+    } = await dispatch(getUserFollow({ userId }))
+    dispatch(updateProfileInfo({ ...data, following, follower }))
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+  dispatch(closeLoading())
+}
+
+export const handleProfileFollow = ({ userId }) => async dispatch => {
+  try {
+    dispatch(openLoading())
+    const {
+      data: { adminFollow, otherFollow },
+    } = await dispatch(updateUserFollow({ userId }))
+    dispatch(
+      setFollow({
+        following: adminFollow.following,
+        follower: adminFollow.follower,
+      }),
+    )
+    dispatch(
+      updateProfileFollow({
+        following: otherFollow.following,
+        follower: otherFollow.follower,
+      }),
+    )
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+  dispatch(closeLoading())
+}
+
+export const handleProfileFollowModal = ({ userId }) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    const state = getState()
+    const admin = userIdSelector(state)
+    const profileUserId = profileUserIdSelector(state)
+    dispatch(openLoading())
+    const {
+      data: { adminFollow },
+    } = await dispatch(updateUserFollow({ userId }))
+    dispatch(
+      setFollow({
+        following: adminFollow.following,
+        follower: adminFollow.follower,
+      }),
+    )
+    if (admin === profileUserId) {
+      dispatch(
+        updateProfileFollow({
+          following: adminFollow.following,
+          follower: adminFollow.follower,
+        }),
+      )
+    }
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+  dispatch(closeLoading())
 }

@@ -1,12 +1,41 @@
 import PropTypes from 'prop-types'
+import { useCallback, useState } from 'react'
 import PostSwiper from 'components/Post/PostSwiper/PostSwiper'
 
 const PostContent = ({ content, imageUrls }) => {
+  const [showMore, setShowMore] = useState(false)
+  const [isMore, setIsMore] = useState(false)
+  let postContent = content
+  if (content.length >= 50) {
+    if (!isMore) {
+      setIsMore(true)
+    }
+    postContent = content.substring(0, 75)
+  }
+  const handleShowMore = useCallback(() => {
+    setShowMore(true)
+  }, [])
   const singleImage = imageUrls.length === 1
   const swiperImage = imageUrls.length > 1
   return (
     <>
-      <p>{content}</p>
+      {!showMore && (
+        <p>
+          {postContent}
+          {isMore && (
+            <>
+              <span className="mr-0.5">...</span>
+              <span
+                role="presentation"
+                onClick={handleShowMore}
+                className="font-bold text-primary-900">
+                顯示更多
+              </span>
+            </>
+          )}
+        </p>
+      )}
+      {showMore && <p>{content}</p>}
       {singleImage && (
         <div className="max-h-[740px] rounded-lg bg-gray-600/50 mt-3">
           <img

@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types'
+import { useCallback, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteImage } from 'actions/uploadImage'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
 import ScrollView from 'components/ScrollView'
 import { ReactComponent as IconDeleteSvg } from './assets/delete.svg'
@@ -11,8 +14,16 @@ const PostModalContent = ({
   imageUrls,
   setTextAreaContent,
 }) => {
+  const dispatch = useDispatch()
+  const scrollViewRef = useRef()
+  const setScrollViewRef = useCallback(rootRef => {
+    scrollViewRef.current = rootRef.current
+  }, [])
   const singleImage = imageUrls.length === 1
   const mostImages = imageUrls.length > 1
+  const handleDeleteImageClick = id => {
+    dispatch(deleteImage({ id }))
+  }
   return (
     <>
       <textarea
@@ -34,6 +45,7 @@ const PostModalContent = ({
       {mostImages && (
         <div className="h-[460px] mt-4">
           <ScrollView
+            setRef={setScrollViewRef}
             vertical
             verticalWidth={4}
             verticalHoverWidth={10}
@@ -45,7 +57,10 @@ const PostModalContent = ({
                   className="relative mb-2 rounded overflow-hidden ">
                   <button
                     type="button"
-                    className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100">
+                    className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100"
+                    onClick={() => {
+                      handleDeleteImageClick(img.id)
+                    }}>
                     <IconDeleteSvg />
                   </button>
                   <img key={`img ${index + 1}`} src={img.imageUrl} alt="post" />
@@ -58,6 +73,7 @@ const PostModalContent = ({
       {singleImage && (
         <div className="h-[460px] mt-4">
           <ScrollView
+            setRef={setScrollViewRef}
             vertical
             verticalWidth={4}
             verticalHoverWidth={10}
@@ -65,7 +81,10 @@ const PostModalContent = ({
             <div className="relative rounded overflow-hidden ">
               <button
                 type="button"
-                className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100">
+                className="absolute flex top-3 right-3 items-center justify-center w-6 h-6 rounded-full bg-white opacity-80 hover:opacity-100"
+                onClick={() => {
+                  handleDeleteImageClick(imageUrls[0].id)
+                }}>
                 <IconDeleteSvg />
               </button>
               <img src={imageUrls[0].imageUrl} alt="post" />

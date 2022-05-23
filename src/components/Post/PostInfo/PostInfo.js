@@ -16,7 +16,10 @@ const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
           </>
         )}
         {!!likeAmount && (
-          <button type="button" className="flex items-center group">
+          <button
+            type="button"
+            className="flex items-center group"
+            onClick={onClick}>
             <IconlikehSvg className="mr-2" />
             <p className="text-gray-1000 group-hover:text-primary-800">
               {likeAmount}個人

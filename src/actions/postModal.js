@@ -1,7 +1,14 @@
-import { getAllPosts, addPost } from 'actions/api/webApi'
+import { getAllPosts, addPost, updatePost } from 'actions/api/webApi'
+import { updateLikesPosts } from 'actions/likesPost'
 import { dismissModal, setModal } from 'actions/modal'
-import { setSearchWord } from 'actions/post'
-import { toggleLoading, cleanAllImageUrl } from 'actions/uploadImage'
+import { setSearchWord, setFilterType } from 'actions/post'
+import { setSinglePost } from 'actions/singlePost'
+import {
+  toggleLoading,
+  cleanAllImageUrl,
+  addImageUrl,
+} from 'actions/uploadImage'
+import { LASTEST_POST } from 'constants/filterType'
 import { POST_MODAL } from 'constants/modal'
 import { postModalSelector } from 'selectors/modal'
 import { uploadImageSelector } from 'selectors/uploadImage'
@@ -29,6 +36,26 @@ export const setPostModal = ({ content = '' }) => (dispatch, getState) => {
   )
 }
 
+export const setUpdatePostModal = ({ _id, content, imageUrls }) => (
+  dispatch,
+  getState,
+) => {
+  const state = getState()
+  const avatorUrl = userAvatorSelector(state)
+  imageUrls.forEach(item => {
+    dispatch(addImageUrl({ imageUrl: item }))
+  })
+  dispatch(
+    setModal({
+      name: POST_MODAL,
+      postId: _id,
+      content,
+      avatorUrl,
+      type: 'update',
+    }),
+  )
+}
+
 export const handleAllPost = data => async (dispatch, getState) => {
   const state = getState()
   const imageArray = uploadImageSelector(state)
@@ -49,10 +76,36 @@ export const handleAllPost = data => async (dispatch, getState) => {
   dispatch(toggleLoading())
   dispatch(dismissPostModal())
   try {
-    dispatch(getAllPosts())
     dispatch(setSearchWord(''))
+    dispatch(setFilterType(LASTEST_POST))
+    dispatch(getAllPosts())
   } catch (error) {
     console.log(error)
     throw error
   }
+}
+
+export const handleUpdatePost = ({ postId, content }) => async (
+  dispatch,
+  getState,
+) => {
+  const state = getState()
+  const imageArray = uploadImageSelector(state)
+  const imageUrls = imageArray.map(img => img.imageUrl)
+
+  try {
+    dispatch(toggleLoading())
+    const { data } = await dispatch(updatePost({ postId, content, imageUrls }))
+    dispatch(cleanAllImageUrl())
+    dispatch(
+      setSinglePost({ content: data.content, imageUrls: data.imageUrls }),
+    )
+    dispatch(updateLikesPosts(data))
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+  dispatch(toggleLoading())
+  dispatch(dismissPostModal())
 }

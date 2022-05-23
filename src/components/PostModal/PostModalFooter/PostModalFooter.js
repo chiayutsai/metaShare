@@ -3,7 +3,7 @@ import { UpLoadButton } from 'components/Button/Button'
 import Button3D from 'components/Button/Button3D/Button3D'
 import { NORMAL, ICON_PHOTO } from 'constants/buttonType'
 
-const PostModalFooter = ({ isError, isLoading, onClick, onChange }) => (
+const PostModalFooter = ({ type, isError, isLoading, onClick, onChange }) => (
   <div className="flex justify-between items-center">
     <UpLoadButton
       content="新增照片"
@@ -13,7 +13,7 @@ const PostModalFooter = ({ isError, isLoading, onClick, onChange }) => (
       onChange={onChange}
     />
     <Button3D
-      content="發布貼文"
+      content={type === 'update' ? '更新貼文' : '發布貼文'}
       isDisabled={isLoading || isError}
       onClick={onClick}
     />
@@ -21,6 +21,7 @@ const PostModalFooter = ({ isError, isLoading, onClick, onChange }) => (
 )
 
 PostModalFooter.propTypes = {
+  type: PropTypes.string,
   isError: PropTypes.bool,
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
@@ -28,6 +29,7 @@ PostModalFooter.propTypes = {
 }
 
 PostModalFooter.defaultProps = {
+  type: '',
   isError: false,
   isLoading: false,
   onClick: () => {},

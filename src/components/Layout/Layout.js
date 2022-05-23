@@ -10,7 +10,11 @@
 // external-global styles must be imported in your JS.
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { handleGetUserFollow } from 'actions/follow'
+import ChannelList from 'components/ChannelList/ChannelList'
+import Chat from 'components/Chat/Chat'
 import LoadingModal from 'components/LoadingModal/LoadingModal'
 import LoginCircle from 'components/LoginCircle/LoginCircle'
 import { appReadySelector, loadingSelector } from 'selectors'
@@ -28,6 +32,7 @@ import PersonCard from '../PersonCard/PersonCard'
 import styles from './Layout.scss'
 
 const Layout = ({ view, children }) => {
+  const dispatch = useDispatch()
   const appReady = useSelector(appReadySelector)
   const postsWallLoading = useSelector(postsWallLoadingSelector)
   const loading = useSelector(loadingSelector)
@@ -40,6 +45,17 @@ const Layout = ({ view, children }) => {
   const isProfile = view === 'profile'
   const isNotFound = view === 'notFound'
   const isLoading = loading || postsWallLoading
+  useEffect(() => {
+    ;(async () => {
+      if (isHome || isProfile) {
+        try {
+          await dispatch(handleGetUserFollow({ userId }))
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    })()
+  }, [dispatch, isHome, isProfile, userId])
   return (
     <ErrorBoundary>
       {/* {!appReady && <LoadingLayout />} 全版 */}
@@ -50,8 +66,8 @@ const Layout = ({ view, children }) => {
             <>
               <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
               <div className="container mt-[56px] mb-16 pt-7 px-9">
-                <div className="flex">
-                  <div className="w-60 shrink-0">
+                <div className="flex items-start">
+                  <div className=" sticky top-[84px] w-60 shrink-0">
                     <div className="mb-3">
                       <PersonCard
                         userId={userId}
@@ -62,7 +78,9 @@ const Layout = ({ view, children }) => {
                     <ButtonGroup userId={userId} />
                   </div>
                   <div className="w-full min-w-0 mx-[30px]">{children}</div>
-                  <div className=" w-[280px] shrink-0 bg-white">聊天室</div>
+                  <div className="sticky top-[84px] w-[280px] shrink-0 ">
+                    <Chat />
+                  </div>
                 </div>
               </div>
             </>
@@ -91,8 +109,9 @@ const Layout = ({ view, children }) => {
             </>
           )}
           {isNotFound && <>{children}</>}
-          <ModalList />
 
+          <ModalList />
+          <ChannelList />
           {isLoading && <LoadingModal />}
         </>
       )}

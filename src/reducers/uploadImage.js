@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 import { uploadImageAction } from 'actions/api/webApi'
 import {
   ADD_IMAGE_URL,
+  DELETE_IMAGE,
   CLEAN_ALL_IMAGE_URL,
   TOGGLE_LOADING,
 } from 'actions/uploadImage'
@@ -20,6 +21,10 @@ export default handleActions(
     [ADD_IMAGE_URL]: (state, { payload }) => ({
       ...state,
       imageUrls: [...state.imageUrls, payload],
+    }),
+    [DELETE_IMAGE]: (state, { payload: { id } }) => ({
+      ...state,
+      imageUrls: state.imageUrls.filter(image => image.id !== id),
     }),
     [CLEAN_ALL_IMAGE_URL]: state => ({
       ...state,

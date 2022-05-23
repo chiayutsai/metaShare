@@ -8,11 +8,14 @@ import { openLoading, closeLoading } from 'actions/loading'
 // ------------------------------------
 
 export const SET_USER_LIKES_POSTS = 'SET_USER_LIKES_POSTS'
+export const DELETE_LIKES_POSTS = 'DELETE_LIKES_POSTS'
+export const UPDATE_LIKES_POSTS = 'UPDATE_LIKES_POSTS'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 export const setUserLikesPosts = createAction(SET_USER_LIKES_POSTS)
-
+export const deleteLikesPosts = createAction(DELETE_LIKES_POSTS)
+export const updateLikesPosts = createAction(UPDATE_LIKES_POSTS)
 export const handleGetUserLikesPosts = () => async dispatch => {
   try {
     dispatch(openLoading())

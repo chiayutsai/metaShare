@@ -1,23 +1,24 @@
 /* eslint-disable no-underscore-dangle */
 import { createAction } from 'redux-actions'
-import { getUserFollow } from 'actions/api/webApi'
+import { getUserFollow, updateUserFollow } from 'actions/api/webApi'
 import { openLoading, closeLoading } from 'actions/loading'
-
 // ------------------------------------
 // Action Types
 // ------------------------------------
 
-export const SET_USER_LIKES_POSTS = 'SET_USER_LIKES_POSTS'
+export const SET_FOLLOW = 'SET_FOLLOW'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
-export const setUserLikesPosts = createAction(SET_USER_LIKES_POSTS)
+export const setFollow = createAction(SET_FOLLOW)
 
-export const handleGetUserLikesPosts = () => async dispatch => {
+export const handleGetUserFollow = ({ userId }) => async dispatch => {
   try {
     dispatch(openLoading())
-    const { data } = await dispatch(getUserLikesPosts())
-    dispatch(setUserLikesPosts(data))
+    const {
+      data: { following, follower },
+    } = await dispatch(getUserFollow({ userId }))
+    dispatch(setFollow({ following, follower }))
   } catch (error) {
     console.log(error)
     throw error
@@ -25,14 +26,18 @@ export const handleGetUserLikesPosts = () => async dispatch => {
   dispatch(closeLoading())
 }
 
-export const handleRemoveLikes = ({ postId }) => async (dispatch, getState) => {
+export const handleUpdateUserFollow = ({ userId }) => async dispatch => {
   try {
-    const state = getState()
-    const { likesPost } = state
     dispatch(openLoading())
-    const { data } = await dispatch(updateLikes({ postId }))
-    const newLikesPost = likesPost.filter(post => post._id !== data._id)
-    dispatch(setUserLikesPosts(newLikesPost))
+    const {
+      data: { adminFollow },
+    } = await dispatch(updateUserFollow({ userId }))
+    dispatch(
+      setFollow({
+        following: adminFollow.following,
+        follower: adminFollow.follower,
+      }),
+    )
   } catch (error) {
     console.log(error)
     throw error

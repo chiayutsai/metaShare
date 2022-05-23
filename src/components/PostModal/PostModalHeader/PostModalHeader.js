@@ -1,23 +1,38 @@
 import PropTypes from 'prop-types'
+import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { setModal } from 'actions/modal'
 import Avator from 'components/Avator/Avator'
+import { CANCEL_POST_MODAL } from 'constants/modal'
 
-const PostModalHeader = ({ avatorUrl, onClose }) => (
-  <div className="relative flex  items-center justify-between p-3 rounded-t-lg bg-white">
-    <div className="absolute w-[106px] h-[106px] bottom-0 left-0 p-4 bg-white rounded-full">
-      <div className="w-full h-full p-2 bg-gradient-to-br from-[#b9d7ff83] to-primary-700/50 rounded-full">
-        <Avator avatorUrl={avatorUrl} isRounded />
+const PostModalHeader = ({ avatorUrl, onClose }) => {
+  const dispatch = useDispatch()
+  const openCancelPostModal = useCallback(() => {
+    dispatch(
+      setModal({
+        name: CANCEL_POST_MODAL,
+        closeModal: onClose,
+      }),
+    )
+  }, [dispatch, onClose])
+  return (
+    <div className="relative flex  items-center justify-between p-3 rounded-t-lg bg-white">
+      <div className="absolute w-[106px] h-[106px] bottom-0 left-0 p-4 bg-white rounded-full">
+        <div className="w-full h-full p-2 bg-gradient-to-br from-[#b9d7ff83] to-primary-700/50 rounded-full">
+          <Avator avatorUrl={avatorUrl} isRounded />
+        </div>
       </div>
+      <p className=" ml-24 text-lg text-gray-1100">說點什麼呢?</p>
+      <button
+        type="button"
+        onClick={openCancelPostModal}
+        className="relative flex items-center justify-center w-8 h-8  rounded-full hover:bg-primary-100">
+        <span className="absolute block w-6 h-1 bg-primary-900 rounded-full rotate-45" />
+        <span className="absolute block w-6 h-1 bg-primary-900 rounded-full rotate-[-45deg]" />
+      </button>
     </div>
-    <p className=" ml-24 text-lg text-gray-1100">說點什麼呢?</p>
-    <button
-      type="button"
-      onClick={onClose}
-      className="relative flex items-center justify-center w-8 h-8  rounded-full hover:bg-primary-100">
-      <span className="absolute block w-6 h-1 bg-primary-900 rounded-full rotate-45" />
-      <span className="absolute block w-6 h-1 bg-primary-900 rounded-full rotate-[-45deg]" />
-    </button>
-  </div>
-)
+  )
+}
 
 PostModalHeader.propTypes = {
   avatorUrl: PropTypes.string,
