@@ -11,6 +11,7 @@
 
 // The top-level (parent) route
 import { handleCheck } from 'actions/user'
+import { webSocketLogin } from 'store/WebSocketService/actions'
 
 const routes = {
   path: '/metaShare',
@@ -73,6 +74,7 @@ const routes = {
 
     if (route.needCheckUser) {
       await store.dispatch(handleCheck())
+      await store.dispatch(webSocketLogin())
     }
 
     ;(async () => {

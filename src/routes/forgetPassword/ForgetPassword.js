@@ -264,28 +264,28 @@ const ForgetPassword = () => {
       )}
       {!isResetSuccess && (
         <>
-          <div className="flex items-center  mb-9 ">
+          <div className="flex items-center  mb-6 xl:mb-9 ">
             <div className="login-line" />
-            <h3 className="flex items-center font-bold text-primary-700 text-3xl">
+            <h3 className="flex-col sm:flex-row flex items-start sm:items-center font-bold text-primary-700 text-2xl sm:text-3xl">
               重設密碼
-              <span className="text-primary-600/60 text-2xl ml-1.5">
+              <span className="text-primary-600/60 text-xl sm:text-2xl sm:ml-1.5">
                 FORGET PASSWORD
               </span>
             </h3>
           </div>
 
           {isCheckEmail && (
-            <p className="mb-9 text-lg text-gray-1200">
+            <p className="mb-6 xl:mb-9 sm:text-lg text-gray-1200">
               請輸入您加入時使用的電子郵件，我們將會向您發送重置密碼的驗證碼。
             </p>
           )}
           {isVerification && (
-            <p className="mb-9 text-lg text-gray-1200">
+            <p className="mb-6 xl:mb-9 sm:text-lg text-gray-1200">
               請輸入您收到的驗證碼。
             </p>
           )}
           {isResetPassword && (
-            <p className="mb-9 text-lg text-gray-1200">
+            <p className="mb-6 xl:mb-9 sm:text-lg text-gray-1200">
               驗證成功，請輸入你想更改的新密碼
             </p>
           )}

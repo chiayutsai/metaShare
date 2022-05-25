@@ -2,6 +2,51 @@
   @apply fixed top-0 left-0 w-full -z-10 bg-[url('./assets/bg.png')] bg-no-repeat bg-cover h-screen;
 }
 
+.bg-img {
+  @apply bg-[url('./assets/bg.png')] bg-no-repeat bg-cover;
+}
 .logo {
-  @apply bg-[url('./assets/logo.png')] bg-no-repeat bg-contain h-[54px] w-[270px] overflow-hidden indent-[101%];
+  @apply bg-[url('./assets/logo.png')] bg-no-repeat bg-contain h-12 w-60 xl:h-[54px] xl:w-[270px] overflow-hidden indent-[101%];
+}
+
+.fade-in {
+  animation: fadeIn 0.5s linear forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.6s linear 1.5s forwards;
+}
+
+.show {
+  animation: show 0.6s linear 1.5s forwards;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

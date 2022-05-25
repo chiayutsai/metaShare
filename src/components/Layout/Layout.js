@@ -8,6 +8,7 @@
  */
 
 // external-global styles must be imported in your JS.
+import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
@@ -24,6 +25,7 @@ import {
   userNameSelector,
   userIdSelector,
 } from 'selectors/user'
+import BrowserStorage from 'utils/BrowserStorage'
 import ButtonGroup from '../ButtonGroup/ButtonGroup'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 import ModalList from '../ModalList/ModalList'
@@ -45,6 +47,7 @@ const Layout = ({ view, children }) => {
   const isProfile = view === 'profile'
   const isNotFound = view === 'notFound'
   const isLoading = loading || postsWallLoading
+  const isFirstTimeUse = !BrowserStorage.get('token')
   useEffect(() => {
     ;(async () => {
       if (isHome || isProfile) {
@@ -88,16 +91,35 @@ const Layout = ({ view, children }) => {
           )}
           {isLogin && (
             <div>
-              <div className="relative w-full h-screen grid grid-cols-12 py-9 px-12 items-center">
-                <h1 className="absolute top-6 left-9 ">
+              <div className="relative w-full h-screen grid grid-cols-12 p-6 sm:py-9 sm:px-12 items-center  sm:items-start xl:items-center">
+                <h1 className="absolute z-20 top-6 left-9 ">
                   <div className={styles.logo}>MetaShare</div>
                 </h1>
-                <div className="col-span-7 flex items-center justify-center">
-                  <div className="scale-110">
+                <div
+                  className={classNames(
+                    'sm:flex sm:static sm:w-auto sm:h-auto sm:!bg-none col-span-12 xl:col-span-6 3xl:col-span-7 items-center justify-center sm:!animate-none pointer-events-none',
+                    {
+                      'absolute z-10 w-screen h-screen': isFirstTimeUse,
+                      hidden: !isFirstTimeUse,
+                      [styles['bg-img']]: isFirstTimeUse,
+                      [styles['fade-out']]: isFirstTimeUse,
+                    },
+                  )}>
+                  <div
+                    className={classNames(
+                      'sm:!animate-none scale-75 xl:scale-95 2xl:scale-100',
+                      {
+                        [styles['fade-in']]: isFirstTimeUse,
+                      },
+                    )}>
                     <LoginCircle />
                   </div>
                 </div>
-                <div className="relative col-span-4 px-24 py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden">
+                <div
+                  className={classNames(
+                    'relative sm:!animate-none col-span-12 md:col-start-2 md:col-span-10  lg:col-start-3 lg:col-span-8 xl:col-start-auto  xl:col-span-6 2xl:col-span-5 3xl:col-span-4 p-6 xs:px-12 xs:py-6 xl:px-16 xl:py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden',
+                    { [styles.show]: isFirstTimeUse },
+                  )}>
                   {children}
                 </div>
               </div>

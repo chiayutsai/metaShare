@@ -4,11 +4,14 @@ module.exports = {
   content: ['./src/**/*.js'],
   theme: {
     screens: {
+      mini: '360px',
+      xs: '420px',
       sm: '640px',
       md: '768px',
-      lg: '1024px',
-      xl: '1280px',
+      lg: '992px',
+      xl: '1240px',
       '2xl': '1440px',
+      '3xl': '1780px',
     },
     colors: {
       transparent: 'transparent',
@@ -90,6 +93,7 @@ module.exports = {
   variants: {
     stroke: ['responsive', 'hover', 'group-hover', 'focus'],
     fill: ['responsive', 'hover', 'group-hover', 'focus'],
+    animation: ['responsive'],
   },
   plugins: [],
 }

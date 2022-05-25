@@ -1,3 +1,4 @@
+import webSocketService from 'store/WebSocketService/reducers'
 import appReady from './appReady'
 import channel from './channel'
 import chat from './chat'
@@ -14,6 +15,7 @@ import uploadImage from './uploadImage'
 import user from './user'
 
 export default {
+  webSocketService,
   appReady,
   darkMode,
   chat,

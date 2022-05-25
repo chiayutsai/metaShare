@@ -6,6 +6,10 @@ import ChatCard from 'components/ChatCard/ChatCard'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ScrollView from 'components/ScrollView'
 import { chatSelector } from 'selectors'
+import {
+  onlineSelector,
+  channelListSelector,
+} from 'store/WebSocketService/selectors'
 
 const Chat = () => {
   const dispatch = useDispatch()
@@ -24,7 +28,8 @@ const Chat = () => {
     scrollViewRef.current = rootRef.current
   }, [])
   const chat = useSelector(chatSelector)
-
+  const online = useSelector(onlineSelector)
+  const channelList = useSelector(channelListSelector)
   return (
     <div className=" px-4 py-3 bg-white rounded-lg shadow-card">
       <div className="flex items-center justify-between mb-3">
@@ -42,11 +47,20 @@ const Chat = () => {
         verticalWidth={4}
         verticalHoverWidth={10}
         thumbSizeChangeOnHover>
-        {chat.map(item => (
-          <div key={item._id}>
-            <ChatCard {...item} />
-          </div>
-        ))}
+        {chat.map(item => {
+          const isOnline = online?.includes(item._id)
+          const [channel] = channelList.filter(
+            channelItem => channelItem.channelId === item._id,
+          )
+
+          const noRead = channel?.noReadMessage.length
+
+          return (
+            <div key={item._id}>
+              <ChatCard {...item} isOnline={isOnline} noRead={noRead} />
+            </div>
+          )
+        })}
       </ScrollView>
     </div>
   )

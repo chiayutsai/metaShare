@@ -97,28 +97,30 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex items-center  mb-9 ">
+      <div className="flex items-center mb-6 xl:mb-9 ">
         <div className="login-line" />
-        <h3 className="flex items-center font-bold text-primary-700 text-3xl">
+        <h3 className="flex items-center font-bold text-primary-700 text-2xl sm:text-3xl">
           登入
-          <span className="text-primary-600/60 text-2xl ml-1.5">LOG IN</span>
+          <span className="text-primary-600/60 text-xl sm:text-2xl ml-1.5">
+            LOG IN
+          </span>
         </h3>
       </div>
-      <div className="flex mb-9">
-        <div className="w-full mr-3">
+      <div className="flex-col sm:flex-row flex mb-6 xl:mb-9">
+        <div className="w-full mb-3 sm:mb-0 sm:mr-3">
           <CommunityButton type={GOOGLE} login />
         </div>
         <div className="w-full">
           <CommunityButton type={FACEBOOK} login />
         </div>
       </div>
-      <div className="flex items-center mb-8">
+      <div className="flex items-center mb-6 xl:mb-8">
         <span className="w-full h-[1px] bg-gray-600" />
         <p className="mx-2 text-sm font-bold text-gray-600">Or</p>
         <span className="w-full h-[1px] bg-gray-600" />
       </div>
       {errorContent && (
-        <div className="mb-8">
+        <div className="mb-6 xl:mb-8">
           <ErrorBadge content={errorContent} />
         </div>
       )}
@@ -132,7 +134,7 @@ const Login = () => {
           errorContent={emailErrorMessage}
         />
       </div>
-      <div className="flex flex-col items-end mb-12">
+      <div className="flex flex-col items-end mb-9 xl:mb-12">
         <Input
           type={PASSWORD}
           showLabel

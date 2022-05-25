@@ -9,7 +9,9 @@ const Avator = ({ avatorUrl, isBorder, isRounded }) => {
   }, [])
 
   useEffect(() => {
-    setImgUrl(avatorUrl)
+    if (avatorUrl !== '') {
+      setImgUrl(avatorUrl)
+    }
   }, [avatorUrl])
 
   return (

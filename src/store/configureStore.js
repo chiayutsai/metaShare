@@ -6,11 +6,17 @@ import * as selectors from 'selectors'
 import { makeRootReducer } from 'store/makeRootReducer'
 import pkg from '../../package.json'
 import createHelpers from './createHelpers'
+import WebSocketService from './WebSocketService/middleware'
 
 const { name, version } = pkg
 const configureStore = (initialState, helpersConfig) => {
+  const webSocketService = new WebSocketService()
+
   const helpers = createHelpers(helpersConfig)
-  const middleware = [thunk.withExtraArgument(helpers)]
+  const middleware = [
+    thunk.withExtraArgument(helpers),
+    webSocketService.createMiddleware(),
+  ]
 
   let enhancer
 
