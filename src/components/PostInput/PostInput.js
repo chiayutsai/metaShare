@@ -10,7 +10,7 @@ const PostInput = ({ avatorUrl }) => {
     dispatch(setPostModal({}))
   }, [dispatch])
   return (
-    <div className="flex items-center px-6 py-3 rounded shadow-card bg-white">
+    <div className="flex items-center px-3 xs:px-6 py-3 rounded shadow-card bg-white">
       <div className="w-12 h-12 mr-3 shrink-0">
         <Avator isRounded avatorUrl={avatorUrl} />
       </div>

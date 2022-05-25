@@ -68,9 +68,9 @@ const Layout = ({ view, children }) => {
           {isHome && (
             <>
               <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
-              <div className="container mt-[56px] mb-16 pt-7 px-9">
+              <div className="container max-w-full lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mt-[60px] md:mt-[56px] mb-16 pt-7 px-4 2xl:px-9 ">
                 <div className="flex items-start">
-                  <div className=" sticky top-[84px] w-60 shrink-0">
+                  <div className="hidden xl:block sticky top-[84px] w-60 shrink-0">
                     <div className="mb-3">
                       <PersonCard
                         userId={userId}
@@ -80,9 +80,16 @@ const Layout = ({ view, children }) => {
                     </div>
                     <ButtonGroup userId={userId} />
                   </div>
-                  <div className="w-full min-w-0 mx-[30px]">{children}</div>
-                  <div className="sticky top-[84px] w-[280px] shrink-0 ">
-                    <Chat />
+                  <div className="w-full min-w-0 md:mr-6 xl:mx-[30px]">
+                    {children}
+                  </div>
+                  <div className="hidden md:block sticky top-[84px] w-60  lg:w-[280px] shrink-0 ">
+                    <div className="mb-3">
+                      <Chat />
+                    </div>
+                    <div className="block xl:hidden">
+                      <ButtonGroup userId={userId} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -91,13 +98,13 @@ const Layout = ({ view, children }) => {
           )}
           {isLogin && (
             <div>
-              <div className="relative w-full h-screen grid grid-cols-12 p-6 sm:py-9 sm:px-12 items-center  sm:items-start xl:items-center">
-                <h1 className="absolute z-20 top-6 left-9 ">
-                  <div className={styles.logo}>MetaShare</div>
-                </h1>
+              <h1 className="relative flex justify-center mt-6 top-0 left-0 sm:mt-0 sm:absolute z-20 sm:top-6 sm:left-9 ">
+                <div className={styles.logo}>MetaShare</div>
+              </h1>
+              <div className="relative w-full min-h-mobile sm:min-h-screen flex flex-col justify-center xl:grid grid-cols-12 p-6 sm:py-9 sm:px-12 items-center">
                 <div
                   className={classNames(
-                    'sm:flex sm:static sm:w-auto sm:h-auto sm:!bg-none col-span-12 xl:col-span-6 3xl:col-span-7 items-center justify-center sm:!animate-none pointer-events-none',
+                    '!flex sm:static sm:w-full sm:h-auto sm:!bg-none xl:col-span-6 3xl:col-span-7 items-center justify-center sm:!animate-none pointer-events-none',
                     {
                       'absolute z-10 w-screen h-screen': isFirstTimeUse,
                       hidden: !isFirstTimeUse,
@@ -117,7 +124,7 @@ const Layout = ({ view, children }) => {
                 </div>
                 <div
                   className={classNames(
-                    'relative sm:!animate-none col-span-12 md:col-start-2 md:col-span-10  lg:col-start-3 lg:col-span-8 xl:col-start-auto  xl:col-span-6 2xl:col-span-5 3xl:col-span-4 p-6 xs:px-12 xs:py-6 xl:px-16 xl:py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden',
+                    'relative sm:!animate-none w-full md:w-4/5 lg:w-8/12 xl:w-auto xl:col-span-6 2xl:col-span-5 3xl:col-span-4 p-6 xs:px-12 xs:py-6 xl:px-16 xl:py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden',
                     { [styles.show]: isFirstTimeUse },
                   )}>
                   {children}

@@ -12,7 +12,9 @@ const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
         {!likeAmount && (
           <>
             <IconNoLikehSvg className="mr-2" />
-            <p className="text-gray-800">成為第一個喜歡的朋友</p>
+            <p className="text-xs xs:text-base text-gray-800">
+              成為第一個喜歡的朋友
+            </p>
           </>
         )}
         {!!likeAmount && (
@@ -21,7 +23,7 @@ const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
             className="flex items-center group"
             onClick={onClick}>
             <IconlikehSvg className="mr-2" />
-            <p className="text-gray-1000 group-hover:text-primary-800">
+            <p className="text-xs xs:text-base text-gray-1000 group-hover:text-primary-800">
               {likeAmount}個人
               {POST_BUTTON_TEXY_MAP[type]}
             </p>
@@ -34,7 +36,7 @@ const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
         {!commentAmount && (
           <>
             <IconNoCommenthSvg className="mr-2" />
-            <p className="text-gray-800">尚無留言</p>
+            <p className="text-xs xs:text-base text-gray-800">尚無留言</p>
           </>
         )}
         {!!commentAmount && (
@@ -43,7 +45,7 @@ const PostInfo = ({ type, likeAmount, commentAmount, onClick }) => (
             className="flex items-center group"
             onClick={onClick}>
             <IconCommenthSvg className="mr-2" />
-            <p className="text-gray-1000 group-hover:text-primary-800">
+            <p className="text-xs xs:text-base text-gray-1000 group-hover:text-primary-800">
               {commentAmount}則{POST_BUTTON_TEXY_MAP[type]}
             </p>
           </button>

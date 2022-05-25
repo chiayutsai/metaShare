@@ -17,12 +17,12 @@ const PostModalHeader = ({ avatorUrl, onClose }) => {
   }, [dispatch, onClose])
   return (
     <div className="relative flex  items-center justify-between p-3 rounded-t-lg bg-white">
-      <div className="absolute w-[106px] h-[106px] bottom-0 left-0 p-4 bg-white rounded-full">
+      <div className="absolute w-20 h-20 sm:w-[106px] sm:h-[106px] bottom-3 sm:bottom-0 left-0 p-2 sm:p-4 bg-white rounded-full">
         <div className="w-full h-full p-2 bg-gradient-to-br from-[#b9d7ff83] to-primary-700/50 rounded-full">
           <Avator avatorUrl={avatorUrl} isRounded />
         </div>
       </div>
-      <p className=" ml-24 text-lg text-gray-1100">說點什麼呢?</p>
+      <p className=" ml-20 sm:ml-24  sm:text-lg text-gray-1100">說點什麼呢?</p>
       <button
         type="button"
         onClick={openCancelPostModal}

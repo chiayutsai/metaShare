@@ -77,9 +77,9 @@ const PostModal = ({ type, postId, avatorUrl, content, onClose }) => {
   }
   return (
     <ModalWrapper disableBodyScroll onClose={handleClose}>
-      <div className="w-[600px] bg-white rounded-lg pb-4">
+      <div className="w-[310px] xs:w-[400px] sm:w-[600px] bg-white rounded-lg pb-4">
         <PostModalHeader avatorUrl={avatorUrl} onClose={handleClose} />
-        <div className="px-7">
+        <div className="px-3 sm:px-7">
           <div className="mb-4">
             <DecorationLine />
           </div>

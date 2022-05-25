@@ -18,7 +18,7 @@ const PostButton = ({ type, isLike, onClick }) => {
         {type === LIKE && isLike && <IconisLikehSvg />}
         {type === COMMENT && <IconCommenthSvg className={styles.icon} />}
       </div>
-      <p className="text-gray-1000 group-hover:text-primary-800">
+      <p className="text-sm md:text-base text-gray-1000 group-hover:text-primary-800">
         {POST_BUTTON_TEXY_MAP[type]}
       </p>
     </button>

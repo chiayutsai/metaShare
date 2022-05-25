@@ -43,7 +43,7 @@ const PostModalContent = ({
         </div>
       )}
       {mostImages && (
-        <div className="h-[460px] mt-4">
+        <div className="h-[200px] sm:h-[460px] mt-4">
           <ScrollView
             setRef={setScrollViewRef}
             vertical
@@ -71,7 +71,7 @@ const PostModalContent = ({
         </div>
       )}
       {singleImage && (
-        <div className="h-[460px] mt-4">
+        <div className="h-[200px] sm:h-[460px] mt-4">
           <ScrollView
             setRef={setScrollViewRef}
             vertical

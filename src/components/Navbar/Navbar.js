@@ -12,6 +12,8 @@ import history from 'history.js'
 import { profileEditSelector } from 'selectors/profile'
 import BrowserStorage from 'utils/BrowserStorage'
 import { ReactComponent as IconEditSvg } from './assets/edit.svg'
+import { ReactComponent as IconFollowSvg } from './assets/follow.svg'
+import { ReactComponent as IconLikeSvg } from './assets/like.svg'
 import { ReactComponent as IconLogOutSvg } from './assets/logout.svg'
 import { ReactComponent as IconPersonSvg } from './assets/person.svg'
 import styles from './Navbar.scss'
@@ -46,7 +48,7 @@ const Navbar = ({ userId, avatorUrl, name }) => {
     window.location = '/metaShare/login'
   }, [])
   return (
-    <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full py-1 px-6 bg-white shadow-navbar">
+    <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full p-3 md:py-1 sm:px-6 bg-white shadow-navbar">
       <h1>
         <Link to="/metaShare" className={styles.logo}>
           MetaShare
@@ -55,7 +57,7 @@ const Navbar = ({ userId, avatorUrl, name }) => {
 
       <SearchBar />
 
-      <div className="flex items-center">
+      <div className="hidden md:flex items-center">
         <HomeButton />
         <div className="relative  ml-4 ">
           <button
@@ -77,9 +79,31 @@ const Navbar = ({ userId, avatorUrl, name }) => {
             className={classNames(
               'absolute w-[150px] h-0 top-[52px] right-0 bg-white  rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
               {
-                'h-[108px]': isToggleDropdown,
+                'h-[180px]': isToggleDropdown,
               },
             )}>
+            <li
+              className="p-2  border-b border-gray-400 hover:bg-primary-100"
+              role="presentation"
+              onClick={() => {
+                setToggleDropdown(false)
+              }}>
+              <Link to="/metaShare/follow" className="flex items-center ">
+                <IconFollowSvg className="mr-2" />
+                <p className="text-sm text-gray-1100 font-bold">追蹤名單</p>
+              </Link>
+            </li>
+            <li
+              className="p-2  border-b border-gray-400 hover:bg-primary-100"
+              role="presentation"
+              onClick={() => {
+                setToggleDropdown(false)
+              }}>
+              <Link to="/metaShare/likesPost" className="flex items-center ">
+                <IconLikeSvg className="mr-2" />
+                <p className="text-sm text-gray-1100 font-bold">喜歡的貼文</p>
+              </Link>
+            </li>
             <li
               className="flex items-center p-2  border-b border-gray-400 hover:bg-primary-100"
               role="presentation"

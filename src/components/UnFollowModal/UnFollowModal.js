@@ -34,7 +34,7 @@ const UnFollowModal = ({ type, user, onClose }) => {
   }
   return (
     <ModalWrapper disableBodyScroll onClose={onClose}>
-      <div className="relative w-[360px] bg-white rounded-lg shadow-card px-4 py-3">
+      <div className="relative w-[300px] xs:w-[360px] bg-white rounded-lg shadow-card px-4 py-3">
         <button
           type="button"
           className="absolute top-[18px] right-4 flex items-center justify-center w-4 h-4"

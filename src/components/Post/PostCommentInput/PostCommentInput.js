@@ -16,7 +16,7 @@ const PostCommentInput = ({
 
   return (
     <div className="flex items-center w-full">
-      <div className=" w-9 h-9 mr-2.5">
+      <div className=" w-9 h-9 mr-2.5 shrink-0">
         <Avator avatorUrl={userAvator} isRounded />
       </div>
       <div

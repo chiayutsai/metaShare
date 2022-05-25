@@ -46,7 +46,7 @@ const ProfileFollowListModal = ({ type, userName, onClose }) => {
   }
   return (
     <ModalWrapper shouldCloseOnOverlayClick disableBodyScroll onClose={onClose}>
-      <div className="relative w-[360px]  bg-white rounded-lg shadow-card px-4 py-3">
+      <div className="relative w-[300px] xs:w-[360px]  bg-white rounded-lg shadow-card px-4 py-3">
         <button
           type="button"
           className="absolute top-[18px] right-4 flex items-center justify-center w-4 h-4"
