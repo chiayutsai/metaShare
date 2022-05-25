@@ -1,3 +1,4 @@
+import wsURL from 'config/wsURL'
 import { tokenSelector } from 'selectors/user'
 import * as ACTION from './actions'
 import { CMD_CODE } from './constants'
@@ -138,7 +139,7 @@ class WebSocketService {
 
   #connect = () =>
     new Promise(resolve => {
-      const url = 'ws://127.0.0.1:3000'
+      const url = wsURL
       this.ws = new WebSocket(url)
       this.ws.onopen = () => {
         console.log('open connection')
