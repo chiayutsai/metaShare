@@ -54,7 +54,7 @@ const Profile = () => {
         follower={follower}
       />
       {!isEdit && (
-        <div className="w-full md:container  md:pt-6 px-4 mid:px-6 xl:px-9">
+        <div className="w-full md:container  md:py-6 px-4 mid:px-6 xl:px-9">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-[240px] mid:w-[280px] xl:w-[345px] shrink-0 mb-4 md:mb-0 md:mr-9">
               <ProfileCard
