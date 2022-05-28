@@ -509,7 +509,7 @@ const updateComments = ({ postId, content }) => async (dispatch, getState) => {
     }
     dispatch(updateCommentsAction.request(data))
     const result = await dispatch(
-      patchApi({
+      postApi({
         url: `/post/${postId}/comments`,
         data,
         headers: {

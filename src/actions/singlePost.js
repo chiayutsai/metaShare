@@ -9,12 +9,12 @@ import { SINGLE_POST_MODAL } from 'constants/modal'
 // Action Types
 // ------------------------------------
 export const SET_SINGLE_POST = 'SET_SINGLE_POST'
-
+export const SET_SINGLE_POST_COMMENTS = 'SET_SINGLE_POST_COMMENTS'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 export const setSinglePost = createAction(SET_SINGLE_POST)
-
+export const setSinglePostComments = createAction(SET_SINGLE_POST_COMMENTS)
 export const handleShowPost = ({ postId }) => async dispatch => {
   try {
     const { data } = await dispatch(getSinglePost({ postId }))
@@ -61,10 +61,8 @@ export const handleSinglePostComment = ({
   content,
 }) => async dispatch => {
   try {
-    const {
-      data: { comments },
-    } = await dispatch(updateComments({ postId, content }))
-    dispatch(setSinglePost({ comments }))
+    const { data } = await dispatch(updateComments({ postId, content }))
+    dispatch(setSinglePostComments(data))
   } catch (error) {
     console.log(error)
     throw error

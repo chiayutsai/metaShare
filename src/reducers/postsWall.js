@@ -99,15 +99,20 @@ export default handleActions(
       return newList
     },
     [SET_COMMENTS]: (state, { payload }) => {
-      const { _id } = payload
+      const { post } = payload
       const { posts } = state
+      const data = {
+        content: payload.content,
+        commenter: payload.commenter,
+        createdAt: payload.createdAt,
+      }
       const newPosts = posts.reduce((acc, cur) => {
-        if (cur._id === _id) {
+        if (cur._id === post) {
           return [
             ...acc,
             {
               ...cur,
-              comments: payload.comments,
+              comments: [...cur.comments, data],
             },
           ]
         }
