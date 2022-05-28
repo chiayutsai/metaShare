@@ -5,7 +5,7 @@ import {
   updatePostAction,
   deletePostAction,
 } from 'actions/api/webApi'
-import { SET_FILTER_TYPE, SET_SEARCH_WROD } from 'actions/post'
+import { SET_FILTER_TYPE, SET_SEARCH_WROD, clearPosts } from 'actions/post'
 import { LASTEST_POST } from 'constants/filterType'
 import {
   userLikesPostNotify,
@@ -17,6 +17,7 @@ const initialState = {
   filterType: LASTEST_POST,
   searchWord: '',
   posts: [],
+  prevPostsLength: -1,
 }
 
 export default handleActions(
@@ -29,17 +30,20 @@ export default handleActions(
       ...state,
       searchWord: payload,
     }),
-    [getAllPostsAction.request]: state => ({
-      filterType: state.filterType,
-      searchWord: state.searchWord,
-      isLoading: true,
+    [clearPosts]: state => ({
+      ...state,
       posts: [],
+      prevPostsLength: -1,
+    }),
+    [getAllPostsAction.request]: state => ({
+      ...state,
+      isLoading: true,
     }),
     [getAllPostsAction.success]: (state, { payload }) => ({
-      filterType: state.filterType,
-      searchWord: state.searchWord,
+      ...state,
       isLoading: false,
-      posts: payload.data,
+      prevPostsLength: state.posts.length,
+      posts: [...state.posts, ...payload.data],
     }),
     [getAllPostsAction.failure]: (state, { payload }) => ({
       ...state,

@@ -4,6 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;900&display=swap');
 
+html, body {
+  height: 100%;
+}
+
 html,body,*,*::after,*::before {
   @apply text-gray-1200 text-base font-sans leading-tight box-border duration-300;
 }

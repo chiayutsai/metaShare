@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from 'actions/api/webApi'
-import { setSearchWord } from 'actions/post'
+import { clearPosts, setSearchWord } from 'actions/post'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
@@ -30,15 +30,34 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
   useEffect(
     () => () => {
       dispatch(setSearchWord(''))
+      dispatch(clearPosts())
     },
     [dispatch],
   )
+
+  const handleScroll = useCallback(() => {
+    const { offsetHeight, scrollHeight } = document.body
+
+    if (offsetHeight + window.scrollY >= scrollHeight) {
+      dispatch(getAllPosts())
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      console.log('removeEventListener')
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
+
   const userId = useSelector(userIdSelector)
   const isPostWallLoading = useSelector(postsWallLoadingSelector)
   const searchWord = useSelector(searchWordSelector)
   const filterType = useSelector(filterTypeSelector)
   const posts = useSelector(postsSelector)
   const isNopost = posts?.length === 0 && !isPostWallLoading
+
   return (
     <>
       <div

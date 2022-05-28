@@ -1,6 +1,13 @@
 import baseURL from 'config/baseURL'
 import { FILTER_TYPE_MAP } from 'constants/filterType'
 import { forgetPasswordTokenSelector } from 'selectors'
+import {
+  filterTypeSelector,
+  postsSelector,
+  postsWallLoadingSelector,
+  prevPostsLengthSelector,
+  searchWordSelector,
+} from 'selectors/post'
 import { profileUserIdSelector } from 'selectors/profile'
 import { tokenSelector } from 'selectors/user'
 
@@ -8,6 +15,7 @@ import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
+const LAZY_LOAD_LIMIT = 5
 // base api
 const getApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,
@@ -61,20 +69,38 @@ const getAllUsers = () => async (dispatch, getState) => {
 export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 
 // request
-const getAllPosts = (filterType, searchWord) => async (dispatch, getState) => {
+const getAllPosts = () => async (dispatch, getState) => {
   const state = getState()
+  const posts = postsSelector(state)
+  const prevPostsLength = prevPostsLengthSelector(state)
+  const postsWallLoading = postsWallLoadingSelector(state)
+  const filterType = filterTypeSelector(state)
+  const searchWord = searchWordSelector(state)
+
+  const skip = posts.length
+  if (postsWallLoading || skip < LAZY_LOAD_LIMIT || skip === prevPostsLength) {
+    // 1. loading
+    // 2. 貼文數小於第一次載入的, 不會有更多貼文
+    // 3. 這次要求的貼文已經和上次拿到的一樣長了, 已經沒有更多貼文
+    return null
+  }
+
   const token = tokenSelector(state)
   const profileUserId = profileUserIdSelector(state)
   const data = {}
   const sort = filterType ? `sort=${FILTER_TYPE_MAP[filterType]}` : ''
   const search = searchWord ? `search=${searchWord}` : ''
   let url = profileUserId ? `/posts/user/${profileUserId}` : '/posts'
+
+  // lazy load
+  url += `?skip=${skip}&limit=${LAZY_LOAD_LIMIT}`
+
   if (sort && search) {
-    url += `?${sort}&${search}`
+    url += `&${sort}&${search}`
   } else if (sort) {
-    url += `?${sort}`
+    url += `&${sort}`
   } else if (search) {
-    url += `?${search}`
+    url += `&${search}`
   }
 
   try {

@@ -1,7 +1,7 @@
 import { getAllPosts, addPost, updatePost } from 'actions/api/webApi'
 import { updateLikesPosts } from 'actions/likesPost'
 import { dismissModal, setModal } from 'actions/modal'
-import { setSearchWord, setFilterType } from 'actions/post'
+import { setSearchWord, setFilterType, clearPosts } from 'actions/post'
 import { setSinglePost } from 'actions/singlePost'
 import {
   toggleLoading,
@@ -78,6 +78,7 @@ export const handleAllPost = data => async (dispatch, getState) => {
   try {
     dispatch(setSearchWord(''))
     dispatch(setFilterType(LASTEST_POST))
+    dispatch(clearPosts())
     dispatch(getAllPosts())
   } catch (error) {
     console.log(error)

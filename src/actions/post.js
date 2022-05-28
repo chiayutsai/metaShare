@@ -9,21 +9,26 @@ import { LIKES_LIST_MODAL } from 'constants/modal'
 // ------------------------------------
 export const SET_FILTER_TYPE = 'SET_FILTER_TYPE'
 export const SET_SEARCH_WROD = 'SET_SEARCH_WROD'
+export const SET_COMMENTS = 'SET_COMMENTS'
+export const CLEAR_POSTS = 'CLEAR_POSTS'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 export const setFilterType = createAction(SET_FILTER_TYPE)
 export const setSearchWord = createAction(SET_SEARCH_WROD)
+export const setComments = createAction(SET_COMMENTS)
+export const clearPosts = createAction(CLEAR_POSTS)
 
 export const changeFilterType = (filterType, searchWord) => async dispatch => {
   try {
-    await dispatch(getAllPosts(filterType, searchWord))
+    dispatch(clearPosts())
+    dispatch(setFilterType(filterType))
+    dispatch(setSearchWord(searchWord))
+    await dispatch(getAllPosts())
   } catch (error) {
     console.log(error)
     throw error
   }
-  dispatch(setFilterType(filterType))
-  dispatch(setSearchWord(searchWord))
 }
 
 export const openLikesModal = ({ postId }) => async dispatch => {
