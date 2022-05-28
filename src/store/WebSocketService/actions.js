@@ -22,6 +22,8 @@ const createActions = type => {
 const CHAT_MESSAGE_NOTIFY = 'CHAT_MESSAGE_NOTIFY'
 const USER_LOGIN_NOTIFY = 'USER_LOGIN_NOTIFY'
 const USER_LOGOUT_NOTIFY = 'USER_LOGOUT_NOTIFY'
+const USER_LIKES_POST = 'USER_LIKES_POST'
+const USER_COMMENT_POST = 'USER_COMMENT_POST'
 // Normal Action
 
 // Request, Success, Failure
@@ -47,6 +49,8 @@ export const sendChatMessageActions = createActions(KEY.SEND_CHAT_MESSAGE)
 export const chatMessageNotify = createAction(CHAT_MESSAGE_NOTIFY)
 export const userLoginNotify = createAction(USER_LOGIN_NOTIFY)
 export const userLogoutNotify = createAction(USER_LOGOUT_NOTIFY)
+export const userLikesPostNotify = createAction(USER_LIKES_POST)
+export const userCommentPostNotify = createAction(USER_COMMENT_POST)
 
 // Normal Action
 

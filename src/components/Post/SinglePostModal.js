@@ -1,13 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { updateComments } from 'actions/api/webApi'
 import { openLikesModal } from 'actions/post'
-import {
-  handleSinglePostLike,
-  handleSinglePostComment,
-} from 'actions/singlePost'
+import { handleSinglePostLike } from 'actions/singlePost'
 import ModalWrapper from 'components/ModalWrapper/ModalWrapper'
 import PostButton from 'components/Post/PostButton/PostButton'
 import PostComment from 'components/Post/PostComment/PostComment'
@@ -50,15 +48,18 @@ const SinglePostModal = ({ onClose }) => {
     commentScrollViewRef.current = rootRef.current
   }, [])
   const scrollToEnd = useCallback(() => {
-    const list = scrollViewRef.current.view
-    const commetList = commentScrollViewRef.current.view
-    if (list) {
-      list.scrollTo(0, list.scrollHeight)
-    }
+    const commetList = commentScrollViewRef.current?.view
     if (commetList) {
       commetList.scrollTo(0, commetList.scrollHeight)
     }
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToEnd()
+    }, 300)
+  }, [comments, scrollToEnd])
+
   const handleLikesClick = useCallback(async () => {
     try {
       await dispatch(handleSinglePostLike({ postId: _id, userId }))
@@ -76,9 +77,7 @@ const SinglePostModal = ({ onClose }) => {
       return
     }
     try {
-      await dispatch(
-        handleSinglePostComment({ postId: _id, content: commentContent }),
-      )
+      await dispatch(updateComments({ postId: _id, content: commentContent }))
       setCommentContent('')
 
       setTimeout(() => {

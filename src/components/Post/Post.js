@@ -2,8 +2,9 @@
 import PropTypes from 'prop-types'
 import { useState, useCallback, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateLikes } from 'actions/api/webApi'
-import { handleComments, openLikesModal } from 'actions/post'
+import { updateLikes, updateComments } from 'actions/api/webApi'
+import { openLikesModal } from 'actions/post'
+
 import PostButton from 'components/Post/PostButton/PostButton'
 import PostComment from 'components/Post/PostComment/PostComment'
 import PostCommentInput from 'components/Post/PostCommentInput/PostCommentInput'
@@ -52,8 +53,12 @@ const Post = ({
       return
     }
     try {
-      await dispatch(handleComments({ postId: _id, content: commentContent }))
+      await dispatch(updateComments({ postId: _id, content: commentContent }))
       setCommentContent('')
+      setShowComments(true)
+      setTimeout(() => {
+        commentInputRef.current.focus()
+      }, 0)
     } catch (error) {
       console.log(error)
     }

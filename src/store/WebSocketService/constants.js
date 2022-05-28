@@ -12,6 +12,8 @@ export const CMD_CODE = {
   CHAT_MESSAGE_NOTIFY: '20',
   USER_LOGIN_NOTIFY: '30',
   USER_LOGOUT_NOTIFY: '31',
+  USER_LIKES_POST: '50',
+  USER_COMMENT_POST: '60',
 }
 
 export const ERROR = {}

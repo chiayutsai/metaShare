@@ -2,12 +2,15 @@
 import { handleActions } from 'redux-actions'
 import {
   getAllPostsAction,
-  updateLikesAction,
   updatePostAction,
   deletePostAction,
 } from 'actions/api/webApi'
-import { SET_FILTER_TYPE, SET_SEARCH_WROD, SET_COMMENTS } from 'actions/post'
+import { SET_FILTER_TYPE, SET_SEARCH_WROD } from 'actions/post'
 import { LASTEST_POST } from 'constants/filterType'
+import {
+  userLikesPostNotify,
+  userCommentPostNotify,
+} from 'store/WebSocketService/actions'
 
 const initialState = {
   isLoading: false,
@@ -76,8 +79,8 @@ export default handleActions(
       }
       return newList
     },
-    [updateLikesAction.success]: (state, { payload: { data } }) => {
-      const { _id } = data
+    [userLikesPostNotify]: (state, { payload }) => {
+      const { _id, likes } = payload
       const { posts } = state
       const newPosts = posts.reduce((acc, cur) => {
         if (cur._id === _id) {
@@ -85,7 +88,7 @@ export default handleActions(
             ...acc,
             {
               ...cur,
-              likes: data.likes,
+              likes,
             },
           ]
         }
@@ -98,7 +101,7 @@ export default handleActions(
       }
       return newList
     },
-    [SET_COMMENTS]: (state, { payload }) => {
+    [userCommentPostNotify]: (state, { payload }) => {
       const { post } = payload
       const { posts } = state
       const data = {

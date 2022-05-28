@@ -24,6 +24,8 @@ class WebSocketService {
         [CMD_CODE.CHAT_MESSAGE_NOTIFY]: ACTION.chatMessageNotify,
         [CMD_CODE.USER_LOGIN_NOTIFY]: ACTION.userLoginNotify,
         [CMD_CODE.USER_LOGOUT_NOTIFY]: ACTION.userLogoutNotify,
+        [CMD_CODE.USER_LIKES_POST]: ACTION.userLikesPostNotify,
+        [CMD_CODE.USER_COMMENT_POST]: ACTION.userCommentPostNotify,
       },
       // map redux actions to middleware functions
       MIDDLEWARE: {
@@ -152,8 +154,6 @@ class WebSocketService {
         console.log('close connection')
       }
       this.ws.onmessage = event => {
-        const txt = event.data
-        console.log(txt)
         this.#onMessage(event.data)
       }
     })
