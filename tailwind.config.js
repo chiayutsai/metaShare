@@ -93,9 +93,9 @@ module.exports = {
         'dot-carousel':
           '9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff, 10014px 0 0 0 #9880ff',
       },
-    },
-    animation: {
-      'dot-carousel': 'dotCarousel 1.5s infinite linear',
+      animation: {
+        'dot-carousel': 'dotCarousel 1.5s infinite linear',
+      },
     },
   },
   variants: {
