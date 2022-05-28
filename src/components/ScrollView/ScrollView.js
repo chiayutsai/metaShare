@@ -261,7 +261,9 @@ const ScrollView = ({
         behavior: 'auto',
       })
 
-      setIsScrollingToEnd(false)
+      setTimeout(() => {
+        setIsScrollingToEnd(false)
+      }, 150)
     },
     [initialScrollHToEnd, initialScrollVToEnd],
   )
