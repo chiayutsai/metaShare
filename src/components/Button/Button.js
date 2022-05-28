@@ -24,6 +24,7 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
+      htmlFor="uploadBtn"
       className={classNames(
         `${styles.button} flex rounded items-center py-1.5 px-4 group bg-primary-50  hover:bg-primary-200 cursor-pointer`,
         {
@@ -31,7 +32,12 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
           [styles.disable]: isDisabled,
         },
       )}>
-      <input type="file" className="hidden" onChange={onChange} />
+      <input
+        id="uploadBtn"
+        type="file"
+        className="hidden"
+        onChange={onChange}
+      />
       <IconPhotoSvg className={styles.photo} />
       <p
         className={classNames('text-primary-700 group-hover:text-primary-800', {
@@ -59,13 +65,19 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
+      htmlFor="uploadLoadingBtn"
       className={classNames(
         `${styles['upload-button']} inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100  hover:bg-primary-200 cursor-pointer`,
         {
           '!bg-gray-400 pointer-events-none': isLoading,
         },
       )}>
-      <input type="file" className="hidden" onChange={onChange} />
+      <input
+        id="uploadLoadingBtn"
+        type="file"
+        className="hidden"
+        onChange={onChange}
+      />
       {isLoading && <IconLoadingSvg className={styles.loadingIcon} />}
       {!isLoading && <IconUploadSvg className={styles.upload} />}
       <p

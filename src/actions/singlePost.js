@@ -2,6 +2,7 @@
 import { createAction } from 'redux-actions'
 import { getSinglePost, updateLikes, updateComments } from 'actions/api/webApi'
 import { setUserLikesPosts } from 'actions/likesPost'
+import { openLoading, closeLoading } from 'actions/loading'
 import { setModal } from 'actions/modal'
 import { SINGLE_POST_MODAL } from 'constants/modal'
 
@@ -17,6 +18,7 @@ export const setSinglePost = createAction(SET_SINGLE_POST)
 export const setSinglePostComments = createAction(SET_SINGLE_POST_COMMENTS)
 export const handleShowPost = ({ postId }) => async dispatch => {
   try {
+    dispatch(openLoading())
     const { data } = await dispatch(getSinglePost({ postId }))
     dispatch(setSinglePost(data))
     dispatch(
@@ -28,6 +30,7 @@ export const handleShowPost = ({ postId }) => async dispatch => {
     console.log(error)
     throw error
   }
+  dispatch(closeLoading())
 }
 
 export const handleSinglePostLike = ({ postId, userId }) => async (
