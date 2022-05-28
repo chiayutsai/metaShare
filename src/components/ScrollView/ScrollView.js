@@ -86,6 +86,7 @@ const ScrollView = ({
   vertical,
   initialScrollHToEnd,
   initialScrollVToEnd,
+  scrollSmooth,
   wheelScrollHorizontal,
   shouldRenderCustomContainer,
   thumbSizeChangeOnHover,
@@ -120,6 +121,9 @@ const ScrollView = ({
   const [isHoveredHTrack, setIsHoveredHTrack] = useState(false)
   const [isDraggingHTrack, setIsDraggingHTrack] = useState(false)
   const [isHighHTrack, setIsHighHTrack] = useState(false)
+  const [isScrollingToEnd, setIsScrollingToEnd] = useState(
+    initialScrollHToEnd || initialScrollVToEnd,
+  )
 
   // -----
   // handlers
@@ -256,6 +260,8 @@ const ScrollView = ({
         left: offsetX,
         behavior: 'auto',
       })
+
+      setIsScrollingToEnd(false)
     },
     [initialScrollHToEnd, initialScrollVToEnd],
   )
@@ -363,6 +369,7 @@ const ScrollView = ({
         <div
           {...props}
           className={classnames(scrollViewClass, {
+            [styles['scroll-smooth']]: scrollSmooth && !isScrollingToEnd,
             [styles['scrollbar-x-hide']]: !horizontal,
             [styles['scrollbar-y-hide']]: !vertical,
           })}
@@ -380,6 +387,7 @@ ScrollView.propTypes = {
   vertical: PropTypes.bool,
   initialScrollHToEnd: PropTypes.bool,
   initialScrollVToEnd: PropTypes.bool,
+  scrollSmooth: PropTypes.bool,
   wheelScrollHorizontal: PropTypes.bool,
   shouldRenderCustomContainer: PropTypes.bool,
   thumbSizeChangeOnHover: PropTypes.bool,
@@ -412,6 +420,7 @@ ScrollView.defaultProps = {
   vertical: false,
   initialScrollHToEnd: false,
   initialScrollVToEnd: false,
+  scrollSmooth: false,
   wheelScrollHorizontal: false,
   shouldRenderCustomContainer: false,
   thumbSizeChangeOnHover: false,

@@ -60,7 +60,7 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       className={classNames(
-        `${styles['upload-button']} inline-flex rounded items-center py-2 px-4 group bg-primary-100  hover:bg-primary-200 cursor-pointer`,
+        `${styles['upload-button']} inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100  hover:bg-primary-200 cursor-pointer`,
         {
           '!bg-gray-400 pointer-events-none': isLoading,
         },
@@ -96,7 +96,7 @@ const Button = ({ type, onClick, iconType, isDisabled, content }) => {
     <button
       type="button"
       className={classNames(
-        `${styles.button} flex rounded items-center py-1.5 px-4 group`,
+        `${styles.button} flex rounded items-center py-1.5 px-2  mini:px-4 group`,
         {
           'bg-primary-100  hover:bg-primary-200': type === NORMAL,
           'bg-primary-700 bg-gradient-to-center from-transparent to-button3dGradient hover:bg-primary-600 hover:bg-gradient-to-center-hover hover:to-button3dGradientHover':
@@ -111,7 +111,7 @@ const Button = ({ type, onClick, iconType, isDisabled, content }) => {
       {iconType === ICON_PHOTO && <IconPhotoSvg className={styles.photo} />}
       {iconType === ICON_UNLIKE && <IconUnLikeSvg className={styles.unlike} />}
       <p
-        className={classNames({
+        className={classNames('text-sm mini:text-base', {
           'text-primary-700 group-hover:text-primary-800': type === NORMAL,
           'text-white': type === DARKEN,
           'text-alert/80 group-hover:text-alert': type === ALERT,

@@ -5,10 +5,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;900&display=swap');
 
 html,body,*,*::after,*::before {
-  scroll-behavior: smooth;
   @apply text-gray-1200 text-base font-sans leading-tight box-border duration-300;
 }
-html,body{
+
+body.Body--Modal-open-disable-scroll {
+  overflow: hidden;
+}
+
+
+body:not(.Body--Modal-open-disable-scroll){
  overflow-x: hidden;
 }
 
@@ -29,13 +34,19 @@ input:-webkit-autofill:active  {
   @apply cursor-pointer outline-none;
 } 
 @layer utilities {
-  .nth-last-child-two{
-    &:nth-last-child(2){
-      border:none
+  @media (min-width: 1480px) {
+    .nth-last-child-two{
+      &:nth-last-child(2){
+        border:none
+      }
     }
   }
+  
   .min-h-mobile {
     min-height:calc(100vh - 120px);
+  }
+  .h-mobile-chat{
+    height:calc(100% - 60px);
   }
 }
 @layer components {

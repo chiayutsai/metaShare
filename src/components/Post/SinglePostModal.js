@@ -99,11 +99,14 @@ const SinglePostModal = ({ onClose }) => {
       shouldCloseOnOverlayClick
       onClose={onClose}>
       <div
-        className={classNames('flex w-[1000px] h-[650px]', {
-          'w-[500px]': !hasImage,
-        })}>
+        className={classNames(
+          'flex w-11/12 xs:w-10/12  mx-auto h-screen max-h-[760px] md:w-[760px] md:h-[550px]  lg:w-[990px] lg:h-[650px] py-12 sm:py-9 md:py-0',
+          {
+            '!max-h-[500px] md:!w-[500px]': !hasImage,
+          },
+        )}>
         {hasImage && (
-          <div className="bg-[#3a3a3a] w-[650px] shrink-0  rounded-tl-lg rounded-bl-lg">
+          <div className="hidden md:block bg-[#3a3a3a] w-[420px] lg:w-[650px] shrink-0  rounded-tl-lg rounded-bl-lg overflow-hidden">
             {singleImage && (
               <img
                 className="w-full h-full object-contain"
@@ -120,9 +123,9 @@ const SinglePostModal = ({ onClose }) => {
         )}
         <div
           className={classNames(
-            'relative flex flex-col justify-between w-full bg-white rounded-tr-lg rounded-br-lg overflow-hidden',
+            'relative flex flex-col justify-between w-full bg-white rounded-lg md:rounded-tl-none md:rounded-bl-none overflow-hidden',
             {
-              'rounded-lg': !hasImage,
+              'md:!rounded-tl-lg md:!rounded-bl-lg': !hasImage,
             },
           )}>
           <div className="sticky top-0 left-0 w-full z-10">
@@ -144,9 +147,26 @@ const SinglePostModal = ({ onClose }) => {
             verticalHoverWidth={10}
             thumbSizeChangeOnHover>
             <div>
-              <div className="border-b border-gray-600/50 py-3 mx-3 min-h-[80px]">
+              <div className="border-b border-gray-600/50 py-3 mx-3 md:min-h-[80px]">
                 <p>{content}</p>
+                {hasImage && (
+                  <div className="block md:hidden w-full sm:h-[500px] rounded-lg bg-gray-600/50 mt-3 ">
+                    {singleImage && (
+                      <img
+                        className="w-full h-full object-contain"
+                        src={`${imageUrls[0]}`}
+                        alt="post"
+                      />
+                    )}
+                    {swiperImage && (
+                      <div className=" group rounded-lg h-full">
+                        <PostSwiper imageUrls={imageUrls} />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
+
               <div className="flex items-center border-b border-gray-600/50 py-3 mx-3">
                 <PostButton
                   type={LIKE}
@@ -165,7 +185,7 @@ const SinglePostModal = ({ onClose }) => {
                 <p className="text-gray-800">{commentAmount}則留言</p>
               </div>
             </div>
-            <div className="flex max-h-[344px] h-full shrink-0 items-center justify-center border-b border-gray-600/50 py-3 mx-3">
+            <div className="flex max-h-[300px] sm:max-h-[340px] h-full shrink-0 items-center justify-center border-b border-gray-600/50 py-3 mx-3">
               {!hasComments && (
                 <p className="text-sm text-gray-700">
                   快來成為第一個留言的朋友吧
@@ -174,6 +194,7 @@ const SinglePostModal = ({ onClose }) => {
               {hasComments && (
                 <ScrollView
                   setRef={setCommentScrollViewRef}
+                  scrollSmooth
                   vertical
                   verticalWidth={4}
                   verticalHoverWidth={10}

@@ -15,7 +15,7 @@ const ProfileCard = ({ description, tags }) => {
           {tags.map((tag, index) => (
             <div
               key={`tag${index + 1}`}
-              className="mr-2 py-1 px-3 rounded-full text-primary-900 bg-primary-100 border border-primary-300 text-sm">
+              className="mb-1 mr-2 py-1 px-3 rounded-full text-primary-900 bg-primary-100 border border-primary-300 text-sm">
               {tag}
             </div>
           ))}

@@ -18,7 +18,11 @@ import ChannelList from 'components/ChannelList/ChannelList'
 import Chat from 'components/Chat/Chat'
 import LoadingModal from 'components/LoadingModal/LoadingModal'
 import LoginCircle from 'components/LoginCircle/LoginCircle'
-import { appReadySelector, loadingSelector } from 'selectors'
+import {
+  appReadySelector,
+  loadingSelector,
+  isMobileChatSelector,
+} from 'selectors'
 import { postsWallLoadingSelector } from 'selectors/post'
 import {
   userAvatorSelector,
@@ -28,6 +32,7 @@ import {
 import BrowserStorage from 'utils/BrowserStorage'
 import ButtonGroup from '../ButtonGroup/ButtonGroup'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+import MobileNav from '../MobileNav/MobileNav'
 import ModalList from '../ModalList/ModalList'
 import Navbar from '../Navbar/Navbar'
 import PersonCard from '../PersonCard/PersonCard'
@@ -42,6 +47,7 @@ const Layout = ({ view, children }) => {
   const userId = useSelector(userIdSelector)
   const userAvator = useSelector(userAvatorSelector)
   const userName = useSelector(userNameSelector)
+  const isMobileChat = useSelector(isMobileChatSelector)
   const isHome = view === 'home'
   const isLogin = view === 'login'
   const isProfile = view === 'profile'
@@ -93,7 +99,12 @@ const Layout = ({ view, children }) => {
                   </div>
                 </div>
               </div>
-              <ChannelList />
+
+              <MobileNav
+                userId={userId}
+                avatorUrl={userAvator}
+                name={userName}
+              />
             </>
           )}
           {isLogin && (
@@ -136,11 +147,29 @@ const Layout = ({ view, children }) => {
             <>
               <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
               {children}
+
+              <MobileNav
+                userId={userId}
+                avatorUrl={userAvator}
+                name={userName}
+              />
             </>
           )}
           {isNotFound && <>{children}</>}
 
           <ModalList />
+          {!isLogin && (
+            <>
+              {isMobileChat && (
+                <div
+                  className={`${styles['bg-img']} fixed w-full h-mobile-chat top-14  z-10 left-0`}>
+                  <Chat />
+                </div>
+              )}
+
+              <ChannelList />
+            </>
+          )}
 
           {isLoading && <LoadingModal />}
         </>

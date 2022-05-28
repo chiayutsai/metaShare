@@ -83,7 +83,7 @@ const ProfileHeader = ({
   }, [dispatch, name])
   return (
     <>
-      <div className="relative w-full h-[420px] px-20 bg-white">
+      <div className="relative w-full h-[240px] xs:h-[300px] md:h-[320px] mid:h-[420px]  md:px-12 xl:px-20 bg-white">
         {coverImage && (
           <>
             {isOpen && (
@@ -103,16 +103,18 @@ const ProfileHeader = ({
           <div className={classNames(styles.cover, styles['default-cover'])} />
         )}
       </div>
-      <div className="relative  bg-white   shadow-profile">
-        <div className="container pt-3 pb-10 px-9 flex justify-between items-center">
-          <div className="  flex items-center">
-            <div className="w-40" />
-            <div className="absolute -top-16 w-40 h-40 p-1 rounded-full bg-gradient-to-br from-[#B9D7FF] to-primary-700">
-              <Avator avatorUrl={avatorUrl} isRounded />
+      <div className="relative -top-12 md:top-0 rounded-tl-[24px] rounded-tr-[24px] bg-white shadow-m-profile  md:shadow-profile md:rounded-none">
+        <div className="container pt-16 sm:pt-[72px] pb-4 xs:pb-8 md:pt-3 md:pb-10 px-12 xl:px-16 flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row items-center mb-3 md:mb-0">
+            <div className="hidden md:block w-40" />
+            <div className="absolute -top-16 sm:-top-[84px] md:-top-12 xl:-top-16 w-[120px] h-[120px] sm:w-36 sm:h-36 xl:w-40 xl:h-40 p-1 rounded-full bg-gradient-to-br from-[#B9D7FF] to-primary-700">
+              <Avator key={avatorUrl} avatorUrl={avatorUrl} isRounded />
             </div>
-            <div className=" flex-col ml-9">
-              <p className="font-bold text-3xl mb-1">{name}</p>
-              <div className="flex items-center">
+            <div className="md:ml-6 xl:ml-9">
+              <p className="font-bold text-center md:text-left text-2xl sm:text-3xl mb-1">
+                {name}
+              </p>
+              <div className="hidden md:flex items-center">
                 <button
                   type="button"
                   className="text-gray-1000"
@@ -136,7 +138,26 @@ const ProfileHeader = ({
               </div>
             </div>
           </div>
-
+          <div className="flex md:hidden  mb-5">
+            <div className="flex flex-col items-center border-r border-gray-600 pr-6">
+              <button
+                type="button"
+                className="text-primary-900 text-xl font-bold hover:text-primary-700"
+                onClick={openFollowingModal}>
+                {following.length}
+              </button>
+              <p className="text-gray-1000 text-sm">追蹤中</p>
+            </div>
+            <div className="flex flex-col items-center pl-6">
+              <button
+                type="button"
+                className="text-primary-900 text-xl font-bold hover:text-primary-700"
+                onClick={openFollowerModal}>
+                {follower.length}
+              </button>
+              <p className="text-gray-1000 text-sm">關注數</p>
+            </div>
+          </div>
           <div className="flex">
             {isAdmin && !isEdit && (
               <ProfileButton

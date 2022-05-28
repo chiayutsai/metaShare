@@ -3,12 +3,14 @@ import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { closeMobileChat } from 'actions/chat'
 import { openProfileEdit, setProfileEditInit } from 'actions/profile'
 import Avator from 'components/Avator/Avator'
 import HomeButton from 'components/Button/HomeButton/HomeButton'
 import Link from 'components/Link/Link'
 import SearchBar from 'components/SerachBar/SearchBar'
 import history from 'history.js'
+import { isMobileChatSelector } from 'selectors'
 import { profileEditSelector } from 'selectors/profile'
 import BrowserStorage from 'utils/BrowserStorage'
 import { ReactComponent as IconEditSvg } from './assets/edit.svg'
@@ -26,7 +28,7 @@ const Navbar = ({ userId, avatorUrl, name }) => {
   const handleToggleDropdown = useCallback(() => {
     setToggleDropdown(!isToggleDropdown)
   }, [isToggleDropdown])
-
+  const isMobileChat = useSelector(isMobileChatSelector)
   const handleToPersonProfile = useCallback(() => {
     if (isEditProfile) {
       dispatch(setProfileEditInit())
@@ -47,15 +49,22 @@ const Navbar = ({ userId, avatorUrl, name }) => {
     BrowserStorage.remove('token')
     window.location = '/metaShare/login'
   }, [])
+
+  const handleCloseMobileChat = useCallback(() => {
+    dispatch(closeMobileChat())
+    document.body.classList.remove('Body--Modal-open-disable-scroll')
+  }, [dispatch])
   return (
     <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full p-3 md:py-1 sm:px-6 bg-white shadow-navbar">
       <h1>
-        <Link to="/metaShare" className={styles.logo}>
+        <Link
+          to="/metaShare"
+          className={styles.logo}
+          onClick={handleCloseMobileChat}>
           MetaShare
         </Link>
       </h1>
-
-      <SearchBar />
+      {!isMobileChat && <SearchBar />}
 
       <div className="hidden md:flex items-center">
         <HomeButton />

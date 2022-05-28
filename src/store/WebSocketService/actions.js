@@ -28,6 +28,7 @@ const USER_LOGOUT_NOTIFY = 'USER_LOGOUT_NOTIFY'
 export const KEY = {
   WEB_SOCKET_LOGIN: 'WEB_SOCKET_LOGIN',
   SEND_CHAT_MESSAGE: 'SEND_CHAT_MESSAGE',
+  GET_CHANNEL_HISTORY: 'GET_CHANNEL_HISTORY',
 }
 
 // ------------------------------------
@@ -35,6 +36,7 @@ export const KEY = {
 // ------------------------------------
 
 export const webSocketLoginActions = createActions(KEY.WEB_SOCKET_LOGIN)
+export const getChannelHistoryActions = createActions(KEY.GET_CHANNEL_HISTORY)
 export const sendChatMessageActions = createActions(KEY.SEND_CHAT_MESSAGE)
 
 // ------------------------------------
@@ -50,4 +52,5 @@ export const userLogoutNotify = createAction(USER_LOGOUT_NOTIFY)
 
 // Request
 export const webSocketLogin = webSocketLoginActions.request
+export const getChannelHistory = getChannelHistoryActions.request
 export const sendChatMessage = sendChatMessageActions.request

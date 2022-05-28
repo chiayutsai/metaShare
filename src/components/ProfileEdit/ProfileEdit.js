@@ -16,7 +16,7 @@ const ProfileEdit = ({ editPage, profileInfo, profileCoverImage }) => {
   )
   const isEditLoading = useSelector(profileEditLoadingSelector)
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <ProfileEditMenu editPage={editPage} />
       <ProfileEditContent
         editPage={editPage}

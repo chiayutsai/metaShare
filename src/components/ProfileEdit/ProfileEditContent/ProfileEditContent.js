@@ -19,13 +19,13 @@ const ProfileEditContent = ({
   profileCoverImage,
   isEditLoading,
 }) => (
-  <div className="relative w-full bg-white rounded-tr rounded-br py-6 px-9 overflow-hidden">
+  <div className="relative w-full bg-white rounded-tr rounded-br p-4 sm:py-6 sm:px-9 overflow-hidden">
     {isEditLoading && (
       <div className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-white/70">
         <IconLoadingSvg className=" animate-spin" />
       </div>
     )}
-    <p className="font-bold text-primary-900 text-[28px] mb-6">
+    <p className="font-bold text-primary-900 text-xl sm:text-[28px] mb-3 sm:mb-6">
       {PROFILE_EDIT_PAGE_TITLE_MAP[editPage]}
     </p>
     <div className="mb-6">

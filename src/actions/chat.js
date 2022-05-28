@@ -7,11 +7,14 @@ import { userIdSelector } from 'selectors/user'
 // ------------------------------------
 
 export const SET_CHAT_USERS = 'SET_CHAT_USERS'
+export const OPEN_MOBILE_CHAT = 'OPEN_MOBILE_CHAT'
+export const CLOSE_MOBILE_CHAT = 'CLOSE_MOBILE_CHAT'
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 export const setChatUsers = createAction(SET_CHAT_USERS)
-
+export const openMobileChat = createAction(OPEN_MOBILE_CHAT)
+export const closeMobileChat = createAction(CLOSE_MOBILE_CHAT)
 export const handleGetUsers = () => async (dispatch, getState) => {
   try {
     const state = getState()

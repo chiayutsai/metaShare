@@ -14,6 +14,8 @@ class WebSocketService {
       // map actions with corresponding results
       ACTION: {
         [CMD_CODE.WEB_SOCKET_LOGIN_REQUEST]: CMD_CODE.WEB_SOCKET_LOGIN_RESPONSE,
+        [CMD_CODE.GET_CHANNEL_HISTORY_REQUEST]:
+          CMD_CODE.GET_CHANNEL_HISTORY_RESPONSE,
         [CMD_CODE.SEND_CHAT_MESSAGE_REQUEST]:
           CMD_CODE.SEND_CHAT_MESSAGE_RESPONSE,
       },
@@ -26,6 +28,7 @@ class WebSocketService {
       // map redux actions to middleware functions
       MIDDLEWARE: {
         [ACTION.KEY.WEB_SOCKET_LOGIN]: this.#webSocketLogin,
+        [ACTION.KEY.GET_CHANNEL_HISTORY]: this.#getChannelHistory,
         [ACTION.KEY.SEND_CHAT_MESSAGE]: this.#sendChatMessage,
       },
     }
@@ -164,6 +167,9 @@ class WebSocketService {
 
     return this.#request(CMD_CODE.WEB_SOCKET_LOGIN_REQUEST, { token })
   }
+
+  #getChannelHistory = async data =>
+    this.#request(CMD_CODE.GET_CHANNEL_HISTORY_REQUEST, data)
 
   #sendChatMessage = async data =>
     this.#request(CMD_CODE.SEND_CHAT_MESSAGE_REQUEST, data)

@@ -22,9 +22,9 @@ const FollowCard = ({ user, followAt }) => {
   }, [dispatch, user])
 
   return (
-    <div className="w-full flex justify-between items-center">
-      <div className="flex items-center">
-        <div className=" w-14 h-14 mr-3">
+    <div className="w-full flex flex-col mini:flex-row items-start justify-between mini:items-center">
+      <div className="flex items-center mb-2 mini:mb-0">
+        <div className="w-10 h-10 mr-2 xs:w-14 xs:h-14 xs:mr-3 shrink-0">
           <Avator avatorUrl={user.avator} isRounded />
         </div>
         <div>
@@ -46,7 +46,9 @@ const FollowCard = ({ user, followAt }) => {
           </p>
         </div>
       </div>
-      <Button type={NORMAL} content="取消追蹤" onClick={openUnFollowModal} />
+      <div className="ml-12 mini:ml-0">
+        <Button type={NORMAL} content="取消追蹤" onClick={openUnFollowModal} />
+      </div>
     </div>
   )
 }

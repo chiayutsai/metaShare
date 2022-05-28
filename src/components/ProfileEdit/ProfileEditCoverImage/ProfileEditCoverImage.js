@@ -110,14 +110,14 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
           <img
             src={coverImgUrl}
             alt="cover"
-            className="w-full mb-6 rounded"
+            className="w-full mb-4 mini:mb-6 rounded"
             onError={showDefaultImg}
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex flex-col mini:flex-row justify-between">
           <button
             type="button"
-            className="rounded bg-gray-400 py-2 px-4 text-gray-900 hover:bg-gray-500"
+            className="rounded mb-4 mini:mb-0 bg-gray-400 py-2 px-4 text-gray-900 hover:bg-gray-500"
             onClick={handleRemoveCoverImageClick}>
             移除封面圖片
           </button>
@@ -128,7 +128,7 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
           />
         </div>
       </div>
-      <div className="border-b  border-gray-600/50 mb-6">
+      <div className="hidden md:block border-b  border-gray-600/50 mb-6">
         <div className="flex mb-6 items-center">
           <p className="text-lg mr-16 shrink-0">開啟模糊效果</p>
           <div className="flex items-center">

@@ -16,7 +16,7 @@ const ProfileEditMenu = ({ editPage }) => {
     dispatch(setProfileEditPage(page))
   }
   return (
-    <div className="bg-gray-50 min-w-[240px] rounded-tl rounded-bl overflow-hidden">
+    <div className="bg-gray-50 min-w-[200px] lg:min-w-[240px] md:rounded-tl md:rounded-bl overflow-hidden flex md:block">
       <div
         className={classNames(styles.item, {
           [styles.active]: editPage === COVER_IMAGE,
@@ -24,7 +24,7 @@ const ProfileEditMenu = ({ editPage }) => {
         role="presentation"
         onClick={handleEdidPageClick(COVER_IMAGE)}>
         <IconImagelSvg className={styles.icon} />
-        <p>修改封面圖片</p>
+        <p className="hidden xs:block">修改封面圖片</p>
       </div>
       <div
         className={classNames(styles.item, {
@@ -33,7 +33,7 @@ const ProfileEditMenu = ({ editPage }) => {
         role="presentation"
         onClick={handleEdidPageClick(PERSON_INFO)}>
         <IconPesonSvg className={styles.icon} />
-        <p>編輯個人檔案</p>
+        <p className="hidden xs:block">編輯個人檔案</p>
       </div>
       <div
         className={classNames(styles.item, {
@@ -42,7 +42,7 @@ const ProfileEditMenu = ({ editPage }) => {
         role="presentation"
         onClick={handleEdidPageClick(RESET_PASSWORD)}>
         <IconLockSvg className={styles.icon} />
-        <p>重設密碼</p>
+        <p className="hidden xs:block">重設密碼</p>
       </div>
     </div>
   )

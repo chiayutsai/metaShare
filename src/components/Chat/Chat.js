@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
+import classNames from 'classnames'
 import { useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { handleGetUsers } from 'actions/chat'
 import ChatCard from 'components/ChatCard/ChatCard'
 import DecorationLine from 'components/DecorationLine/DecorationLine'
 import ScrollView from 'components/ScrollView'
-import { chatSelector } from 'selectors'
+import { chatSelector, isMobileChatSelector } from 'selectors'
 import {
   onlineSelector,
   channelListSelector,
@@ -13,7 +14,7 @@ import {
 
 const Chat = () => {
   const dispatch = useDispatch()
-
+  const isMobileChat = useSelector(isMobileChatSelector)
   useEffect(() => {
     ;(async () => {
       try {
@@ -31,7 +32,10 @@ const Chat = () => {
   const online = useSelector(onlineSelector)
   const channelList = useSelector(channelListSelector)
   return (
-    <div className=" px-4 py-3 bg-white rounded-lg shadow-card">
+    <div
+      className={classNames('pb-28 px-4 pt-3 md:pb-3  h-full', {
+        ' rounded-lg shadow-card bg-white': !isMobileChat,
+      })}>
       <div className="flex items-center justify-between mb-3">
         <p className="font-bold text-xl text-primary-900">聊天室</p>
       </div>
@@ -43,7 +47,8 @@ const Chat = () => {
         setRef={setScrollViewRef}
         vertical
         auto
-        maxHeight="500px"
+        minHeight={isMobileChat ? '100%' : '100%'}
+        maxHeight={isMobileChat ? '100%' : '500px'}
         verticalWidth={4}
         verticalHoverWidth={10}
         thumbSizeChangeOnHover>

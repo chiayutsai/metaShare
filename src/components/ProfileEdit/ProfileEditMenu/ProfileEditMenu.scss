@@ -1,9 +1,12 @@
 .icon {
-  @apply mr-3;
+  @apply xs:hidden xs:mr-3;
+  @media (min-width: 500px) {
+    display: block;
+  }
 }
 
 .item {
-  @apply relative flex p-4 before:absolute before:top-0 before:left-0 before:w-[3px] before:h-full hover:bg-primary-50 hover:before:bg-primary-300;
+  @apply relative w-full flex justify-center md:justify-start p-3 md:p-4 before:absolute before:top-0 before:left-0 before:w-full before:h-0.5 md:before:w-[3px] md:before:h-full hover:bg-primary-50 hover:before:bg-primary-300;
 
   &.active {
     @apply bg-primary-100  before:bg-primary-900;

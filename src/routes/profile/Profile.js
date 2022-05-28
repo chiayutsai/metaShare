@@ -54,9 +54,9 @@ const Profile = () => {
         follower={follower}
       />
       {!isEdit && (
-        <div className="container  pt-6 px-9">
-          <div className="flex">
-            <div className="w-[345px] shrink-0 mr-9">
+        <div className="w-full md:container  md:pt-6 px-4 mid:px-6 xl:px-9">
+          <div className="flex flex-col md:flex-row">
+            <div className="w-full md:w-[240px] mid:w-[280px] xl:w-[345px] shrink-0 mb-4 md:mb-0 md:mr-9">
               <ProfileCard
                 description={profileInfo.description}
                 tags={profileInfo.tags}
@@ -73,7 +73,7 @@ const Profile = () => {
         </div>
       )}
       {isAdmin && isEdit && (
-        <div className="container pt-12 px-9">
+        <div className="w-full md:container md:pt-12 px-4 xl:px-9">
           <ProfileEdit
             editPage={editPage}
             profileInfo={profileInfo}

@@ -134,8 +134,10 @@ const ProfileResetPassword = ({ isEditLoading }) => {
         </div>
       )}
       <div className="border-b mb-6 border-gray-600/50">
-        <div className="flex mb-8 items-center">
-          <p className="text-lg mr-6 shrink-0">輸入新密碼</p>
+        <div className="flex flex-col xs:flex-row items-start mb-8 xs:items-center">
+          <p className="xs:text-lg mr-3 mb-3 xs:mb-0 xs:mr-6 shrink-0">
+            輸入新密碼
+          </p>
           <div className="w-full max-w-[420px]">
             <Input
               type={NEW_PASSWORD}
@@ -146,8 +148,10 @@ const ProfileResetPassword = ({ isEditLoading }) => {
             />
           </div>
         </div>
-        <div className="flex mb-8 items-center">
-          <p className="text-lg mr-6 shrink-0">確認新密碼</p>
+        <div className="flex flex-col xs:flex-row items-start mb-8 xs:items-center">
+          <p className="xs:text-lg mr-3 mb-3 xs:mb-0 xs:mr-6 shrink-0">
+            確認新密碼
+          </p>
           <div className="w-full max-w-[420px]">
             <Input
               type={CONFIRM_NEW_PASSWORD}

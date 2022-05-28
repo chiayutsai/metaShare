@@ -15,4 +15,5 @@ export const forgetPasswordTokenSelector = state => state.forgetPassword.token
 
 export const likesPostsSelector = state => state.likesPost
 
-export const chatSelector = state => state.chat
+export const chatSelector = state => state.chat.chat
+export const isMobileChatSelector = state => state.chat.isMobileChat

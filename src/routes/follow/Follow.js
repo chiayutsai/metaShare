@@ -28,7 +28,7 @@ const Follow = () => {
             <div
               key={`post${index + 1}`}
               className={classNames(
-                'w-1/2 py-4 even:pl-4 odd:pr-4 border-b border-gray-400 last:border-none ',
+                'w-full 2xl:w-1/2 py-4 2xl:even:pl-4 2xl:odd:pr-4 border-b border-gray-400 last:border-none ',
                 {
                   'nth-last-child-two ': isEvenFollowing,
                 },

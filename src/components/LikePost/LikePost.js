@@ -32,9 +32,9 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
   return (
     <>
       <div className="border-b border-gray-600/50 pb-2.5 mb-2.5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <div className=" w-14 h-14 mr-3">
+        <div className="flex flex-col sm:flex-row md:flex-col mid:flex-row items-start sm:items-center md:items-start mid:items-center justify-between">
+          <div className="flex  items-center mb-3 sm:mb-0 md:mb-3 mid:mb-0">
+            <div className="w-12 h-12 lg:w-14 lg:h-14 mr-3 shrink-0 ">
               <Avator avatorUrl={author.avator} isRounded />
             </div>
             <div>
@@ -47,7 +47,7 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
             </div>
           </div>
           <div className="flex">
-            <div className="mr-3">
+            <div className="mr-1 mini:mr-3">
               <Button
                 type={ALERT}
                 iconType={ICON_UNLIKE}
@@ -64,7 +64,7 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
           </div>
         </div>
       </div>
-      <div className="flex ">
+      <div className="flex flex-col-reverse xs:flex-row items-center xs:items-start">
         <p className="w-full h-10 overflow-hidden text-ellipsis text-overflow">
           {content}
         </p>
@@ -72,7 +72,7 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
           <img
             src={imageUrls[0]}
             alt="postImage"
-            className=" shrink-0 rounded-lg w-24 h-24 ml-3 "
+            className=" shrink-0 rounded-lg max-h-[160px] xs:w-24 xs:h-24 mb-3 xs:mb-0 xs:ml-3 "
           />
         )}
       </div>
