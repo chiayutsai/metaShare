@@ -72,7 +72,7 @@ const Layout = ({ view, children }) => {
           {isHome && (
             <>
               <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
-              <div className="container max-w-full lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mt-[60px] md:mt-[56px] mb-16 py-7 px-4 2xl:px-9 ">
+              <div className="container max-w-full lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mt-[60px] md:mt-[56px] pb-24 mb-16 md:pb-12 pt-7 px-4 2xl:px-9 ">
                 <div className="flex items-start">
                   <div className="hidden xl:block sticky top-[84px] w-60 shrink-0">
                     <div className="mb-3">

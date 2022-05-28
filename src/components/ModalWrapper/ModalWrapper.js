@@ -42,9 +42,9 @@ const ModalWrapper = ({
         <button
           type="button"
           onClick={onClose}
-          className="absolute flex items-center justify-center w-7 h-7 top-4 right-6 md:right-10 md:top-10 pointer-events-auto">
-          <span className="absolute w-7 md:w-9 h-1 bg-white rotate-45 rounded-full" />
-          <span className="absolute w-7 md:w-9 h-1 bg-white rotate-[-45deg] rounded-full" />
+          className="absolute flex items-center justify-center w-7 h-7 top-2 right-2 mid:right-10 mid:top-10 pointer-events-auto">
+          <span className="absolute w-7 mid:w-9 h-1 bg-white rotate-45 rounded-full" />
+          <span className="absolute w-7 mid:w-9 h-1 bg-white rotate-[-45deg] rounded-full" />
         </button>
       )}
 

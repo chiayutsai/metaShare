@@ -92,7 +92,7 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
       )}
 
       {noMorePost && (
-        <div className="w-full flex justify-center text-gray-700">
+        <div className="w-full flex justify-center text-sm text-gray-700">
           已經沒有更多貼文了
         </div>
       )}

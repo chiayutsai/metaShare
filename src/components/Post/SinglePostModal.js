@@ -99,9 +99,9 @@ const SinglePostModal = ({ onClose }) => {
       onClose={onClose}>
       <div
         className={classNames(
-          'flex w-11/12 xs:w-10/12  mx-auto h-screen max-h-[760px] md:w-[760px] md:h-[550px]  lg:w-[990px] lg:h-[650px] py-12 sm:py-9 md:py-0',
+          'flex w-11/12 xs:w-10/12  mx-auto h-screen max-h-[760px] md:w-[760px] md:max-h-[600px]  lg:w-[990px] lg:max-h-[722px] py-14 sm:py-6',
           {
-            '!max-h-[500px] md:!w-[500px]': !hasImage,
+            '!max-h-[572px] md:!w-[500px]': !hasImage,
           },
         )}>
         {hasImage && (

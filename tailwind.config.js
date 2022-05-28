@@ -91,7 +91,7 @@ module.exports = {
         '3d':
           'inset -1px -1px 1px rgba(24, 0, 75, 0.25), inset 1px 1px 1px rgba(239, 205, 251, 0.35);',
         'dot-carousel':
-          '9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff, 10014px 0 0 0 #9880ff',
+          '9984px 0 0 0 #5B4B98, 9999px 0 0 0 #5B4B98, 10014px 0 0 0 #5B4B98',
       },
       animation: {
         'dot-carousel': 'dotCarousel 1.5s infinite linear',
