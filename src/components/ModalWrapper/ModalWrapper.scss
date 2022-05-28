@@ -21,7 +21,7 @@ $modal-overlay-color: rgba(0, 0, 0, 0.6);
     left: 0;
     right: 0;
     cursor: default;
-    pointer-events: auto;
+    pointer-events: none;
 
     &.can-click {
       pointer-events: auto;
