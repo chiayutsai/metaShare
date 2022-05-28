@@ -7,20 +7,25 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import Layout from 'components/Layout/Layout'
-import NotFound from './NotFound'
+import history from 'history.js'
+import BrowserStorage from 'utils/BrowserStorage'
 
 const title = 'Page Not Found'
 
-const action = () => ({
-  title,
-  chunks: ['not-found'],
-  component: (
-    <Layout view="notFound">
-      <NotFound title={title} />
-    </Layout>
-  ),
-  status: 404,
-})
+const action = () => {
+  const hasToken = BrowserStorage.get('token')
+  if (hasToken) {
+    history.push('/metaShare')
+  } else {
+    history.push('/metaShare/login')
+  }
+
+  return {
+    title,
+    chunks: ['not-found'],
+    component: <div />,
+    status: 404,
+  }
+}
 
 export default action
