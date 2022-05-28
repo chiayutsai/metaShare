@@ -50,7 +50,16 @@ const environments = {
   // ======================================================
   development: {
     isDebug: true,
-    proxies: [],
+    proxies: [
+      {
+        endpoint: 'http://localhost:3000',
+        paths: ['/api'],
+      },
+      {
+        endpoint: 'ws://localhost:3000',
+        paths: ['/websocket'],
+      },
+    ],
   },
 
   // ======================================================

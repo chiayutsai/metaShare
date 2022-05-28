@@ -1,6 +1,6 @@
 import getEnvConfig from './index'
 
-const dev = 'http://127.0.0.1:3000'
+const dev = ''
 
 const production = 'https://mata-share-backend.herokuapp.com'
 
