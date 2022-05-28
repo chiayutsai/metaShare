@@ -78,7 +78,11 @@ const getAllPosts = () => async (dispatch, getState) => {
   const searchWord = searchWordSelector(state)
 
   const skip = posts.length
-  if (postsWallLoading || skip < LAZY_LOAD_LIMIT || skip === prevPostsLength) {
+  if (
+    postsWallLoading ||
+    (skip > 0 && skip < LAZY_LOAD_LIMIT) ||
+    skip === prevPostsLength
+  ) {
     // 1. loading
     // 2. 貼文數小於第一次載入的, 不會有更多貼文
     // 3. 這次要求的貼文已經和上次拿到的一樣長了, 已經沒有更多貼文
