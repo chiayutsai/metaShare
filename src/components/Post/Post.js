@@ -13,6 +13,8 @@ import PostHeader from 'components/Post/PostHeader/PostHeader'
 import PostInfo from 'components/Post/PostInfo/PostInfo'
 import { LIKE, COMMENT } from 'constants/post'
 
+const COMMENT_LIMIT = 5
+
 const Post = ({
   _id,
   userId,
@@ -29,6 +31,10 @@ const Post = ({
   const [isShowComments, setShowComments] = useState(false)
   const likeAmount = likes.length
   const commentAmount = comments.length
+  const initHideCommentAmount = Math.max(commentAmount - COMMENT_LIMIT, 0)
+  const [hideCommentAmount, setHideCommentAmount] = useState(
+    initHideCommentAmount,
+  )
   const isLike = Boolean(likes.filter(user => user === userId).length)
   const handleLikesClick = useCallback(async () => {
     try {
@@ -63,6 +69,10 @@ const Post = ({
       console.log(error)
     }
   }, [dispatch, _id, commentContent])
+
+  const handleMoreCommentClick = useCallback(() => {
+    setHideCommentAmount(amount => Math.max(amount - COMMENT_LIMIT, 0))
+  }, [])
 
   const handleLikesModal = useCallback(() => {
     dispatch(openLikesModal({ postId: _id }))
@@ -102,9 +112,17 @@ const Post = ({
           onClick={handleShowCommentsClick}
         />
       </div>
+      {showComments && !!hideCommentAmount && (
+        <div
+          className="flex border-b border-gray-600/50 pb-3 mb-3"
+          role="presentation"
+          onClick={handleMoreCommentClick}>
+          查看先前的留言
+        </div>
+      )}
       {showComments && (
         <div className="border-b border-gray-600/50 pb-3 mb-3">
-          {comments.map((comment, index) => (
+          {comments.slice(hideCommentAmount).map((comment, index) => (
             <div key={`comment${index + 1}`} className="mb-3 last:mb-0 ">
               <PostComment
                 avatorUrl={comment.commenter.avator}
