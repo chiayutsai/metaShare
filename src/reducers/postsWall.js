@@ -5,7 +5,12 @@ import {
   updatePostAction,
   deletePostAction,
 } from 'actions/api/webApi'
-import { SET_FILTER_TYPE, SET_SEARCH_WROD, clearPosts } from 'actions/post'
+import {
+  SET_FILTER_TYPE,
+  SET_SEARCH_WROD,
+  clearPosts,
+  setNoMorePost,
+} from 'actions/post'
 import { LASTEST_POST } from 'constants/filterType'
 import {
   userLikesPostNotify,
@@ -18,6 +23,7 @@ const initialState = {
   searchWord: '',
   posts: [],
   prevPostsLength: -1,
+  noMorePost: false,
 }
 
 export default handleActions(
@@ -34,6 +40,11 @@ export default handleActions(
       ...state,
       posts: [],
       prevPostsLength: -1,
+      noMorePost: false,
+    }),
+    [setNoMorePost]: state => ({
+      ...state,
+      noMorePost: true,
     }),
     [getAllPostsAction.request]: state => ({
       ...state,

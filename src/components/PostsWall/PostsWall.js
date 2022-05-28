@@ -2,8 +2,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllPosts } from 'actions/api/webApi'
-import { clearPosts, setSearchWord } from 'actions/post'
+import { clearPosts, handleGetAllPosts, setSearchWord } from 'actions/post'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
@@ -13,6 +12,7 @@ import {
   filterTypeSelector,
   searchWordSelector,
   postsWallLoadingSelector,
+  noMorePostSelector,
 } from 'selectors/post'
 import { userIdSelector } from 'selectors/user'
 
@@ -21,7 +21,7 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
   useEffect(() => {
     ;(async () => {
       try {
-        await dispatch(getAllPosts())
+        await dispatch(handleGetAllPosts())
       } catch (error) {
         console.log(error)
       }
@@ -39,7 +39,7 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
     const { offsetHeight, scrollHeight } = document.body
 
     if (offsetHeight + window.scrollY >= scrollHeight) {
-      dispatch(getAllPosts())
+      dispatch(handleGetAllPosts())
     }
   }, [dispatch])
 
@@ -56,6 +56,7 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
   const searchWord = useSelector(searchWordSelector)
   const filterType = useSelector(filterTypeSelector)
   const posts = useSelector(postsSelector)
+  const noMorePost = useSelector(noMorePostSelector)
   const isNopost = posts?.length === 0 && !isPostWallLoading
 
   return (
@@ -83,9 +84,22 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
           <Post {...props} userId={userId} />
         </div>
       ))}
+
+      {isPostWallLoading && (
+        <div className="w-full flex justify-center">
+          <div className="relative left-[-9999px] w-2.5 h-2.5 rounded-full shadow-dot-carousel animate-dot-carousel" />
+        </div>
+      )}
+
+      {noMorePost && (
+        <div className="w-full flex justify-center text-gray-700">
+          已經沒有更多貼文了
+        </div>
+      )}
     </>
   )
 }
+
 PostsWall.propTypes = {
   isAdmin: PropTypes.bool,
   avatorUrl: PropTypes.string,

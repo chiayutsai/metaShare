@@ -23,7 +23,6 @@ import {
   loadingSelector,
   isMobileChatSelector,
 } from 'selectors'
-import { postsWallLoadingSelector } from 'selectors/post'
 import {
   userAvatorSelector,
   userNameSelector,
@@ -41,7 +40,6 @@ import styles from './Layout.scss'
 const Layout = ({ view, children }) => {
   const dispatch = useDispatch()
   const appReady = useSelector(appReadySelector)
-  const postsWallLoading = useSelector(postsWallLoadingSelector)
   const loading = useSelector(loadingSelector)
   useStyles(styles)
   const userId = useSelector(userIdSelector)
@@ -52,7 +50,7 @@ const Layout = ({ view, children }) => {
   const isLogin = view === 'login'
   const isProfile = view === 'profile'
   const isNotFound = view === 'notFound'
-  const isLoading = loading || postsWallLoading
+  const isLoading = loading
   const isFirstTimeUse = !BrowserStorage.get('token')
   useEffect(() => {
     ;(async () => {

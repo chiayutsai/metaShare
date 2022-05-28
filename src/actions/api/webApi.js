@@ -1,11 +1,10 @@
 import baseURL from 'config/baseURL'
 import { FILTER_TYPE_MAP } from 'constants/filterType'
+import { LAZY_LOAD_LIMIT } from 'constants/post'
 import { forgetPasswordTokenSelector } from 'selectors'
 import {
   filterTypeSelector,
   postsSelector,
-  postsWallLoadingSelector,
-  prevPostsLengthSelector,
   searchWordSelector,
 } from 'selectors/post'
 import { profileUserIdSelector } from 'selectors/profile'
@@ -15,7 +14,6 @@ import BrowserStorage from 'utils/BrowserStorage'
 import createApiActions from 'utils/createApiActions'
 import BaseApi from './BaseApi'
 
-const LAZY_LOAD_LIMIT = 5
 // base api
 const getApi = new BaseApi().create({
   baseURL: `${baseURL}/api`,
@@ -72,23 +70,8 @@ export const getAllPostsAction = createApiActions('GET_ALL_POSTS')
 const getAllPosts = () => async (dispatch, getState) => {
   const state = getState()
   const posts = postsSelector(state)
-  const prevPostsLength = prevPostsLengthSelector(state)
-  const postsWallLoading = postsWallLoadingSelector(state)
   const filterType = filterTypeSelector(state)
   const searchWord = searchWordSelector(state)
-
-  const skip = posts.length
-  if (
-    postsWallLoading ||
-    (skip > 0 && skip < LAZY_LOAD_LIMIT) ||
-    skip === prevPostsLength
-  ) {
-    // 1. loading
-    // 2. 貼文數小於第一次載入的, 不會有更多貼文
-    // 3. 這次要求的貼文已經和上次拿到的一樣長了, 已經沒有更多貼文
-    return null
-  }
-
   const token = tokenSelector(state)
   const profileUserId = profileUserIdSelector(state)
   const data = {}
@@ -97,6 +80,7 @@ const getAllPosts = () => async (dispatch, getState) => {
   let url = profileUserId ? `/posts/user/${profileUserId}` : '/posts'
 
   // lazy load
+  const skip = posts.length
   url += `?skip=${skip}&limit=${LAZY_LOAD_LIMIT}`
 
   if (sort && search) {

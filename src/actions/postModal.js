@@ -1,7 +1,12 @@
-import { getAllPosts, addPost, updatePost } from 'actions/api/webApi'
+import { addPost, updatePost } from 'actions/api/webApi'
 import { updateLikesPosts } from 'actions/likesPost'
 import { dismissModal, setModal } from 'actions/modal'
-import { setSearchWord, setFilterType, clearPosts } from 'actions/post'
+import {
+  setSearchWord,
+  setFilterType,
+  clearPosts,
+  handleGetAllPosts,
+} from 'actions/post'
 import { setSinglePost } from 'actions/singlePost'
 import {
   toggleLoading,
@@ -79,7 +84,7 @@ export const handleAllPost = data => async (dispatch, getState) => {
     dispatch(setSearchWord(''))
     dispatch(setFilterType(LASTEST_POST))
     dispatch(clearPosts())
-    dispatch(getAllPosts())
+    dispatch(handleGetAllPosts())
   } catch (error) {
     console.log(error)
     throw error
