@@ -1,7 +1,11 @@
 import { useState, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import validator from 'validator'
-import { handleRegister } from 'actions/user'
+import {
+  handleRegister,
+  handleFacebookLogin,
+  handleGoogleLogin,
+} from 'actions/user'
 import Button3D from 'components/Button/Button3D/Button3D'
 import CommunityButton from 'components/Button/CommunityButton/CommunityButton'
 import ErrorBadge from 'components/ErrorBadge/ErrorBadge'
@@ -132,6 +136,13 @@ const Register = () => {
     emailContent,
     passwordContent,
   ])
+
+  const handleFacebookLoginClick = useCallback(async () => {
+    dispatch(handleFacebookLogin())
+  }, [dispatch])
+  const handleGoogleLoginClick = useCallback(async () => {
+    dispatch(handleGoogleLogin())
+  }, [dispatch])
   return (
     <>
       <div className="flex items-center  mb-6 xl:mb-9 ">
@@ -145,10 +156,10 @@ const Register = () => {
       </div>
       <div className="flex-col sm:flex-row flex mb-6 xl:mb-9">
         <div className="w-full mb-3 sm:mb-0 sm:mr-3">
-          <CommunityButton type={GOOGLE} />
+          <CommunityButton type={GOOGLE} onClick={handleGoogleLoginClick} />
         </div>
         <div className="w-full">
-          <CommunityButton type={FACEBOOK} />
+          <CommunityButton type={FACEBOOK} onClick={handleFacebookLoginClick} />
         </div>
       </div>
       <div className="flex items-center mb-6 xl:mb-8">

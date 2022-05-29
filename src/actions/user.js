@@ -81,6 +81,10 @@ export const handleFacebookLogin = () => () => {
   window.location = `${baseURL}/api/auth/facebook`
 }
 
+export const handleGoogleLogin = () => () => {
+  window.location = `${baseURL}/api/auth/google`
+}
+
 export const handleCheckEmail = ({ email }) => async dispatch => {
   try {
     dispatch(setLoginLoading())
