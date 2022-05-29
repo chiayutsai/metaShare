@@ -11,11 +11,12 @@
 import classNames from 'classnames'
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { handleGetUserFollow } from 'actions/follow'
 import ChannelList from 'components/ChannelList/ChannelList'
 import Chat from 'components/Chat/Chat'
+import LightModeToggle from 'components/LightModeToggle/LightModeToggle'
 import LoadingModal from 'components/LoadingModal/LoadingModal'
 import LoginCircle from 'components/LoginCircle/LoginCircle'
 import {
@@ -39,6 +40,7 @@ import styles from './Layout.scss'
 
 const Layout = ({ view, children }) => {
   const dispatch = useDispatch()
+  const [lightMode, setLightMode] = useState(true)
   const appReady = useSelector(appReadySelector)
   const loading = useSelector(loadingSelector)
   useStyles(styles)
@@ -52,6 +54,21 @@ const Layout = ({ view, children }) => {
   const isNotFound = view === 'notFound'
   const isLoading = loading
   const isFirstTimeUse = !BrowserStorage.get('token')
+  useEffect(() => {
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
+
+    if (matchMedia.matches) {
+      setLightMode(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (lightMode) {
+      document.body.classList.remove('dark')
+    } else {
+      document.body.classList.add('dark')
+    }
+  }, [lightMode])
   useEffect(() => {
     ;(async () => {
       if (isHome || isProfile) {
@@ -71,7 +88,13 @@ const Layout = ({ view, children }) => {
           <div className={styles.bg} />
           {isHome && (
             <>
-              <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
+              <Navbar
+                userId={userId}
+                avatorUrl={userAvator}
+                name={userName}
+                lightMode={lightMode}
+                setLightMode={setLightMode}
+              />
               <div className="container max-w-full lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mt-[60px] md:mt-[56px] pb-24 mb-16 md:pb-12 pt-7 px-4 2xl:px-9 ">
                 <div className="flex items-start">
                   <div className="hidden xl:block sticky top-[84px] w-60 shrink-0">
@@ -102,21 +125,29 @@ const Layout = ({ view, children }) => {
                 userId={userId}
                 avatorUrl={userAvator}
                 name={userName}
+                lightMode={lightMode}
+                setLightMode={setLightMode}
               />
             </>
           )}
           {isLogin && (
             <div>
-              <h1 className="relative flex justify-center mt-6 top-0 left-0 sm:mt-0 sm:absolute z-20 sm:top-6 sm:left-9 ">
+              <h1 className="relative  mt-6 ml-3 sm:mt-0 sm:absolute z-20 sm:top-6 sm:left-9 ">
                 <div className={styles.logo}>MetaShare</div>
               </h1>
+              <div className="absolute z-10 right-3 top-16 mini:top-6 sm:right-6 sm:top-8 ">
+                <LightModeToggle
+                  lightMode={lightMode}
+                  setLightMode={setLightMode}
+                />
+              </div>
               <div className="relative w-full min-h-mobile sm:min-h-screen flex flex-col justify-center xl:grid grid-cols-12 p-6 sm:py-9 sm:px-12 items-center">
                 <div
                   className={classNames(
-                    '!flex sm:static sm:w-full sm:h-auto sm:!bg-none xl:col-span-6 3xl:col-span-7 items-center justify-center sm:!animate-none pointer-events-none',
+                    'sm:!flex sm:static sm:w-full sm:h-auto sm:!bg-none xl:col-span-6 3xl:col-span-7 items-center justify-center sm:!animate-none pointer-events-none',
                     {
                       'absolute z-10 w-screen h-screen': isFirstTimeUse,
-                      hidden: !isFirstTimeUse,
+                      '!hidden': !isFirstTimeUse,
                       [styles['bg-img']]: isFirstTimeUse,
                       [styles['fade-out']]: isFirstTimeUse,
                     },
@@ -143,13 +174,21 @@ const Layout = ({ view, children }) => {
           )}
           {isProfile && (
             <>
-              <Navbar userId={userId} avatorUrl={userAvator} name={userName} />
+              <Navbar
+                userId={userId}
+                avatorUrl={userAvator}
+                name={userName}
+                lightMode={lightMode}
+                setLightMode={setLightMode}
+              />
               {children}
 
               <MobileNav
                 userId={userId}
                 avatorUrl={userAvator}
                 name={userName}
+                lightMode={lightMode}
+                setLightMode={setLightMode}
               />
             </>
           )}

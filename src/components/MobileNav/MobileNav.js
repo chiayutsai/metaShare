@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { openMobileChat, closeMobileChat } from 'actions/chat'
 import { openProfileEdit, setProfileEditInit } from 'actions/profile'
 import Avator from 'components/Avator/Avator'
+import LightModeToggle from 'components/LightModeToggle/LightModeToggle'
 import Link from 'components/Link/Link'
 import ScrollView from 'components/ScrollView'
 import history from 'history.js'
@@ -24,7 +25,7 @@ import { ReactComponent as IconLikeFilledSvg } from './assets/likeFilled.svg'
 import { ReactComponent as IconLogOutSvg } from './assets/logout.svg'
 import styles from './MobileNav.scss'
 
-const MobileNav = ({ userId, avatorUrl, name }) => {
+const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
   useStyles(styles)
   const dispatch = useDispatch()
   const [page, setPage] = useState('')
@@ -167,6 +168,13 @@ const MobileNav = ({ userId, avatorUrl, name }) => {
       {showMobileMenu && (
         <div
           className={`${styles['bg-img']} fixed top-[60px] left-0 z-10 w-full h-mobile-chat pt-3 pb-16 px-3 sm:px-12`}>
+          <div className="flex justify-end sm:hidden items-center mb-3">
+            <p className="text-sm text-primary-800 ">淺 / 深色模式 :</p>
+            <LightModeToggle
+              lightMode={lightMode}
+              setLightMode={setLightMode}
+            />
+          </div>
           <ScrollView
             setRef={setScrollViewRef}
             vertical
@@ -193,6 +201,7 @@ const MobileNav = ({ userId, avatorUrl, name }) => {
                 <IconEditSvg className="mr-2" />
                 <p className="text-gray-1100 font-bold">編輯個人資料</p>
               </button>
+
               <button
                 type="button"
                 onClick={handleLogOut}
@@ -211,11 +220,15 @@ MobileNav.propTypes = {
   userId: PropTypes.string,
   avatorUrl: PropTypes.string,
   name: PropTypes.string,
+  lightMode: PropTypes.bool,
+  setLightMode: PropTypes.func,
 }
 
 MobileNav.defaultProps = {
   userId: '',
   avatorUrl: '',
   name: '',
+  lightMode: false,
+  setLightMode: () => {},
 }
 export default MobileNav

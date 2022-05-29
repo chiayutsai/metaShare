@@ -199,3 +199,76 @@ box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     box-shadow: 9999px 0 0 1px #9880ff, 10014px 0 0 -1px #9880ff, 9984px 0 0 -1px #9880ff;
   }
 }
+
+@keyframes modeFadeIn {
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modeFadeOut {
+  0% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sunClose {
+  0% {
+    opacity: 1;
+    left: 5px;
+  }
+  
+  100% {
+    opacity: 0;
+    left: 30px;
+  }
+}
+
+@keyframes sunOpen {
+  0% {
+    opacity: 0;
+    left: 30px;
+  }
+  40%{
+    opacity: 0;
+    left: 30px;
+  }
+  100% {
+    opacity: 1;
+    left: 5px;
+  }
+}
+
+@keyframes moonClose {
+  0% {
+    opacity: 1;
+    right: 4px;
+  }
+ 
+  100% {
+    opacity: 0;
+    right: 24px;
+  }
+}
+
+@keyframes moonOpen {
+  0% {
+    opacity: 0;
+    right: 24px;
+  }
+  40%{
+    opacity: 0;
+    right: 24px;
+  }
+  100% {
+    opacity: 1;
+    right: 4px;
+  }
+}

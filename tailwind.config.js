@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: ['./src/**/*.js'],
+  darkMode: 'class',
   theme: {
     screens: {
       mini: '375px',
@@ -95,6 +96,12 @@ module.exports = {
       },
       animation: {
         'dot-carousel': 'dotCarousel 1.5s infinite linear',
+        'mode-fade-in': 'modeFadeIn 0.2s linear forwards',
+        'mode-fade-out': 'modeFadeOut 0.2s linear forwards',
+        'sun-close': 'sunClose 0.2s linear forwards',
+        'sun-open': 'sunOpen 0.2s linear forwards',
+        'moon-close': 'moonClose 0.2s linear forwards',
+        'moon-open': 'moonOpen 0.2s linear forwards',
       },
     },
   },
