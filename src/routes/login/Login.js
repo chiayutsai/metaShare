@@ -99,9 +99,9 @@ const Login = () => {
     <>
       <div className="flex items-center mb-6 xl:mb-9 ">
         <div className="login-line" />
-        <h3 className="flex items-center font-bold text-primary-700 text-2xl sm:text-3xl">
+        <h3 className="flex items-center font-bold text-primary-700 dark:text-primary-400 text-2xl sm:text-3xl">
           登入
-          <span className="text-primary-600/60 text-xl sm:text-2xl ml-1.5">
+          <span className="text-primary-600/60 dark:text-primary-200/80 text-xl sm:text-2xl ml-1.5">
             LOG IN
           </span>
         </h3>
@@ -115,9 +115,11 @@ const Login = () => {
         </div>
       </div>
       <div className="flex items-center mb-6 xl:mb-8">
-        <span className="w-full h-[1px] bg-gray-600" />
-        <p className="mx-2 text-sm font-bold text-gray-600">Or</p>
-        <span className="w-full h-[1px] bg-gray-600" />
+        <span className="w-full h-[1px] bg-gray-600 dark:bg-gray-600/70" />
+        <p className="mx-2 text-sm font-bold text-gray-600 dark:text-gray-600/70">
+          Or
+        </p>
+        <span className="w-full h-[1px] bg-gray-600 dark:bg-gray-600/70" />
       </div>
       {errorContent && (
         <div className="mb-6 xl:mb-8">
@@ -159,10 +161,12 @@ const Login = () => {
         />
       </div>
       <div className="flex items-center justify-center">
-        <p className="text-gray-900 text-sm">還沒有帳號嗎?</p>
+        <p className="text-gray-900 dark:text-gray-800 text-sm">
+          還沒有帳號嗎?
+        </p>
         <Link
           to="/metaShare/register"
-          className="ml-0.5 text-primary-800 text-sm font-bold hover:text-primary-600">
+          className="ml-0.5 text-primary-800 dark:text-primary-400 text-sm font-bold hover:text-primary-600 dark:hover:text-primary-600">
           前往註冊
         </Link>
       </div>

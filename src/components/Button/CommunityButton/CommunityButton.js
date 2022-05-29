@@ -8,9 +8,9 @@ const CommunityButton = ({ type, isDisabled, onClick, login }) => (
   <button
     type="button"
     className={classNames(
-      'flex items-center justify-center w-full rounded px-2 py-1 bg-primary-100/80 border border-primary-300 group hover:bg-primary-100',
+      'flex items-center justify-center w-full rounded px-2 py-1 bg-primary-100/80 dark:bg-dark-primary-400 border border-primary-300 group hover:bg-primary-100 dark:hover:bg-dark-primary-500',
       {
-        '!bg-gray-400 !border-gray-600 pointer-events-none': isDisabled,
+        '!bg-gray-400 dark:!bg-gray-1100 dark:!border-gray-1200 !border-gray-600 pointer-events-none': isDisabled,
       },
     )}
     onClick={onClick}>
@@ -30,9 +30,9 @@ const CommunityButton = ({ type, isDisabled, onClick, login }) => (
     )}
     <p
       className={classNames(
-        'ml-2 text-primary-900/80 font-bold group-hover:text-primary-900',
+        'ml-2 text-primary-900/80 font-bold group-hover:text-primary-900 dark:group-hover:text-primary-100',
         {
-          '!text-gray-700': isDisabled,
+          '!text-gray-700 ': isDisabled,
         },
       )}>
       使用 {type} {login ? '登入' : '註冊'}

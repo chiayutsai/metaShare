@@ -254,7 +254,7 @@ const ForgetPassword = () => {
   return (
     <>
       {isLoginLoading && (
-        <div className="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-white/70">
+        <div className="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-white/70 dark:bg-dark-login-bg/80">
           <div className=" animate-spin">
             <div className="scale-[2]">
               <IconLoadingSvg />
@@ -266,9 +266,9 @@ const ForgetPassword = () => {
         <>
           <div className="flex items-center  mb-6 xl:mb-9 ">
             <div className="login-line" />
-            <h3 className="flex-col sm:flex-row flex items-start sm:items-center font-bold text-primary-700 text-2xl sm:text-3xl">
+            <h3 className="flex-col sm:flex-row flex items-start sm:items-center font-bold text-primary-700 dark:text-primary-400 text-2xl sm:text-3xl">
               重設密碼
-              <span className="text-primary-600/60 text-xl sm:text-2xl sm:ml-1.5">
+              <span className="text-primary-600/60 dark:text-primary-200/80 text-xl sm:text-2xl sm:ml-1.5">
                 FORGET PASSWORD
               </span>
             </h3>
@@ -359,15 +359,17 @@ const ForgetPassword = () => {
           <div className="flex items-center justify-between">
             <Link
               to="/metaShare/login"
-              className="ml-0.5 text-primary-800 text-sm font-bold hover:text-primary-600">
+              className="ml-0.5 text-primary-800 dark:text-primary-400  text-sm font-bold hover:text-primary-600 dark:hover:text-primary-600">
               返回登入
             </Link>
             {isCheckEmail && (
               <div className="flex items-center justify-center">
-                <p className="text-gray-900 text-sm">還沒有帳號嗎?</p>
+                <p className="text-gray-900 dark:text-gray-800 text-sm">
+                  還沒有帳號嗎?
+                </p>
                 <Link
                   to="/metaShare/register"
-                  className="ml-0.5 text-primary-800 text-sm font-bold hover:text-primary-600">
+                  className="ml-0.5 text-primary-800 dark:text-primary-400  text-sm font-bold hover:text-primary-600 dark:hover:text-primary-600">
                   前往註冊
                 </Link>
               </div>

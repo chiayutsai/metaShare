@@ -41,9 +41,9 @@ const Input = ({
   return (
     <div
       className={classNames(
-        'relative flex items-center w-full max-h-12 rounded border-[1.5px] border-gray-600 px-5 py-3',
+        'relative flex items-center w-full max-h-12 rounded border-[1.5px] border-gray-600 px-5 py-3 dark:bg-dark-input-bg',
         {
-          'border-primary-600': isFocus,
+          'border-primary-600 dark:border-primary-400': isFocus,
           '!border-alert': errorContent,
         },
       )}>
@@ -51,9 +51,9 @@ const Input = ({
         <label
           htmlFor={`input${type}`}
           className={classNames(
-            'absolute -top-3 left-3 bg-white px-2 font-bold text-gray-900 ',
+            'absolute -top-3 left-3 bg-white dark:bg-transparent dark:bg-dark-input-label px-2 font-bold text-gray-900 ',
             {
-              '!text-primary-700': isFocus,
+              '!text-primary-700 dark:text-primary-500': isFocus,
               '!text-alert': errorContent,
             },
           )}>
@@ -96,7 +96,7 @@ const Input = ({
           'w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 focus:outline-none',
           {
             'placeholder:text-primary-300 ': isFocus,
-            '!text-alert placeholder:text-alert/50': errorContent,
+            '!text-alert placeholder:text-alert/50 ': errorContent,
           },
         )}
         ref={setRef}
@@ -134,7 +134,7 @@ const Input = ({
       {errorContent && (
         <div className="absolute -bottom-7 left-0 flex items-center">
           <IconErrorSvg />
-          <p className="relative -top-[1px] text-alert ml-2 text-sm">
+          <p className="relative -top-[1px] text-alert ml-2 text-sm dark:text-alert">
             {errorContent}
           </p>
         </div>

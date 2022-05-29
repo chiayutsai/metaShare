@@ -1,5 +1,11 @@
 .bg {
-  @apply fixed top-0 left-0 w-full -z-10 bg-[url('./assets/bg.png')] bg-no-repeat bg-cover h-screen;
+  @apply fixed top-0 left-0 w-full -z-10 bg-[url('./assets/bg.png')]  bg-no-repeat bg-cover h-screen;
+}
+
+:global(.dark) {
+  .bg {
+    @apply bg-[url('./assets/darkbg.png')];
+  }
 }
 
 .bg-img {

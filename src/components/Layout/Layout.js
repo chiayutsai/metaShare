@@ -159,12 +159,12 @@ const Layout = ({ view, children }) => {
                         [styles['fade-in']]: isFirstTimeUse,
                       },
                     )}>
-                    <LoginCircle />
+                    <LoginCircle lightMode={lightMode} />
                   </div>
                 </div>
                 <div
                   className={classNames(
-                    'relative sm:!animate-none w-full md:w-4/5 lg:w-8/12 xl:w-auto xl:col-span-6 2xl:col-span-5 3xl:col-span-4 p-6 xs:px-12 xs:py-6 xl:px-16 xl:py-14 ml bg-white shadow-login-card rounded-lg overflow-hidden',
+                    'relative sm:!animate-none w-full md:w-4/5 lg:w-8/12 xl:w-auto xl:col-span-6 2xl:col-span-5 3xl:col-span-4 p-6 xs:px-12 xs:py-6 xl:px-16 xl:py-14 ml bg-white dark:bg-dark-login-bg shadow-login-card rounded-lg overflow-hidden',
                     { [styles.show]: isFirstTimeUse },
                   )}>
                   {children}

@@ -9,7 +9,7 @@ html, body {
 }
 
 html,body,*,*::after,*::before {
-  @apply text-gray-1200 text-base font-sans leading-tight box-border duration-300;
+  @apply text-gray-1200 dark:text-white/90 text-base font-sans leading-tight box-border duration-300;
 }
 
 body.Body--Modal-open-disable-scroll {
@@ -72,7 +72,7 @@ input:-webkit-autofill:active  {
   }
   
   .button-3d-disabled {
-    @apply text-gray-200 shadow-button-3d-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+    @apply text-gray-200 dark:text-gray-900 button-3d-rounded-disabled shadow-button-3d-disable bg-gray-700 dark:bg-gray-1100 to-button3dGradientDisable pointer-events-none dark:shadow-button-3d-dark-disable dark:to-dark-button3dGradientDisable;
   }
 
 
@@ -81,7 +81,8 @@ input:-webkit-autofill:active  {
   }
 
   .button-3d-rounded-disabled {
-    @apply text-gray-200 text-sm shadow-button-3d-rounded-disable bg-gray-700 to-button3dGradientDisable pointer-events-none;
+    @apply text-gray-200 dark:text-gray-900 text-sm shadow-button-3d-rounded-disable bg-gray-700 dark:bg-gray-1100 to-button3dGradientDisable pointer-events-none dark:shadow-button-3d-dark-rounded-disable dark:to-dark-button3dGradientDisable;
+
   }
 
   .login-circle {

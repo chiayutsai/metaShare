@@ -52,6 +52,17 @@ module.exports = {
         1200: '#2D2D2D',
         1300: '#1C1C1C',
       },
+      dark: {
+        'login-bg': '#1C1826',
+        'input-bg': 'rgba(18,18,18,0.8)',
+        button3dGradientDisable: 'rgba(18, 18, 18, 0.6)',
+        'primary-100': '#CCC4EC',
+        'primary-200': '#BEB1EF',
+        'primary-300': '#9E90D4',
+        'primary-400': '#8C81B7',
+        'primary-500': '#73689E',
+        'primary-600': '#584C86',
+      },
     },
     container: {
       center: true,
@@ -65,6 +76,8 @@ module.exports = {
           'radial-gradient(100% 100% at 32% 100%, var(--tw-gradient-stops))',
         'gradient-to-center-hover':
           'radial-gradient(134% 134% at 87% 0%, var(--tw-gradient-stops))',
+        'dark-input-label':
+          'linear-gradient(180deg, #1C1826 0%, #1C1826 60.42%, rgba(18,18,18,0.8) 60.43%, rgba(18,18,18,0.8) 100%);',
       },
       fontFamily: {
         sans: ['Noto Sans TC', ...defaultTheme.fontFamily.sans],
@@ -76,7 +89,9 @@ module.exports = {
         'button-3d-hover': `0px 2px 2px rgba(0, 0, 0, 0.2), inset 0px -4px 0px #7464b3`,
         'button-3d-rounded-hover': `inset 0px -2px 0px #7464b3`,
         'button-3d-disable': `0px 2px 2px rgba(0, 0, 0, 0.2), inset 0px -4px 0px #838383`,
+        'button-3d-dark-disable': `0px 2px 2px rgba(0, 0, 0, 0.2), inset 0px -4px 0px #2D2D2D`,
         'button-3d-rounded-disable': `inset 0px -2px 0px #838383`,
+        'button-3d-dark-rounded-disable': `inset 0px -2px 0px #2D2D2D`,
         navbar: '0px 2px 10px rgba(0, 0, 0, 0.04)',
         'navbar-dropdown': '0px 1px 4px rgba(116, 100, 179, 0.4)',
         'mobile-nav': '0px -2px 8px rgba(0,0,0,0.1)',
