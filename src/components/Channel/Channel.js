@@ -33,6 +33,7 @@ const Channel = ({ _id, avator, name, onClose }) => {
   )
   const online = useSelector(onlineSelector)
   const [chatContent, setChatContent] = useState('')
+  const [isChatLoading, setIsChatLoading] = useState(false)
   const [isSmall, setSmall] = useState(false)
   const [isFocus, setFocus] = useState(false)
   const isOnline = online?.includes(_id)
@@ -52,9 +53,10 @@ const Channel = ({ _id, avator, name, onClose }) => {
   }, [isSmall])
 
   const handleSendMessage = useCallback(async () => {
-    if (!chatContent) {
+    if (!chatContent || isChatLoading) {
       return
     }
+    setIsChatLoading(true)
     try {
       await dispatch(
         sendChatMessage({
@@ -67,7 +69,8 @@ const Channel = ({ _id, avator, name, onClose }) => {
     } catch (error) {
       console.log(error)
     }
-  }, [dispatch, userId, _id, chatContent])
+    setIsChatLoading(false)
+  }, [dispatch, userId, _id, chatContent, isChatLoading])
 
   useEffect(() => {
     const handleKeydown = event => {
