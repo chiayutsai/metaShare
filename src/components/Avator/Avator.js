@@ -5,13 +5,13 @@ import { useState, useCallback, useEffect } from 'react'
 const Avator = ({ avatorUrl, isBorder, isRounded }) => {
   const [imgUrl, setImgUrl] = useState(avatorUrl)
   const showDefaultImg = useCallback(() => {
-    setImgUrl('https://imgur.com/pCHyxml.png')
+    setTimeout(() => {
+      setImgUrl('https://imgur.com/pCHyxml.png')
+    }, 0)
   }, [])
 
   useEffect(() => {
-    if (avatorUrl !== '') {
-      setImgUrl(avatorUrl)
-    }
+    setImgUrl(avatorUrl)
   }, [avatorUrl])
 
   return (

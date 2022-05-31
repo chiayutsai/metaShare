@@ -54,7 +54,7 @@ const PostHeader = ({
     <div className="flex items-center justify-between">
       <div className="flex items-center">
         <div className="w-12 h-12 sm:w-14 sm:h-14 mr-3">
-          <Avator key={_id} isRounded avatorUrl={avatorUrl} />
+          <Avator isRounded avatorUrl={avatorUrl} />
         </div>
         <div>
           <Link
