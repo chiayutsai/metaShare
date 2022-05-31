@@ -44,6 +44,7 @@ const Profile = () => {
   return (
     <div className="mt-[56px] mb-16">
       <ProfileHeader
+        key={profileUserId}
         isAdmin={isAdmin}
         isEdit={isEdit}
         profileUserId={profileUserId}

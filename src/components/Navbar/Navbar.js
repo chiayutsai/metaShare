@@ -56,7 +56,7 @@ const Navbar = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
     document.body.classList.remove('Body--Modal-open-disable-scroll')
   }, [dispatch])
   return (
-    <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full p-3 md:py-1 lg:px-6 bg-white dark:bg-black  shadow-navbar">
+    <div className="fixed flex items-center justify-between top-0 left-0 z-10 w-full p-3 md:py-1 lg:px-6 bg-white dark:bg-dark-bg  shadow-navbar dark:shadow-dark-navbar">
       <h1>
         <Link
           to="/metaShare"
@@ -75,10 +75,10 @@ const Navbar = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
             <button
               type="button"
               className={classNames(
-                'flex items-center py-1 pl-1 pr-2 rounded-full  duration-300 hover:bg-primary-100',
+                'flex items-center py-1 pl-1 pr-2 rounded-full  duration-300 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50',
 
                 {
-                  'bg-primary-100': isToggleDropdown,
+                  'bg-primary-100 dark:bg-dark-primary-500/50': isToggleDropdown,
                 },
               )}
               onClick={handleToggleDropdown}>
@@ -89,52 +89,52 @@ const Navbar = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
             </button>
             <ul
               className={classNames(
-                'absolute w-[150px] h-0 top-[52px] right-0 bg-white  rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
+                'absolute w-[150px] h-0 top-[52px] right-0 bg-white dark:bg-dark-bg rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
                 {
                   'h-[180px]': isToggleDropdown,
                 },
               )}>
               <li
-                className="p-2  border-b border-gray-400 hover:bg-primary-100"
+                className="p-2  border-b border-gray-400 dark:border-gray-1100 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50"
                 role="presentation"
                 onClick={() => {
                   setToggleDropdown(false)
                 }}>
                 <Link to="/metaShare/follow" className="flex items-center ">
-                  <IconFollowSvg className="mr-2" />
+                  <IconFollowSvg className={styles.icon} />
                   <p className="text-sm text-gray-1100 font-bold">追蹤名單</p>
                 </Link>
               </li>
               <li
-                className="p-2  border-b border-gray-400 hover:bg-primary-100"
+                className="p-2  border-b border-gray-400 dark:border-gray-1100 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50"
                 role="presentation"
                 onClick={() => {
                   setToggleDropdown(false)
                 }}>
                 <Link to="/metaShare/likesPost" className="flex items-center ">
-                  <IconLikeSvg className="mr-2" />
+                  <IconLikeSvg className={styles.icon} />
                   <p className="text-sm text-gray-1100 font-bold">喜歡的貼文</p>
                 </Link>
               </li>
               <li
-                className="flex items-center p-2  border-b border-gray-400 hover:bg-primary-100"
+                className="flex items-center p-2  border-b border-gray-400 dark:border-gray-1100 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50"
                 role="presentation"
                 onClick={handleToPersonProfile}>
-                <IconPersonSvg className="mr-2" />
+                <IconPersonSvg className={styles.icon} />
                 <p className="text-sm text-gray-1100 font-bold">個人貼文牆</p>
               </li>
               <li
-                className="flex items-center p-2 border-b border-gray-400 hover:bg-primary-100"
+                className="flex items-center p-2 border-b border-gray-400 dark:border-gray-1100 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50"
                 role="presentation"
                 onClick={handleToEditProfile}>
-                <IconEditSvg className="mr-2" />
+                <IconEditSvg className={styles.icon} />
                 <p className="text-sm text-gray-1100 font-bold">編輯個人資料</p>
               </li>
               <li
-                className="flex items-center p-2 hover:bg-primary-100"
+                className="flex items-center p-2 hover:bg-primary-100 dark:hover:bg-dark-primary-500/50"
                 role="presentation"
                 onClick={handleLogOut}>
-                <IconLogOutSvg className="mr-2" />
+                <IconLogOutSvg className={styles.icon} />
                 <p className="text-sm text-gray-1100 font-bold">登出</p>
               </li>
             </ul>

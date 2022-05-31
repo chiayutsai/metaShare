@@ -41,10 +41,10 @@ const Input = ({
   return (
     <div
       className={classNames(
-        'relative flex items-center w-full max-h-12 rounded border-[1.5px] border-gray-600 px-5 py-3 dark:bg-dark-input-bg',
+        'relative flex items-center w-full max-h-12 rounded border-[1.5px] border-gray-600 px-5 py-3 dark:bg-dark-input-bg dark:border-gray-800',
         {
-          'border-primary-600 dark:border-primary-400': isFocus,
-          '!border-alert': errorContent,
+          'border-primary-600 dark:!border-primary-400': isFocus,
+          '!border-alert dark:!border-alert': errorContent,
         },
       )}>
       {showLabel && (

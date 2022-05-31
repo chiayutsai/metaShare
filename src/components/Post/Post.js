@@ -78,8 +78,8 @@ const Post = ({
     dispatch(openLikesModal({ postId: _id }))
   }, [dispatch, _id])
   return (
-    <div className="w-full py-3 px-6 rounded shadow-card bg-white">
-      <div className="border-b border-gray-600/50 pb-3 mb-3">
+    <div className="w-full py-3 px-6 rounded shadow-card dark:shadow-dark-card bg-white dark:bg-dark-bg">
+      <div className="border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-3 mb-3">
         <PostHeader
           _id={_id}
           authorId={author._id}
@@ -90,15 +90,15 @@ const Post = ({
           imageUrls={imageUrls}
         />
       </div>
-      <div className="border-b border-gray-600/50 pb-3 mb-2">
+      <div className="border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-3 mb-2">
         <PostContent content={content} imageUrls={imageUrls} />
       </div>
-      <div className="flex items-center border-b border-gray-600/50 pb-2 mb-3">
+      <div className="flex items-center border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-2 mb-3">
         <PostButton type={LIKE} isLike={isLike} onClick={handleLikesClick} />
-        <div className="w-[1px] h-6 mx-1 bg-gray-500 shrink-0" />
+        <div className="w-[1px] h-6 mx-1 bg-gray-500 dark:bg-dark-primary-500/50 shrink-0" />
         <PostButton type={COMMENT} onClick={handleCommentsClick} />
       </div>
-      <div className="flex border-b border-gray-600/50 pb-3 mb-3">
+      <div className="flex border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-3 mb-3">
         <div className="mr-3">
           <PostInfo
             type={LIKE}
@@ -114,17 +114,18 @@ const Post = ({
       </div>
       {showComments && !!hideCommentAmount && (
         <div
-          className="flex border-b border-gray-600/50 pb-3 mb-3"
+          className="flex border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-3 mb-3"
           role="presentation"
           onClick={handleMoreCommentClick}>
           查看先前的留言
         </div>
       )}
       {showComments && (
-        <div className="border-b border-gray-600/50 pb-3 mb-3">
+        <div className="border-b border-gray-600/50 dark:border-dark-primary-500/40 pb-3 mb-3">
           {comments.slice(hideCommentAmount).map((comment, index) => (
             <div key={`comment${index + 1}`} className="mb-3 last:mb-0 ">
               <PostComment
+                id={comment.commenter._id}
                 avatorUrl={comment.commenter.avator}
                 userName={comment.commenter.name}
                 date={comment.createdAt}

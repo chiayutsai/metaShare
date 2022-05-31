@@ -29,13 +29,13 @@ const PersonCard = ({ userId, avatorUrl, name }) => {
     )
   }, [dispatch])
   return (
-    <div className="flex flex-col justify-center items-center px-[30px] py-9 bg-white rounded-lg shadow-card">
+    <div className="flex flex-col justify-center items-center px-[30px] py-9 bg-white dark:bg-dark-bg rounded-lg shadow-card dark:shadow-dark-card">
       <div className=" w-[120px] h-[120px] mb-2">
         <Avator avatorUrl={avatorUrl} />
       </div>
       <Link
         to={`/metaShare/profile/${userId}`}
-        className="font-bold text-xl mb-3 hover:text-primary-800">
+        className="font-bold text-xl mb-3 hover:text-primary-800 dark:hover:text-primary-400">
         {name}
       </Link>
       <DecorationLine />
@@ -46,7 +46,7 @@ const PersonCard = ({ userId, avatorUrl, name }) => {
           <p className="text-gray-1000 text-sm">關注數</p>
           <button
             type="button"
-            className="text-gray-1300 hover:text-primary-700"
+            className="text-gray-1300 hover:text-primary-700 dark:hover:text-primary-400"
             onClick={handleFollowerModal}>
             {followerCount}
           </button>
@@ -55,7 +55,7 @@ const PersonCard = ({ userId, avatorUrl, name }) => {
           <p className="text-gray-1000 text-sm">追蹤中</p>
           <button
             type="button"
-            className="text-gray-1300 hover:text-primary-700"
+            className="text-gray-1300 hover:text-primary-700 dark:hover:text-primary-400"
             onClick={handleFollowingModal}>
             {followingCount}
           </button>

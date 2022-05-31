@@ -20,11 +20,11 @@ const PostCommentInput = ({
         <Avator avatorUrl={userAvator} isRounded />
       </div>
       <div
-        className="flex w-full h-9 pl-3 py-1 pr-1 bg-gray-200 rounded-full"
+        className="flex w-full h-9 pl-3 py-1 pr-1 bg-gray-200 dark:bg-dark-primary-500/30 rounded-full"
         role="presentation"
         onClick={() => {}}>
         <input
-          className="w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 focus:outline-none"
+          className="w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 dark:placeholder:text-white/20 focus:outline-none"
           placeholder="留言...."
           value={commentContent}
           ref={setRef}

@@ -42,13 +42,13 @@ const FollowListModal = ({ type, onClose }) => {
   }
   return (
     <ModalWrapper shouldCloseOnOverlayClick disableBodyScroll onClose={onClose}>
-      <div className="relative w-[300px] xs:w-[360px]  bg-white rounded-lg shadow-card px-4 py-3">
+      <div className="relative w-[300px] xs:w-[360px]  bg-white dark:bg-dark-bg rounded-lg shadow-card dark:shadow-dark-card px-4 py-3">
         <button
           type="button"
           className="absolute top-[18px] right-4 flex items-center justify-center w-4 h-4"
           onClick={onClose}>
-          <span className="absolute w-4 h-0.5 bg-primary-900 block rotate-45" />
-          <span className="absolute w-4 h-0.5 bg-primary-900 block rotate-[-45deg]" />
+          <span className="absolute w-4 h-0.5 bg-primary-900 dark:bg-primary-400 block rotate-45" />
+          <span className="absolute w-4 h-0.5 bg-primary-900 dark:bg-primary-400 block rotate-[-45deg]" />
         </button>
         <p className=" text-center font-bold text-primary-900 text-lg mb-2.5">
           {isFollowing ? '追蹤名單' : '誰追蹤我'}
@@ -86,7 +86,7 @@ const FollowListModal = ({ type, onClose }) => {
                       </div>
                       <Link
                         to={`/metaShare/profile/${item.user._id}`}
-                        className="hover:text-primary-800"
+                        className="hover:text-primary-800 dark:hover:text-primary-400 "
                         onClick={onClose}>
                         {item.user.name}
                       </Link>

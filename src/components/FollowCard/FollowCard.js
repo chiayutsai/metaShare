@@ -30,18 +30,18 @@ const FollowCard = ({ user, followAt }) => {
         <div>
           <Link
             to={`/metaShare/profile/${user._id}`}
-            className="text-lg font-bold leading-none hover:text-primary-800">
+            className="text-lg font-bold leading-none hover:text-primary-800 dark:hover:text-primary-400">
             {user.name}
           </Link>
 
           <p className="text-sm ">
             你已追蹤
-            <span className="font-bold text-base text-primary-900 mx-0.5 ">
+            <span className="font-bold text-base text-primary-900 dark:text-primary-500 mx-0.5 ">
               {followFormatDay(followAt)}
             </span>
             天
           </p>
-          <p className="text-sm text-gray-800">
+          <p className="text-sm text-gray-800 dark:text-white/40">
             追蹤時間: {followFormatDate(followAt)}
           </p>
         </div>

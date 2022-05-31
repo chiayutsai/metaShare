@@ -21,7 +21,7 @@
     box-shadow: inset -1px -1px 1px rgba(105, 105, 105, 0.25),
       inset 1px 1px 1px rgba(255, 255, 255, 0.35);
 
-    @apply bg-gray-400 hover:bg-gray-500;
+    @apply bg-gray-400  hover:bg-gray-500;
   }
 
   &.darken {
@@ -38,6 +38,37 @@
     .unfollow {
       path {
         @apply fill-gray-700;
+      }
+    }
+  }
+}
+
+:global(.dark) {
+  .button {
+    &.normal {
+      @apply bg-dark-primary-400 hover:bg-dark-primary-500/80;
+      path {
+        @apply fill-white;
+      }
+    }
+
+    &.cancel {
+      @apply bg-gray-900 hover:bg-gray-800;
+
+      path {
+        @apply fill-white;
+      }
+    }
+
+    &.disable {
+      @apply bg-gray-1100;
+      .edit,
+      .trash,
+      .follow,
+      .unfollow {
+        path {
+          @apply fill-gray-900;
+        }
       }
     }
   }

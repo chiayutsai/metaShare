@@ -34,7 +34,7 @@ const Chat = () => {
   return (
     <div
       className={classNames('pb-28 px-4 pt-3 md:pb-3  h-full', {
-        ' rounded-lg shadow-card bg-white': !isMobileChat,
+        ' rounded-lg shadow-card dark:shadow-dark-card bg-white dark:bg-dark-bg': !isMobileChat,
       })}>
       <div className="flex items-center justify-between mb-3">
         <p className="font-bold text-xl text-primary-900">聊天室</p>

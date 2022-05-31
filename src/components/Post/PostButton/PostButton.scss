@@ -7,3 +7,20 @@
     }
   }
 }
+
+:global(.dark) {
+  .button {
+    .icon {
+      path {
+        @apply stroke-white/80;
+      }
+    }
+    &:hover {
+      .icon {
+        path {
+          @apply stroke-primary-400;
+        }
+      }
+    }
+  }
+}

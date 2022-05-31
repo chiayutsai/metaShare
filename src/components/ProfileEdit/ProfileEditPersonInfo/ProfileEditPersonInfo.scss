@@ -20,3 +20,20 @@
 :global(.rti--container) {
   @apply border-[1.5px] border-gray-600 outline-none focus-within:outline-none focus-within:border-primary-600;
 }
+
+:global(.dark .rti--tag) {
+  @apply bg-dark-primary-500/50;
+  span {
+    @apply text-white/80;
+  }
+  button {
+    @apply hover:bg-white/80;
+  }
+}
+
+:global(.dark .rti--input) {
+  @apply bg-transparent placeholder:text-white/40;
+}
+:global(.dark .rti--container) {
+  @apply border-gray-800 focus-within:border-primary-400;
+}

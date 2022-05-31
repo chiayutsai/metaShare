@@ -9,7 +9,7 @@ html, body {
 }
 
 html,body,*,*::after,*::before {
-  @apply text-gray-1200 dark:text-white/90 text-base font-sans leading-tight box-border duration-300;
+  @apply text-gray-1200 dark:text-white/80 text-base font-sans leading-tight box-border duration-300;
 }
 
 body.Body--Modal-open-disable-scroll {

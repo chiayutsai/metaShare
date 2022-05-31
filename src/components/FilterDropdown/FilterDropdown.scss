@@ -1,5 +1,5 @@
-.filter-button{
-  @apply flex items-center justify-between w-full py-2 px-4 bg-white border border-primary-100 rounded-lg shadow-filter hover:bg-primary-50;
+.filter-button {
+  @apply flex items-center justify-between w-full py-2 px-4 bg-white dark:bg-dark-bg border border-primary-100 rounded-lg shadow-filter hover:bg-primary-50;
 
   &.focus {
     @apply border-primary-300;
@@ -7,7 +7,7 @@
 }
 
 .dropdown-icon {
-  @apply flex items-center justify-center relative rounded-full bg-primary-100 w-5 h-5;
+  @apply flex items-center justify-center relative rounded-full bg-primary-100  w-5 h-5;
   &.rotate {
     @apply rotate-180;
   }
@@ -22,7 +22,7 @@
 
 .dropdown-menu {
   @apply absolute w-full h-[110px] border  top-11 left-0 bg-white border-primary-300 rounded-lg shadow-filter overflow-hidden transition-height duration-500;
-  
+
   &.close {
     @apply h-0;
   }
@@ -44,6 +44,29 @@
   }
 }
 
+:global(.dark) {
+  .filter-button {
+    @apply bg-dark-bg border-dark-primary-500/50;
+  }
+  .dropdown-icon {
+    @apply bg-dark-primary-600;
+    span {
+      @apply bg-primary-200;
+    }
+  }
+
+  .dropdown-menu {
+    @apply bg-dark-bg border-dark-primary-500/50;
+
+    li {
+      @apply text-white bg-dark-bg hover:bg-dark-primary-500/50;
+
+      &.active {
+        @apply bg-dark-primary-500;
+      }
+    }
+  }
+}
 @keyframes closeDropDown {
   0% {
     @apply border-primary-300;

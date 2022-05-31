@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { useCallback, useState } from 'react'
+import BrowserStorage from 'utils/BrowserStorage'
 import { ReactComponent as IconDarkSvg } from './assets/dark.svg'
 import { ReactComponent as IconLightSvg } from './assets/light.svg'
 import { ReactComponent as IconMoonSvg } from './assets/moon.svg'
@@ -13,6 +14,7 @@ const LightModeToggle = ({ lightMode, setLightMode }) => {
       setFirstClick(false)
     }
     setLightMode(!lightMode)
+    BrowserStorage.set('lightMode', !lightMode)
   }, [lightMode, setLightMode, firstClick])
 
   return (

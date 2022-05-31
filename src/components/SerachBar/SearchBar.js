@@ -33,9 +33,12 @@ const SearchBar = () => {
     }
   }, [handleBtnClick, isFocus])
   return (
-    <div className={styles.root} role="presentation" onClick={() => {}}>
+    <div
+      className={`${styles.root} dark:bg-dark-input-bg dark:border-gray-1000 dark:focus-within:bg-black`}
+      role="presentation"
+      onClick={() => {}}>
       <input
-        className="w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 focus:outline-none"
+        className="w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 dark:placeholder:text-gray-700/70 focus:outline-none"
         placeholder="搜尋"
         value={searchWord}
         onFocus={() => {

@@ -28,7 +28,7 @@ const PostModalContent = ({
     <>
       <textarea
         rows="5"
-        className="w-full bg-gray-100 rounded p-3 outline-none placeholder:text-gray-700"
+        className="w-full bg-gray-100 dark:bg-dark-input-bg rounded p-3 outline-none placeholder:text-gray-700 dark:placeholder:text-white/30"
         placeholder="貼文內容"
         value={textAreaContent}
         onChange={e => {

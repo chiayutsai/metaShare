@@ -31,7 +31,7 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
   }, [dispatch, _id])
   return (
     <>
-      <div className="border-b border-gray-600/50 pb-2.5 mb-2.5">
+      <div className="border-b border-gray-600/50 dark:border-dark-primary-500/50 pb-2.5 mb-2.5">
         <div className="flex flex-col sm:flex-row md:flex-col mid:flex-row items-start sm:items-center md:items-start mid:items-center justify-between">
           <div className="flex  items-center mb-3 sm:mb-0 md:mb-3 mid:mb-0">
             <div className="w-12 h-12 lg:w-14 lg:h-14 mr-3 shrink-0 ">
@@ -40,10 +40,12 @@ const LikePost = ({ _id, author, createdAt, content, imageUrls }) => {
             <div>
               <Link
                 to={`/metaShare/profile/${author._id}`}
-                className="font-bold text-lg hover:text-primary-800">
+                className="font-bold text-lg hover:text-primary-800 dark:hover:text-primary-400">
                 {author.name}
               </Link>
-              <p className="text-sm text-gray-800">{formatDate(createdAt)}</p>
+              <p className="text-sm text-gray-800 dark:text-white/40">
+                {formatDate(createdAt)}
+              </p>
             </div>
           </div>
           <div className="flex">

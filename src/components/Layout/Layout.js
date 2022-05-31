@@ -55,10 +55,15 @@ const Layout = ({ view, children }) => {
   const isLoading = loading
   const isFirstTimeUse = !BrowserStorage.get('token')
   useEffect(() => {
-    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
-
-    if (matchMedia.matches) {
-      setLightMode(false)
+    const defaultLightMode = BrowserStorage.get('lightMode')
+    if (!defaultLightMode) {
+      const matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
+      if (matchMedia.matches) {
+        setLightMode(false)
+      }
+      BrowserStorage.set('lightMode', !matchMedia.matches)
+    } else {
+      setLightMode(defaultLightMode)
     }
   }, [])
 

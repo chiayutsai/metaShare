@@ -26,9 +26,9 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
     <label
       htmlFor="uploadBtn"
       className={classNames(
-        `${styles.button} flex rounded items-center py-1.5 px-4 group bg-primary-50  hover:bg-primary-200 cursor-pointer`,
+        `${styles.button} flex rounded items-center py-1.5 px-4 group bg-primary-50 dark:bg-dark-primary-500/80 dark:hover:bg-dark-primary-500/60  hover:bg-primary-200 cursor-pointer`,
         {
-          'bg-gray-400 pointer-events-none': isDisabled,
+          'bg-gray-400  dark:bg-gray-1100 pointer-events-none': isDisabled,
           [styles.disable]: isDisabled,
         },
       )}>
@@ -40,9 +40,12 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
       />
       <IconPhotoSvg className={styles.photo} />
       <p
-        className={classNames('text-primary-700 group-hover:text-primary-800', {
-          'text-gray-700': isDisabled,
-        })}>
+        className={classNames(
+          'text-primary-700 group-hover:text-primary-800 dark:group-hover:text-white',
+          {
+            'text-gray-700 dark:text-gray-900': isDisabled,
+          },
+        )}>
         上傳圖片
       </p>
     </label>
@@ -67,9 +70,9 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
     <label
       htmlFor="uploadLoadingBtn"
       className={classNames(
-        `${styles['upload-button']} inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100  hover:bg-primary-200 cursor-pointer`,
+        `${styles['upload-button']} inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100 dark:bg-dark-primary-400 hover:bg-primary-200 dark:hover:bg-dark-primary-500 cursor-pointer`,
         {
-          '!bg-gray-400 pointer-events-none': isLoading,
+          '!bg-gray-400 dark:!bg-gray-1100 pointer-events-none': isLoading,
         },
       )}>
       <input
@@ -81,9 +84,12 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
       {isLoading && <IconLoadingSvg className={styles.loadingIcon} />}
       {!isLoading && <IconUploadSvg className={styles.upload} />}
       <p
-        className={classNames('text-primary-700 group-hover:text-primary-800', {
-          'text-gray-800': isLoading,
-        })}>
+        className={classNames(
+          'text-primary-700 group-hover:text-primary-800 dark:group-hover:text-white',
+          {
+            'text-gray-800 dark:text-gray-800': isLoading,
+          },
+        )}>
         {labelText}
       </p>
     </label>
@@ -110,10 +116,11 @@ const Button = ({ type, onClick, iconType, isDisabled, content }) => {
       className={classNames(
         `${styles.button} flex rounded items-center py-1.5 px-2  mini:px-4 group`,
         {
-          'bg-primary-100  hover:bg-primary-200': type === NORMAL,
-          'bg-primary-700 bg-gradient-to-center from-transparent to-button3dGradient hover:bg-primary-600 hover:bg-gradient-to-center-hover hover:to-button3dGradientHover':
+          'bg-primary-100 dark:bg-dark-primary-400  hover:bg-primary-200':
+            type === NORMAL,
+          'bg-primary-700  bg-gradient-to-center from-transparent to-button3dGradient hover:bg-primary-600 hover:bg-gradient-to-center-hover hover:to-button3dGradientHover':
             type === DARKEN,
-          'bg-[#f9d8e4]': type === ALERT,
+          'bg-[#f9d8e4] dark:bg-[#ffcfcf]': type === ALERT,
           'bg-gray-400 pointer-events-none': isDisabled,
           [styles.disable]: isDisabled,
         },
@@ -124,9 +131,11 @@ const Button = ({ type, onClick, iconType, isDisabled, content }) => {
       {iconType === ICON_UNLIKE && <IconUnLikeSvg className={styles.unlike} />}
       <p
         className={classNames('text-sm mini:text-base', {
-          'text-primary-700 group-hover:text-primary-800': type === NORMAL,
+          'text-primary-700 group-hover:text-primary-800 dark:group-hover:text-dark-bg/60':
+            type === NORMAL,
           'text-white': type === DARKEN,
-          'text-alert/80 group-hover:text-alert': type === ALERT,
+          'text-alert/80 dark:text-alert/80 group-hover:text-alert':
+            type === ALERT,
           'text-gray-700': isDisabled,
         })}>
         {content}

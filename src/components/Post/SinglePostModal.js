@@ -105,7 +105,7 @@ const SinglePostModal = ({ onClose }) => {
           },
         )}>
         {hasImage && (
-          <div className="hidden md:block bg-[#3a3a3a] w-[420px] lg:w-[650px] shrink-0  rounded-tl-lg rounded-bl-lg overflow-hidden">
+          <div className="hidden md:block bg-[#3a3a3a] dark:bg-gray-1200 w-[420px] lg:w-[650px] shrink-0  rounded-tl-lg rounded-bl-lg overflow-hidden">
             {singleImage && (
               <img
                 className="w-full h-full object-contain"
@@ -122,7 +122,7 @@ const SinglePostModal = ({ onClose }) => {
         )}
         <div
           className={classNames(
-            'relative flex flex-col justify-between w-full bg-white rounded-lg md:rounded-tl-none md:rounded-bl-none overflow-hidden',
+            'relative flex flex-col justify-between w-full bg-white dark:bg-dark-bg rounded-lg md:rounded-tl-none md:rounded-bl-none overflow-hidden',
             {
               'md:!rounded-tl-lg md:!rounded-bl-lg': !hasImage,
             },
@@ -146,10 +146,10 @@ const SinglePostModal = ({ onClose }) => {
             verticalHoverWidth={10}
             thumbSizeChangeOnHover>
             <div>
-              <div className="border-b border-gray-600/50 py-3 mx-3 md:min-h-[80px]">
+              <div className="border-b border-gray-600/50 dark:border-dark-primary-500/50 py-3 mx-3 md:min-h-[80px]">
                 <p>{content}</p>
                 {hasImage && (
-                  <div className="block md:hidden w-full sm:h-[500px] rounded-lg bg-gray-600/50 mt-3 ">
+                  <div className="block md:hidden w-full sm:h-[500px] rounded-lg bg-gray-600/50 dark:bg-gray-1200/50 mt-3 ">
                     {singleImage && (
                       <img
                         className="w-full h-full object-contain"
@@ -166,16 +166,16 @@ const SinglePostModal = ({ onClose }) => {
                 )}
               </div>
 
-              <div className="flex items-center border-b border-gray-600/50 py-3 mx-3">
+              <div className="flex items-center border-b border-gray-600/50 dark:border-dark-primary-500/50 py-3 mx-3">
                 <PostButton
                   type={LIKE}
                   isLike={isLike}
                   onClick={handleLikesClick}
                 />
-                <div className="w-[1px] h-6 mx-1 bg-gray-500 shrink-0" />
+                <div className="w-[1px] h-6 mx-1 bg-gray-500 dark:bg-dark-primary-500/50 shrink-0" />
                 <PostButton type={COMMENT} onClick={handleFocusComments} />
               </div>
-              <div className="flex justify-between border-b border-gray-600/50 py-3 mx-3">
+              <div className="flex justify-between border-b border-gray-600/50 dark:border-dark-primary-500/50 py-3 mx-3">
                 <PostInfo
                   type={LIKE}
                   likeAmount={likeAmount}
@@ -184,9 +184,9 @@ const SinglePostModal = ({ onClose }) => {
                 <p className="text-gray-800">{commentAmount}則留言</p>
               </div>
             </div>
-            <div className="flex max-h-[300px] sm:max-h-[340px] h-full shrink-0 items-center justify-center border-b border-gray-600/50 py-3 mx-3">
+            <div className="flex max-h-[300px] sm:max-h-[340px] h-full shrink-0 items-center justify-center border-b border-gray-600/50 dark:border-dark-primary-500/50 py-3 mx-3">
               {!hasComments && (
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-white/40">
                   快來成為第一個留言的朋友吧
                 </p>
               )}

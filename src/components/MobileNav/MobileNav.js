@@ -1,3 +1,4 @@
+/* eslint-disable css-modules/no-undef-class */
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { useCallback, useState, useEffect, useRef } from 'react'
@@ -101,7 +102,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
   }, [])
   return (
     <>
-      <div className="md:hidden fixed flex items-center justify-center bottom-0 left-0 z-20 w-full py-2 px-4  bg-white/90 backdrop-blur-md shadow-mobile-nav rounded-tl-[16px] rounded-tr-[16px]">
+      <div className="md:hidden fixed flex items-center justify-center bottom-0 left-0 z-20 w-full py-2 px-4  bg-white/90 dark:bg-dark-bg/90 backdrop-blur-md shadow-mobile-nav rounded-tl-[16px] rounded-tr-[16px]">
         <div className="w-[360px] flex items-center justify-between">
           <Link to="/metaShare" onClick={handleCloseMobileChatAndMenu}>
             {isHomeActive && (
@@ -110,7 +111,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
                 <IconHomeFilledSvg />
               </div>
             )}
-            {!isHomeActive && <IconHomeSvg />}
+            {!isHomeActive && <IconHomeSvg className={styles.darkIcon} />}
           </Link>
           <Link
             to="/metaShare/likesPost"
@@ -122,7 +123,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
               </div>
             )}
 
-            {!isLikeActive && <IconLikeSvg />}
+            {!isLikeActive && <IconLikeSvg className={styles.darkIcon} />}
           </Link>
           <Link to="/metaShare/follow" onClick={handleCloseMobileChatAndMenu}>
             {isFollowActive && (
@@ -132,7 +133,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
               </div>
             )}
 
-            {!isFollowActive && <IconFollowSvg />}
+            {!isFollowActive && <IconFollowSvg className={styles.darkIcon} />}
           </Link>
           <button
             type="button"
@@ -150,7 +151,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
               </div>
             )}
 
-            {!isMobileChat && <IconChatSvg />}
+            {!isMobileChat && <IconChatSvg className={styles.darkIcon} />}
           </button>
           <button type="button" onClick={handleOpenMobileMunu}>
             <div className="relative">
@@ -158,7 +159,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
                 <span className="absolute block w-14 -left-2 -bottom-2 h-[5px] rounded-tl-[6px] rounded-tr-[6px] bg-gradient-to-br from-primary-500 to-primary-900" />
               )}
 
-              <div className="w-10 h-10 rounded-full border-2 border-primary-800">
+              <div className="w-10 h-10 rounded-full border-2 border-primary-800 dark:border-primary-400">
                 <Avator avatorUrl={avatorUrl} isRounded />
               </div>
             </div>
@@ -181,11 +182,11 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
             verticalWidth={4}
             verticalHoverWidth={10}
             thumbSizeChangeOnHover>
-            <div className="w-full bg-white shadow-card rounded p-2">
+            <div className="w-full bg-white dark:bg-dark-bg shadow-card dark:shadow-dark-card rounded p-2">
               <button
                 type="button"
                 onClick={handleToPersonProfile}
-                className="flex items-center w-full py-2 border-b border-gary-600">
+                className="flex items-center w-full py-2 border-b border-gary-600 dark:border-dark-primary-500/50">
                 <div className="w-10 h-10 mr-2 ">
                   <Avator avatorUrl={avatorUrl} isRounded />
                 </div>
@@ -197,8 +198,8 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
               <button
                 type="button"
                 onClick={handleToEditProfile}
-                className="flex items-center w-full py-4 border-b border-gary-600">
-                <IconEditSvg className="mr-2" />
+                className="flex items-center w-full py-4 border-b border-gary-600 dark:border-dark-primary-500/50">
+                <IconEditSvg className={`${styles.icon}`} />
                 <p className="text-gray-1100 font-bold">編輯個人資料</p>
               </button>
 
@@ -206,7 +207,7 @@ const MobileNav = ({ userId, avatorUrl, name, lightMode, setLightMode }) => {
                 type="button"
                 onClick={handleLogOut}
                 className="flex items-center w-full pt-4 pb-2">
-                <IconLogOutSvg className="mr-2" />
+                <IconLogOutSvg className={`${styles.icon}`} />
                 <p className="text-gray-1100 font-bold">登出</p>
               </button>
             </div>

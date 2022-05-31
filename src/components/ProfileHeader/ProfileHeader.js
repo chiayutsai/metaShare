@@ -83,7 +83,7 @@ const ProfileHeader = ({
   }, [dispatch, name])
   return (
     <>
-      <div className="relative w-full h-[240px] xs:h-[300px] md:h-[320px] mid:h-[420px]  md:px-12 xl:px-20 bg-white">
+      <div className="relative w-full h-[240px] xs:h-[300px] md:h-[320px] mid:h-[420px]  md:px-12 xl:px-20 bg-white dark:bg-dark-bg">
         {coverImage && (
           <>
             {isOpen && (
@@ -103,7 +103,7 @@ const ProfileHeader = ({
           <div className={classNames(styles.cover, styles['default-cover'])} />
         )}
       </div>
-      <div className="relative -top-12 md:top-0 rounded-tl-[24px] rounded-tr-[24px] bg-white shadow-m-profile  md:shadow-profile md:rounded-none">
+      <div className="relative -top-12 md:top-0 rounded-tl-[24px] rounded-tr-[24px] bg-white  dark:bg-dark-bg shadow-m-profile  md:shadow-profile md:rounded-none">
         <div className="container pt-16 sm:pt-[72px] pb-4 xs:pb-8 md:pt-3 md:pb-10 px-12 xl:px-16 flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col md:flex-row items-center mb-3 md:mb-0">
             <div className="hidden md:block w-40" />
@@ -120,7 +120,7 @@ const ProfileHeader = ({
                   className="text-gray-1000"
                   onClick={openFollowingModal}>
                   正在追蹤
-                  <span className="text-lg font-bold mx-0.5 text-primary-900">
+                  <span className="text-lg font-bold mx-0.5 text-primary-900 dark:text-primary-400">
                     {following.length}
                   </span>
                   人
@@ -130,7 +130,7 @@ const ProfileHeader = ({
                   type="button"
                   className="text-gray-1000"
                   onClick={openFollowerModal}>
-                  <span className="text-lg font-bold mr-0.5 text-primary-900">
+                  <span className="text-lg font-bold mr-0.5 text-primary-900 dark:text-primary-400">
                     {follower.length}
                   </span>
                   位追蹤者

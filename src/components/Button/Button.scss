@@ -11,7 +11,7 @@
   @apply mr-2.5;
 
   path {
-    @apply fill-primary-700 group-hover:fill-primary-800;
+    @apply fill-primary-700;
   }
 }
 
@@ -58,4 +58,47 @@
 }
 .loadingIcon {
   @apply mr-2.5 animate-spin;
+}
+
+:global(.dark) {
+  .eye,
+  .photo {
+    path {
+      @apply fill-white/80;
+    }
+  }
+  .button {
+    &.disable {
+      .eye,
+      .photo,
+      .unlike {
+        path {
+          @apply fill-gray-900;
+        }
+      }
+    }
+  }
+
+  .button:not(.disable) {
+    &:hover {
+      .photo {
+        path {
+          @apply fill-white;
+        }
+      }
+      .eye {
+        path {
+          @apply fill-dark-bg/60;
+        }
+      }
+    }
+  }
+
+  .upload-button {
+    .upload {
+      path {
+        @apply fill-white;
+      }
+    }
+  }
 }

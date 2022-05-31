@@ -54,6 +54,7 @@ module.exports = {
       },
       dark: {
         'login-bg': '#1C1826',
+        bg: '#1c1826',
         'input-bg': 'rgba(18,18,18,0.8)',
         button3dGradientDisable: 'rgba(18, 18, 18, 0.6)',
         'primary-100': '#CCC4EC',
@@ -93,9 +94,11 @@ module.exports = {
         'button-3d-rounded-disable': `inset 0px -2px 0px #838383`,
         'button-3d-dark-rounded-disable': `inset 0px -2px 0px #2D2D2D`,
         navbar: '0px 2px 10px rgba(0, 0, 0, 0.04)',
+        'dark-navbar': '0px 2px 10px rgba(0, 0, 0, 0.2)',
         'navbar-dropdown': '0px 1px 4px rgba(116, 100, 179, 0.4)',
         'mobile-nav': '0px -2px 8px rgba(0,0,0,0.1)',
         card: '2px 2px 6px rgba(0, 0, 0, 0.15)',
+        'dark-card': '2px 2px 6px rgba(0, 0, 0, 0.5)',
         filter: '1px 1px 2px rgba(65,49,126,0.2)',
         login: '2px 2px 5px rgba(37,2,81,0.25)',
         'login-card': '4px 5px 10px rgba(0,0,0,0.15)',
@@ -122,7 +125,7 @@ module.exports = {
   },
   variants: {
     stroke: ['responsive', 'hover', 'group-hover', 'focus'],
-    fill: ['responsive', 'hover', 'group-hover', 'focus'],
+    fill: ['responsive', 'hover', 'group-hover', 'focus', 'darkMode'],
     animation: ['responsive'],
   },
   plugins: [],

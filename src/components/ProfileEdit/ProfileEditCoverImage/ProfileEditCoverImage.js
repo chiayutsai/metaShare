@@ -30,7 +30,9 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
     setCoverImgUrl(DEFAULT_COVER_IMG_URL)
   }, [])
   useEffect(() => {
-    setCoverImgUrl(coverImage)
+    if (coverImage !== '') {
+      setCoverImgUrl(coverImage)
+    }
     setOpenCoverImgBlur(isOpen)
   }, [coverImage, isOpen])
 
@@ -100,10 +102,10 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
           <SuccessBadge content={successContent} />
         </div>
       )}
-      <div className="border-b  border-gray-600/50 pb-6 mb-6">
+      <div className="border-b  border-gray-600/50 dark:border-dark-primary-500/50 pb-6 mb-6">
         <div className="relative">
           {isUploadLoading && (
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/40 rounded backdrop-blur-sm">
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/40 dark:bg-dark-bg/40 rounded backdrop-blur-sm">
               <IconLoadingSvg className=" animate-spin" />
             </div>
           )}
@@ -117,7 +119,7 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
         <div className="flex flex-col mini:flex-row justify-between">
           <button
             type="button"
-            className="rounded mb-4 mini:mb-0 bg-gray-400 py-2 px-4 text-gray-900 hover:bg-gray-500"
+            className="rounded mb-4 mini:mb-0 bg-gray-400 dark:bg-dark-primary-500/50 py-2 px-4 text-gray-900 hover:bg-gray-500 dark:hover:bg-dark-primary-500/80"
             onClick={handleRemoveCoverImageClick}>
             移除封面圖片
           </button>
@@ -128,7 +130,7 @@ const ProfileEditCoverImage = ({ isEditLoading, profileCoverImage }) => {
           />
         </div>
       </div>
-      <div className="hidden md:block border-b  border-gray-600/50 mb-6">
+      <div className="hidden md:block border-b  border-gray-600/50 dark:border-dark-primary-500/50 mb-6">
         <div className="flex mb-6 items-center">
           <p className="text-lg mr-16 shrink-0">開啟模糊效果</p>
           <div className="flex items-center">

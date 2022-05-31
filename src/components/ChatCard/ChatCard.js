@@ -29,7 +29,7 @@ const ChatCard = ({ _id, name, avator, isOnline, noRead }) => {
   return (
     <button
       type="button"
-      className="w-full flex items-center justify-between p-1 mb-2 rounded hover:bg-white md:hover:bg-primary-50"
+      className="w-full flex items-center justify-between p-1 mb-2 rounded hover:bg-white md:hover:bg-primary-50 dark:hover:bg-dark-primary-500/50"
       onClick={openChannel}>
       <div className="flex items-center">
         <div className="relative w-10 h-10 mr-2">

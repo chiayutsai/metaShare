@@ -106,13 +106,13 @@ const Channel = ({ _id, avator, name, onClose }) => {
   return (
     <div
       className={classNames(
-        'fixed z-30 flex flex-col w-full h-full bottom-0 right-0 md:right-12  md:w-[320px]  md:h-[400px] md:shadow-channel md:rounded-tl-lg md:rounded-tr-lg bg-gray-200',
+        'fixed z-30 flex flex-col w-full h-full bottom-0 right-0 md:right-12  md:w-[320px]  md:h-[400px] md:shadow-channel md:rounded-tl-lg md:rounded-tr-lg bg-gray-200 dark:bg-dark-bg',
         {
           'md:h-[52px]': isSmall,
         },
       )}>
       <div
-        className="md:absolute shrink-0 top-0 w-full md:h-[52px] flex flex-row-reverse justify-end items-center md:flex-row md:justify-between p-3 md:px-2 md:py-1.5 bg-white shadow-channel-header md:rounded-tl-lg md:rounded-tr-lg pointer-events-none md:pointer-events-auto"
+        className="md:absolute shrink-0 top-0 w-full md:h-[52px] flex flex-row-reverse justify-end items-center md:flex-row md:justify-between p-3 md:px-2 md:py-1.5 bg-white dark:bg-dark-primary-500/30 shadow-channel-header md:rounded-tl-lg md:rounded-tr-lg pointer-events-none md:pointer-events-auto"
         role="presentation"
         onClick={handleSmallChannel}>
         <div className="flex items-center">
@@ -124,7 +124,7 @@ const Channel = ({ _id, avator, name, onClose }) => {
           </div>
           <Link
             to={`/metaShare/profile/${_id}`}
-            className="hover:text-primary-800 pointer-events-auto"
+            className="hover:text-primary-800 dark:hover:text-primary-400 pointer-events-auto"
             onClick={
               isMobileChat ? handleMobileChatClose : handleDesktopChatClose
             }>
@@ -138,10 +138,10 @@ const Channel = ({ _id, avator, name, onClose }) => {
         </div>
         <button
           type="button"
-          className="relative flex items-center justify-center rounded-full w-6 h-6 md:bg-primary-50 p-1 pointer-events-auto mr-3 md:mr-0"
+          className="relative flex items-center justify-center rounded-full w-6 h-6 md:bg-primary-50 dark:md:bg-dark-primary-500 p-1 pointer-events-auto mr-3 md:mr-0"
           onClick={onClose}>
-          <span className="absolute w-4 h-0.5 top-4 md:top-auto bg-primary-900 block rotate-45" />
-          <span className="absolute w-4 h-0.5 top-1.5 md:top-auto bg-primary-900 block rotate-[-45deg]" />
+          <span className="absolute w-4 h-0.5 top-4 md:top-auto bg-primary-900 dark:bg-primary-200 block rotate-45" />
+          <span className="absolute w-4 h-0.5 top-1.5 md:top-auto bg-primary-900 dark:bg-primary-200 block rotate-[-45deg]" />
         </button>
       </div>
       <div
@@ -168,10 +168,10 @@ const Channel = ({ _id, avator, name, onClose }) => {
                     key={`self${createAt}`}
                     className="flex items-end justify-end mb-2 ml-12 md:ml-0">
                     <div className=" md:max-w-[227px] flex flex-col items-end">
-                      <p className="rounded-[12px] break-all rounded-br-none p-2 mb-0.5 bg-primary-50 shadow-chat text-sm">
+                      <p className="rounded-[12px] break-all rounded-br-none p-2 mb-0.5 bg-primary-50 dark:bg-dark-primary-500/50 shadow-chat text-sm">
                         {message}
                       </p>
-                      <p className="text-gray-800 text-xs">
+                      <p className="text-gray-800 text-xs dark:text-white/40">
                         {formatDate(createAt)}
                       </p>
                     </div>
@@ -189,10 +189,10 @@ const Channel = ({ _id, avator, name, onClose }) => {
                     <Avator isRounded avatorUrl={avator} />
                   </div>
                   <div className="md:max-w-[227px]  flex flex-col items-start">
-                    <p className="rounded-[12px] break-all rounded-bl-none p-2 mb-0.5 bg-white shadow-chat text-sm">
+                    <p className="rounded-[12px] break-all rounded-bl-none p-2 mb-0.5 bg-white dark:bg-dark-primary-500/80 shadow-chat text-sm">
                       {message}
                     </p>
-                    <p className="text-gray-800 text-xs">
+                    <p className="text-gray-800 text-xs dark:text-white/40">
                       {formatDate(createAt)}
                     </p>
                   </div>
@@ -204,13 +204,13 @@ const Channel = ({ _id, avator, name, onClose }) => {
       </div>
       <div
         className={classNames(
-          'md:absolute shrink-0 bottom-0 w-full h-[60px] p-3 bg-white overflow-hidden',
+          'md:absolute shrink-0 bottom-0 w-full h-[60px] p-3 bg-white dark:bg-[#36314b]  overflow-hidden',
           {
             'h-0 hidden': isSmall,
           },
         )}>
         <div
-          className="flex w-full h-9 pl-3  pr-1 py-1 bg-gray-200 rounded-full"
+          className="flex w-full h-9 pl-3  pr-1 py-1 bg-gray-200 dark:bg-dark-bg rounded-full"
           role="presentation">
           <input
             className="w-full bg-transparent text-gray-1200 outline-none placeholder:text-gray-700 focus:outline-none"

@@ -10,7 +10,7 @@ const NoPost = ({ isAdmin }) => {
     dispatch(setPostModal({}))
   }, [dispatch])
   return (
-    <div className="flex items-center justify-center w-full py-6 bg-white shadow-card rounded">
+    <div className="flex items-center justify-center w-full py-6 bg-white  dark:bg-dark-bg dark:shadow-dark-card shadow-card rounded">
       <p className="text-xs text-gray-700 mr-3">
         {isAdmin ? '沒有相關貼文，快去新增一則貼文吧！' : '沒有相關貼文喔'}
       </p>

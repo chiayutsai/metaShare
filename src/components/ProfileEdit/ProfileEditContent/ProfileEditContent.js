@@ -19,9 +19,9 @@ const ProfileEditContent = ({
   profileCoverImage,
   isEditLoading,
 }) => (
-  <div className="relative w-full bg-white rounded-tr rounded-br p-4 sm:py-6 sm:px-9 overflow-hidden">
+  <div className="relative w-full bg-white dark:bg-dark-bg rounded-tr rounded-br p-4 sm:py-6 sm:px-9 overflow-hidden">
     {isEditLoading && (
-      <div className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-white/70">
+      <div className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-white/70 dark:bg-dark-bg/60">
         <IconLoadingSvg className=" animate-spin" />
       </div>
     )}

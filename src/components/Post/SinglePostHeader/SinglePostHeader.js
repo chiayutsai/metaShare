@@ -86,7 +86,7 @@ const SinglePostHeader = ({
   }, [dispatch, postId, content, imageUrls])
 
   return (
-    <div className="flex items-center justify-between p-3 bg-white shadow-card">
+    <div className="flex items-center justify-between p-3 bg-white shadow-card dark:bg-dark-primary-500/30 dark:shadow-dark-card">
       <div className="flex items-center">
         <div className=" w-10 h-10 mr-2.5">
           <Avator isRounded avatorUrl={avatorUrl} />
@@ -94,12 +94,15 @@ const SinglePostHeader = ({
         <div>
           <Link
             to={`/metaShare/profile/${authorId}`}
-            className="font-bold mb-0.5 hover:text-primary-800"
+            className="font-bold mb-0.5 hover:text-primary-800 dark:hover:text-primary-400"
             onClick={onClose}>
             {userName}
           </Link>
 
-          <p className="text-sm  text-gray-800"> {formatDate(createdAt)}</p>
+          <p className="text-sm  text-gray-800 dark:text-white/40">
+            {' '}
+            {formatDate(createdAt)}
+          </p>
         </div>
       </div>
       {isAdmin && (
@@ -108,9 +111,9 @@ const SinglePostHeader = ({
             type="button"
             onClick={handleToggleDropdown}
             className={classNames(
-              'rounded px-1.5 py-2 bg-gray-100 flex justify-center items-center group hover:bg-primary-100',
+              'rounded px-1.5 py-2 bg-gray-100 dark:bg-dark-primary-500/30 dark:hover:bg-dark-primary-500/50 flex justify-center items-center group hover:bg-primary-100',
               {
-                '!bg-primary-100': isToggleDropdown,
+                '!bg-primary-100 dark:!bg-dark-primary-500/30': isToggleDropdown,
               },
             )}>
             <div
@@ -140,19 +143,19 @@ const SinglePostHeader = ({
           </button>
           <ul
             className={classNames(
-              'absolute w-[150px] h-0 top-6 right-0 bg-white  rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
+              'absolute w-[150px] h-0 top-6 right-0 bg-white dark:bg-dark-primary-600   rounded shadow-navbar-dropdown overflow-hidden transition-height duration-500 ',
               {
                 'h-[72px]': isToggleDropdown,
               },
             )}>
             <li
-              className="flex items-center p-2  border-b border-gray-400 hover:bg-primary-100"
+              className="flex items-center p-2  border-b border-gray-400  dark:border-white/10 hover:bg-primary-100 dark:hover:bg-dark-primary-500"
               role="presentation"
               onClick={handleOpenPostModal}>
               <p className="text-sm text-gray-1100 font-bold">編輯貼文</p>
             </li>
             <li
-              className="flex items-center p-2 border-b border-gray-400 hover:bg-primary-100"
+              className="flex items-center p-2 border-b border-gray-400 dark:border-white/10 hover:bg-primary-100 dark:hover:bg-dark-primary-500"
               role="presentation"
               onClick={handleOpenDeleteModal}>
               <p className="text-sm text-gray-1100 font-bold">刪除貼文</p>

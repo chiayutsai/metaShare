@@ -22,7 +22,7 @@ const LikesPostsWall = () => {
   const isNoLikesPosts = likesPosts?.length === 0 && !loading
   return (
     <>
-      <div className="bg-white shadow-card py-3 px-4 rounded">
+      <div className="bg-white dark:bg-dark-bg shadow-card dark:shadow-dark-card py-3 px-4 rounded">
         <p className="font-bold text-primary-900 text-xl mb-4">喜歡的貼文</p>
 
         <DecorationLine />
@@ -37,7 +37,7 @@ const LikesPostsWall = () => {
             {likesPosts.map((props, index) => (
               <div
                 key={`post${index + 1}`}
-                className="w-full  py-6 px-4  last:mb-0 even:bg-gray-50/80 rounded">
+                className="w-full  py-6 px-4  last:mb-0 even:bg-gray-50/80 dark:even:bg-dark-primary-500/10 rounded">
                 <LikePost {...props} />
               </div>
             ))}

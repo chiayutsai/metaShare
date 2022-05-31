@@ -130,11 +130,11 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
           <SuccessBadge content={successContent} />
         </div>
       )}
-      <div className="border-b mb-6 border-gray-600/50 pb-6">
+      <div className="border-b mb-6 border-gray-600/50 dark:border-dark-primary-500/50 pb-6">
         <div className="flex flex-col items-center justify-center">
-          <div className="relative w-28 h-28 xs:w-32 xs:h-32 mb-6 rounded-full  shadow-card">
+          <div className="relative w-28 h-28 xs:w-32 xs:h-32 mb-6 rounded-full  shadow-card dark:shadow-dark-card">
             {isUploadLoading && (
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-full">
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-white/60 dark:bg-dark-bg/40 backdrop-blur-[2px] rounded-full">
                 <div className="scale-75">
                   <IconLoadingSvg className="animate-spin" />
                 </div>
@@ -149,7 +149,7 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
           />
         </div>
       </div>
-      <div className="border-b mb-6 border-gray-600/50 pb-8">
+      <div className="border-b mb-6 border-gray-600/50 dark:border-dark-primary-500/50 pb-8">
         <div className="flex flex-col xs:flex-row items-start xs:items-center">
           <p className="xs:text-lg w-20 sm:w-28 shrink-0 mb-3 xs:mb-0">暱稱</p>
           <div className="w-full max-w-[420px]">
@@ -163,7 +163,7 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
           </div>
         </div>
       </div>
-      <div className="border-b mb-6 border-gray-600/50  pb-6">
+      <div className="border-b mb-6 border-gray-600/50 dark:border-dark-primary-500/50  pb-6">
         <div className="flex flex-col xs:flex-row items-start ">
           <p className="xs:text-lg w-20 sm:w-28 shrink-0 mb-3 xs:mb-0">
             個人簡介
@@ -171,7 +171,7 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
           <div className="w-full max-w-[420px]">
             <textarea
               rows="5"
-              className="w-full border-[1.5px] border-gray-600 rounded px-5 py-3 outline-none focus:border-primary-600 placeholder:text-gray-700"
+              className="w-full border-[1.5px] border-gray-600 dark:border-gray-800 dark:bg-dark-input-bg  rounded px-5 py-3 outline-none focus:border-primary-600 placeholder:text-gray-700"
               placeholder="請輸入個人簡介"
               value={textAreaContent}
               onChange={e => {
@@ -182,7 +182,7 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
           </div>
         </div>
       </div>
-      <div className="border-b mb-6 border-gray-600/50  pb-6">
+      <div className="border-b mb-6 border-gray-600/50 dark:border-dark-primary-500/50  pb-6">
         <div className="flex flex-col xs:flex-row items-start">
           <p className="xs:text-lg w-20 sm:w-28 shrink-0 mb-3 xs:mb-0">
             個人標籤
@@ -191,9 +191,6 @@ const ProfileEditPersonInfo = ({ isEditLoading, profileInfo }) => {
             <TagsInput
               value={tags}
               onChange={setTags}
-              onExisting={() => {
-                console.log('test')
-              }}
               placeHolder="新增個人標籤"
             />
           </div>

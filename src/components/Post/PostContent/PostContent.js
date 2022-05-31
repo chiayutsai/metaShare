@@ -28,7 +28,7 @@ const PostContent = ({ content, imageUrls }) => {
               <span
                 role="presentation"
                 onClick={handleShowMore}
-                className="font-bold text-primary-900">
+                className="font-bold text-primary-900 dark:text-primary-400">
                 顯示更多
               </span>
             </>
@@ -37,7 +37,7 @@ const PostContent = ({ content, imageUrls }) => {
       )}
       {showMore && <p>{content}</p>}
       {singleImage && (
-        <div className="max-h-[740px] rounded-lg bg-gray-600/50 mt-3">
+        <div className="max-h-[740px] rounded-lg bg-gray-600/50 dark:bg-gray-1200/50 mt-3">
           <img
             className="w-full h-full max-h-[740px] object-contain rounded-lg"
             src={`${imageUrls[0]}`}
@@ -46,7 +46,7 @@ const PostContent = ({ content, imageUrls }) => {
         </div>
       )}
       {swiperImage && (
-        <div className="mt-3 group max-h-[740px] rounded-lg bg-gray-600/50">
+        <div className="mt-3 group max-h-[740px] rounded-lg bg-gray-600/50 dark:bg-gray-1200/50">
           <PostSwiper imageUrls={imageUrls} />
         </div>
       )}

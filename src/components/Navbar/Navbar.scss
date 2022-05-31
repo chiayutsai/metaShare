@@ -1,3 +1,17 @@
 .logo {
   @apply block bg-[url('./assets/logo.png')] bg-no-repeat bg-contain h-8 w-[162px] overflow-hidden indent-[101%];
 }
+.icon {
+  @apply mr-2;
+  path {
+    @apply dark:fill-white;
+  }
+}
+
+:global(.dark) {
+  .icon {
+    path {
+      @apply fill-white;
+    }
+  }
+}

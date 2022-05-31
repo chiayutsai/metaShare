@@ -16,7 +16,7 @@ const ProfileEditMenu = ({ editPage }) => {
     dispatch(setProfileEditPage(page))
   }
   return (
-    <div className="bg-gray-50 min-w-[200px] lg:min-w-[240px] md:rounded-tl md:rounded-bl overflow-hidden flex md:block">
+    <div className="bg-gray-50 dark:bg-dark-bg/70 min-w-[200px] lg:min-w-[240px] md:rounded-tl md:rounded-bl overflow-hidden flex md:block">
       <div
         className={classNames(styles.item, {
           [styles.active]: editPage === COVER_IMAGE,

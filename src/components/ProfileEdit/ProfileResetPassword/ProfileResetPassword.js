@@ -133,7 +133,7 @@ const ProfileResetPassword = ({ isEditLoading }) => {
           <SuccessBadge content={successContent} />
         </div>
       )}
-      <div className="border-b mb-6 border-gray-600/50">
+      <div className="border-b mb-6 border-gray-600/50 dark:border-dark-primary-500/50">
         <div className="flex flex-col xs:flex-row items-start mb-8 xs:items-center">
           <p className="xs:text-lg mr-3 mb-3 xs:mb-0 xs:mr-6 shrink-0">
             輸入新密碼

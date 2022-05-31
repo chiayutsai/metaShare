@@ -11,7 +11,7 @@ const Follow = () => {
   const isEvenFollowing = following.length % 2 === 0
   const isNoFollowing = following?.length === 0 && !loading
   return (
-    <div className="bg-white shadow-card py-3 px-4 rounded">
+    <div className="bg-white dark:bg-dark-bg shadow-card dark:shadow-dark-card py-3 px-4 rounded">
       <p className="font-bold text-primary-900 text-xl mb-4">追蹤名單</p>
       <div className="mb-3">
         <DecorationLine />
@@ -28,7 +28,7 @@ const Follow = () => {
             <div
               key={`post${index + 1}`}
               className={classNames(
-                'w-full 2xl:w-1/2 py-4 2xl:even:pl-4 2xl:odd:pr-4 border-b border-gray-400 last:border-none ',
+                'w-full 2xl:w-1/2 py-4 2xl:even:pl-4 2xl:odd:pr-4 border-b border-gray-400 dark:border-dark-primary-500/50 last:border-none ',
                 {
                   'nth-last-child-two ': isEvenFollowing,
                 },

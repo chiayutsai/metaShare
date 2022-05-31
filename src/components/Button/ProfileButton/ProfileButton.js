@@ -43,7 +43,7 @@ const ProfileButton = ({ type, onClick, iconType, isDisabled, content }) => {
           'text-primary-900 ': type === NORMAL,
           'text-primary-50': type === DARKEN,
           'text-gray-1100': type === CANCEL,
-          '!text-gray-700': isDisabled,
+          '!text-gray-700 dark:!text-gray-900': isDisabled,
         })}>
         {content}
       </p>

@@ -11,14 +11,14 @@ const PostButton = ({ type, isLike, onClick }) => {
   return (
     <button
       type="button"
-      className={`${styles.button} flex items-center justify-center group p-1 w-full rounded hover:bg-primary-50`}
+      className={`${styles.button} flex items-center justify-center group p-1 w-full rounded hover:bg-primary-50 dark:hover:bg-dark-primary-500/30`}
       onClick={onClick}>
       <div className="mr-2">
         {type === LIKE && !isLike && <IconlikehSvg className={styles.icon} />}
         {type === LIKE && isLike && <IconisLikehSvg />}
         {type === COMMENT && <IconCommenthSvg className={styles.icon} />}
       </div>
-      <p className="text-sm md:text-base text-gray-1000 group-hover:text-primary-800">
+      <p className="text-sm md:text-base text-gray-1000 group-hover:text-primary-800 dark:group-hover:text-primary-400">
         {POST_BUTTON_TEXY_MAP[type]}
       </p>
     </button>

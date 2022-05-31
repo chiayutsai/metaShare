@@ -21,3 +21,28 @@
     }
   }
 }
+
+:global(.dark) {
+  .icon {
+    path {
+      @apply fill-white;
+    }
+  }
+
+  .item {
+    @apply hover:bg-dark-primary-500/20 hover:before:bg-dark-primary-500/20;
+
+    &.active {
+      @apply bg-dark-primary-500/50  before:bg-dark-primary-500/80;
+
+      p {
+        @apply text-primary-200;
+      }
+      .icon {
+        path {
+          @apply fill-primary-200;
+        }
+      }
+    }
+  }
+}
