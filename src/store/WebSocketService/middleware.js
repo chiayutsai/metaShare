@@ -114,10 +114,13 @@ class WebSocketService {
   // ------------------------------------
   // Helpers
   // ------------------------------------
-  #send = (code, data) => {
+  #send = (code, data = {}) => {
+    const token = tokenSelector(this.#getState())
+
     this.ws.send(
       JSON.stringify({
         commandCode: code,
+        token,
         ...data,
       }),
     )
@@ -163,9 +166,7 @@ class WebSocketService {
 
     await this.#connect()
 
-    const token = tokenSelector(this.#getState())
-
-    return this.#request(CMD_CODE.WEB_SOCKET_LOGIN_REQUEST, { token })
+    return this.#request(CMD_CODE.WEB_SOCKET_LOGIN_REQUEST)
   }
 
   #getChannelHistory = async data =>
