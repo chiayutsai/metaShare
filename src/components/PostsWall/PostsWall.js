@@ -2,11 +2,17 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { clearPosts, handleGetAllPosts, setSearchWord } from 'actions/post'
+import {
+  clearPosts,
+  handleGetAllPosts,
+  setFilterType,
+  setSearchWord,
+} from 'actions/post'
 import FilterDropdown from 'components/FilterDropdown/FilterDropdown'
 import NoPost from 'components/Post/NoPost/NoPost'
 import Post from 'components/Post/Post'
 import PostInput from 'components/PostInput/PostInput'
+import { LASTEST_POST } from 'constants/filterType'
 import {
   postsSelector,
   filterTypeSelector,
@@ -21,6 +27,8 @@ const PostsWall = ({ isAdmin, avatorUrl }) => {
   useEffect(() => {
     ;(async () => {
       try {
+        dispatch(setSearchWord(''))
+        dispatch(setFilterType(LASTEST_POST))
         await dispatch(handleGetAllPosts())
       } catch (error) {
         console.log(error)

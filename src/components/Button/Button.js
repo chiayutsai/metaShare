@@ -26,7 +26,7 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
     <label
       htmlFor="uploadBtn"
       className={classNames(
-        `${styles.button} flex rounded items-center py-1.5 px-4 group bg-primary-50 dark:bg-dark-primary-500/80 dark:hover:bg-dark-primary-500/60  hover:bg-primary-200 cursor-pointer`,
+        `${styles.button} relative flex rounded items-center py-1.5 px-4 group bg-primary-50 dark:bg-dark-primary-500/80 dark:hover:bg-dark-primary-500/60  hover:bg-primary-200 cursor-pointer`,
         {
           'bg-gray-400  dark:bg-gray-1100 pointer-events-none': isDisabled,
           [styles.disable]: isDisabled,
@@ -35,7 +35,7 @@ const UpLoadButton = ({ isDisabled, onChange }) => {
       <input
         id="uploadBtn"
         type="file"
-        className="hidden"
+        className="absolute left-0 w-full opacity-0"
         onChange={onChange}
       />
       <IconPhotoSvg className={styles.photo} />
@@ -70,7 +70,7 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
     <label
       htmlFor="uploadLoadingBtn"
       className={classNames(
-        `${styles['upload-button']} inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100 dark:bg-dark-primary-400 hover:bg-primary-200 dark:hover:bg-dark-primary-500 cursor-pointer`,
+        `${styles['upload-button']} relative inline-flex justify-center rounded items-center py-2 px-4 group bg-primary-100 dark:bg-dark-primary-400 hover:bg-primary-200 dark:hover:bg-dark-primary-500 cursor-pointer`,
         {
           '!bg-gray-400 dark:!bg-gray-1100 pointer-events-none': isLoading,
         },
@@ -78,7 +78,7 @@ export const UpLoadLoadingButton = ({ isLoading, onChange, content }) => {
       <input
         id="uploadLoadingBtn"
         type="file"
-        className="hidden"
+        className="absolute left-0 w-full opacity-0"
         onChange={onChange}
       />
       {isLoading && <IconLoadingSvg className={styles.loadingIcon} />}

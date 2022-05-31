@@ -68,7 +68,9 @@ const SinglePostModal = ({ onClose }) => {
     }
   }, [dispatch, _id, userId])
   const handleFocusComments = useCallback(() => {
+    commentInputRef.current.focus()
     setTimeout(() => {
+      commentInputRef.current.blur()
       commentInputRef.current.focus()
     }, 0)
   }, [])

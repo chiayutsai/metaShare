@@ -45,7 +45,9 @@ const Post = ({
   }, [dispatch, _id])
   const handleCommentsClick = useCallback(async () => {
     setShowComments(true)
+    commentInputRef.current.focus()
     setTimeout(() => {
+      commentInputRef.current.blur()
       commentInputRef.current.focus()
     }, 0)
   }, [])
@@ -58,11 +60,13 @@ const Post = ({
     if (!commentContent) {
       return
     }
+    commentInputRef.current.focus()
     try {
       await dispatch(updateComments({ postId: _id, content: commentContent }))
       setCommentContent('')
       setShowComments(true)
       setTimeout(() => {
+        commentInputRef.current.blur()
         commentInputRef.current.focus()
       }, 0)
     } catch (error) {
