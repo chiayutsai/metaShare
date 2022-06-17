@@ -1,3 +1,4 @@
+/* eslint-disable css-modules/no-undef-class */
 import useStyles from 'isomorphic-style-loader/useStyles'
 import PropTypes from 'prop-types'
 import { LIKE, POST_BUTTON_TEXY_MAP, COMMENT } from 'constants/post'
