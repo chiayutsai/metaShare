@@ -2,7 +2,7 @@ import getEnvConfig from './index'
 
 const dev = ''
 
-const production = 'https://mata-share-backend.herokuapp.com'
+const production = 'http://34.80.94.59'
 
 const baseURL = getEnvConfig({
   development: __DEV__ && dev,
